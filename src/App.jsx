@@ -1,11 +1,13 @@
-
+import Login from './Login.jsx' 
+import Header from './Header.jsx'
 import './App.css'
 
 function App() {
 
   return (
     <>
-      <h1>L-Hospital</h1>
+      <Header />
+      <Login />
     </>
   )
 }
