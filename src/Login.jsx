@@ -1,8 +1,10 @@
+// import new_doctor from "./assets/new_doctor.png";
+
 function Login(){
     return(
         <>
         <div className="Login">
-            <h3>Hello</h3>
+            {/* <img className="doctor" src={new_doctor} alt="doctor"/> */}
         </div>
         </>
     )

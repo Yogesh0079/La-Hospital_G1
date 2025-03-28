@@ -9,7 +9,7 @@
     width: 87vw;
     margin: 0.9rem;
     height: 5vw;
-    background: linear-gradient(to right, rgb(28, 42, 76), rgb(54, 70, 104));
+    background: linear-gradient(to right, rgb(28, 42, 76), rgb(110, 135, 189));
     margin-left: 5.6rem;
 }
 .header p{
@@ -33,12 +33,24 @@
     
 }
 .Login{
-    background: linear-gradient(to right, rgb(28, 42, 76), rgb(54, 70, 104));
+    background: linear-gradient(to right, rgb(28, 42, 76), rgb(110, 135, 189));
     width: 87vw;
     position: flex;
     display: block;
     margin: 0.9rem;
-    height: 80%;
+    height: 38vw;
     margin-left: 5.6rem;
     border-radius: 30px;
+    margin-top: 9vw;
+}
+.ring{
+    margin-left: 40vw;
+    width: 50%;
+    height: 100%;
+    /* z-index: 101; */
+}
+.new_doctor{
+    height: 65vh;
+    position: absolute;
+    right: 16%;
 }
