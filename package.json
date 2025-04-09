@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "express": "^5.1.0",
+    "mongoose": "^8.13.2",
     "motion": "^12.6.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
