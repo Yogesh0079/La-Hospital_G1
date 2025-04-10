@@ -33,21 +33,22 @@
     
 }
 .Login{
+    padding-top: 10%;
+    max-height: 60vh;
     background: linear-gradient(to right, rgb(28, 42, 76), rgb(110, 135, 189));
     width: 87vw;
     position: flex;
     display: block;
     margin: 0.9rem;
-    height: 38vw;
+    height: 80vh;
     margin-left: 5.6rem;
     border-radius: 30px;
-    margin-top: 9vw;
+    margin-top: 7vw;
 }
 .ring{
     margin-left: 40vw;
     width: 50%;
     height: 100%;
-    /* z-index: 101; */
 }
 .new_doctor{
     height: 65vh;

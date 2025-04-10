@@ -73,7 +73,7 @@ app.post("/createRecord", (req, res) => {
 })
 
 app.get("/getUser", (req, res) => {
-    res.send("Server working.");
+    res.render("Server working.");
 })
 
 app.get("/getRecord", (req, res) => {
