@@ -1,15 +1,19 @@
 {
-  "name": "package",
+  "name": "la-hospital",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
+    "wbackend": "node --watch ./backend/main.js",
+    "backend": "node ./backend/main.js",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
     "express": "^5.1.0",
     "mongoose": "^8.13.2",
     "motion": "^12.6.2",
