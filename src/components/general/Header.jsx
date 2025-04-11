@@ -1,4 +1,4 @@
-import logo from "./assets/logo-removebg-preview.png";
+import logo from "../../assets/logo-removebg-preview.png";
 function Header(){
     return (
         <>
