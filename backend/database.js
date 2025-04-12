@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-mongoose.connect("mongodb://localhost:32769/lhospital")
+mongoose.connect("mongodb://localhost:32768/lhospital")
     .then(() => console.log('Connected to database!'));
 
 const userSchema = new Schema({
@@ -38,32 +38,22 @@ const User = new mongoose.model("users", userSchema);
 const Record = new mongoose.model("records", recordSchema);
 
 
-async function createDb(reqData, dataSchema, deb_name) {
+async function createDb(objData, dataSchema, deb_name) {
     // Create a new object of specified schema and save it to the database
-    let obj = new dataSchema({
-        first_name: reqData.first_name,
-        last_name: reqData.last_name,
-        email: reqData.email,
-        contact: reqData.contact,
-        doctor: reqData.doctor,
-        records: reqData.records
-    });
-    return await obj.save().then(() => {
-        // console.log(`Object ${deb_name} created successfully!`);
-        return obj;
-    }).catch((err) => {
-        console.log(`${deb_name} Error: ${err}`)
+    let obj = new dataSchema(objData);
+    return await obj.save().catch((err) => {
+        console.log(`${deb_name} Error: ${err}`);
+        err.error = `${deb_name}`;
+        return err;
     });
 }
 
 async function readDb(id, dataSchema, deb_name) {
     // Fetch an object from the database of the specified schema using the id
-    return dataSchema.findById(id).then((obj) => {
-        if (!obj) {
-            console.log(`Object for ${deb_name} not found ${id}`);
-        }
-        return obj;
-    }).catch((err) => {console.log(`${deb_name} Error: ${err}`)});
+    return dataSchema.findById(id).catch((err) => {
+        err.error = `${deb_name}`;
+        return err;
+    });
 }
 
 async function updateDb(id, updateFields, dataSchema, deb_name) {
@@ -71,8 +61,8 @@ async function updateDb(id, updateFields, dataSchema, deb_name) {
         console.log(`Object for ${deb_name} updated successfully!`);
         return obj;
     }).catch((err) => {
-        console.log(`${deb_name} Error: ${err}`);
-        return null;
+        err.error = `${deb_name}`;
+        return err;
     });
 }
 

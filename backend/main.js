@@ -1,41 +1,62 @@
 import express from "express";
+import bodyParser from "body-parser";
 import {createUser, getUser, createRecord, getRecord, updateUser, updateRecord} from "./database.js";
 
 const app = express();
 
-// let user = await createUser({
-//     first_name: "John",
-//     last_name: "Doe",
-//     email: "john.doe@example.com",
-//     contact: "1234567890",
-//     doctor: true,
-//     records: [0, 1]
-// });
-// console.log(user);
-
-let user = await updateUser("67f963dbdba8cc610182de2e", {first_name: "Jhonie"});
-console.log(user);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.get("/", (req,res) => {
     res.send("Server working.");
 })
 
 app.post("/createUser", (req, res) => {
-    console.log(req)
-    res.send("Hi");
+    createUser(req.body).then((user) => {
+        if (user.error) {
+            console.log(user)
+            res.send({"error": user.error, "message": user._message});
+        }
+        else {
+            res.send(user);
+        }
+    })
 })
 
 app.post("/createRecord", (req, res) => {
-    res.send("Server working.");
+    createRecord(req.body).then((record) => {
+        if (record.error) {
+            console.log(record)
+            res.send({"error": record.error, "message": record._message});
+        }
+        else {
+            res.send(record);
+        }
+    });
 })
 
-app.get("/getUser", (req, res) => {
-    res.send("Server working.");
+app.get("/getUser/:userId", (req, res) => {
+    console.log(req.params.userId);
+    getUser(req.params.userId).then((user) => {
+        if (!user) {
+            res.send({"error": "User not found"});
+        }
+        else {
+            res.send(user);
+        }
+    });
+})
+app.get("/getRecord/:recordId", (req, res) => {
+    getRecord(req.params.recordId).then((record) => {
+        if (!record) {
+            res.send({"error": "Record not found"});
+        }
+        else {
+            res.send(record);
+        }
+    });
 })
 
-app.get("/getRecord", (req, res) => {
-    res.send("Server working.");
-})
 app.listen(5000, () => {
     console.log("App started on port 5000");
 })
