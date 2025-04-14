@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
-import {createUser, getUser, createRecord, getRecord, updateUser, updateRecord} from "./database.js";
+import {newUser, updateUserData, getUserData} from "./controllers/user.js";
+import {newRecord, getRecordData, updateRecordData} from "./controllers/record.js";
 
 const app = express();
 
@@ -11,51 +12,13 @@ app.get("/", (req,res) => {
     res.send("Server working.");
 })
 
-app.post("/createUser", (req, res) => {
-    createUser(req.body).then((user) => {
-        if (user.error) {
-            console.log(user)
-            res.send({"error": user.error, "message": user._message});
-        }
-        else {
-            res.send(user);
-        }
-    })
-})
+app.post("/createUser", newUser);
+app.get("/getUser/:userId", getUserData);
+app.put("/updateUser/:userId", updateUserData);
 
-app.post("/createRecord", (req, res) => {
-    createRecord(req.body).then((record) => {
-        if (record.error) {
-            console.log(record)
-            res.send({"error": record.error, "message": record._message});
-        }
-        else {
-            res.send(record);
-        }
-    });
-})
-
-app.get("/getUser/:userId", (req, res) => {
-    console.log(req.params.userId);
-    getUser(req.params.userId).then((user) => {
-        if (!user) {
-            res.send({"error": "User not found"});
-        }
-        else {
-            res.send(user);
-        }
-    });
-})
-app.get("/getRecord/:recordId", (req, res) => {
-    getRecord(req.params.recordId).then((record) => {
-        if (!record) {
-            res.send({"error": "Record not found"});
-        }
-        else {
-            res.send(record);
-        }
-    });
-})
+app.post("/createRecord", newRecord)
+app.get("/getRecord/:recordId", getRecordData);
+app.put("/updateRecord/:recordId", updateRecordData);
 
 app.listen(5000, () => {
     console.log("App started on port 5000");
