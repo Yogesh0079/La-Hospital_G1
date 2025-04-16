@@ -19,6 +19,7 @@
     "motion": "^12.6.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^7.4.0"
   },
   "devDependencies": {
