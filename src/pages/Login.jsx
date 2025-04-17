@@ -13,9 +13,11 @@ function Login(){
                 <input type="password" name="password" id="login-password-input" placeholder="  Password"/>
                 <button name="confirm" id="button-confirm" >Submit</button>
                 <hr />
-                <button name="google" id="button-google-oauth"></button>
-                <button name="github" id="button-github-oauth"></button>
-                <button name="outlook" id="button-outlook-oauth"></button>
+                <div className="OAuth">
+                <a name="google" id="button-google-oauth"></a>
+                <a name="github" id="button-github-oauth"></a>
+                <a name="outlook" id="button-outlook-oauth"></a>
+                </div>
             </form>
             
             </div>

@@ -1,9 +1,19 @@
+* {
+    margin:0;
+    padding:0;
+    width:100%;
+    z-index:0;
+}
+
+
+
+/* Login */
 .header{
     border-radius: 30px;
     background-color: #f0f0f0;
     filter: drop-shadow(0 0 1px white);
     position: fixed;
-    display: block;
+    display: inline-flex;
     float: top;
     top: 0;
     width: 87vw;
@@ -11,19 +21,24 @@
     height: 5vw;
     background: linear-gradient(to right, rgb(28, 42, 76), rgb(110, 135, 189));
     margin-left: 5.6rem;
+    z-index:1;
 }
 .header p{
     margin-top: 0% ;
     display: inline-block;
     font-size: 2rem;
+    height: 60vh;
+    width: 256vw;
 }
-
-.header a{
-    margin-left:3vw;
-    float:right;
-    margin-top: 1.6%;
-    margin-right: 4%;
-    color: whitesmoke;
+.header div{
+    display: inline-flex;
+    margin-left: 50%;
+    width:200vw;
+    padding-top: 3vh;
+}
+.header div a{
+    color:white;
+    margin-left:5%;
 }
 .header img{
     width: 20%;
@@ -56,6 +71,7 @@
     border-radius: 30px;
     margin-top: 4vw;
     padding: 0%;
+    opacity: 0.8;
 }
 .form-border form{
     border-radius: 30px;
@@ -121,6 +137,80 @@
     border: 1px ridge black;
     width: 9vw;
 }
+
+.OAuth {
+    display: inline-flex;
+    padding-top: 3vh;
+}
+.OAuth a {
+    height: 8vh;
+    margin-left: 4.3vw;
+    width: 4vw;
+    border-radius: 150px;
+    background-color: white;
+    border: black 1px solid;
+}
+
+
+/* Patient Form */
+.Form {
+    background-image: url("C:\Users\Amrit pal singh\OneDrive\Desktop\SCM Clone\La-Hospital_G1\src\assets\team.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: '100%';
+    height: '100rem';
+    margin:0;
+    padding:0;
+}
 .form-border hr{
     margin-top:4vh;
 }
+.Form-on-image {
+    height: 100vh;
+    padding-top: 70vh;
+    padding-left: 35vw;
+    width: 17vw;
+}
+.Form-on-image form{
+    padding: 7.5%;
+    background-color: white;
+    height: 50vh;
+    width: 30vw;
+    border-radius: 50px;
+    opacity: 0.85;
+}
+.Form-on-image form b{}
+.Form-on-image form input{
+    margin-bottom: 5vh;
+    height: 3.5vh;
+    border-radius: 50px;
+}
+.Form-on-image form select{
+    margin-bottom: 5vh;
+    height: 3.5vh;
+    border-radius: 50px;
+}
+
+.Form-on-image form b{
+    color: black;
+}
+
+/* .Form{
+    width: 100%;
+    height: 300px;            
+  background-image: url('../../assets/team.jpg');  
+  background-size: cover;   
+  background-position: center; 
+  background-repeat: no-repeat; 
+} */
+/* .Form img{
+    margin-left: 12vh;
+    margin-top: 12vh;
+    width: 90%;
+    
+    
+} */
+/* .Form-on-image{
+    background-color: rgba(128, 128, 128, 0.4);
+    width: 100%;
+} */
