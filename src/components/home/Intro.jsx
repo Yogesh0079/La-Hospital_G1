@@ -1,25 +1,99 @@
-import React from "react";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+import React, { useState } from "react";
 
 export default function Intro() {
+  const [formData, setFormData] = useState({
+    name: "",
+    department: "",
+    date: "",
+    number: 1,
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form Data Submitted:", formData);
+  };
+
   return (
-      <div
-        className="welcome-section"
-        style={{
-          flex: "1 1 400px",
-          padding: "30px",
-          maxWidth: "600px",
-        }}
-      >
-        <h1 style={{ fontSize: "2.5rem", marginBottom: "20px" }}>
-        Welcome to La Hospital
-        </h1>
-        <p style={{ fontSize: "1.2rem", lineHeight: "1.8" }}>
-          Your health is our priority. We provide world-class medical services
-          with a team of experienced professionals. Our hospital is equipped
-          with state-of-the-art facilities to ensure the best care for you and
-          your loved ones.
-        </p>
-      </div>
+    <div
+      className="form-section"
+      style={{
+        flex: "1 1 400px",
+        padding: "30px",
+        maxWidth: "600px",
+      }}
+    >
+      <h1 style={{ fontSize: "2rem", marginBottom: "20px" }}>
+        Hospital Appointment Form
+      </h1>
+      <form onSubmit={handleSubmit}>
+        <div style={{ marginBottom: "15px" }}>
+          <label style={{ display: "block", marginBottom: "5px" }}>Name:</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            style={{ width: "100%", padding: "8px" }}
+            required
+          />
+        </div>
+        <div style={{ marginBottom: "15px" }}>
+          <label style={{ display: "block", marginBottom: "5px" }}>
+            Department:
+          </label>
+          <input
+            type="text"
+            name="department"
+            value={formData.department}
+            onChange={handleChange}
+            style={{ width: "100%", padding: "8px" }}
+            required
+          />
+        </div>
+        <div style={{ marginBottom: "15px" }}>
+          <label style={{ display: "block", marginBottom: "5px" }}>Date:</label>
+          <input
+            type="date"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+            style={{ width: "100%", padding: "8px" }}
+            required
+          />
+        </div>
+        <div style={{ marginBottom: "15px" }}>
+          <label style={{ display: "block", marginBottom: "5px" }}>
+            Number (1-20):
+          </label>
+          <input
+            type="number"
+            name="number"
+            value={formData.number}
+            onChange={handleChange}
+            min="1"
+            max="20"
+            style={{ width: "100%", padding: "8px" }}
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          style={{
+            padding: "10px 20px",
+            backgroundColor: "#007BFF",
+            color: "#fff",
+            border: "none",
+            cursor: "pointer",
+          }}
+        >
+          Submit
+        </button>
+      </form>
+    </div>
   );
 }
