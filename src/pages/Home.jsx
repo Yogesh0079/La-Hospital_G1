@@ -11,15 +11,16 @@ function App() {
       <div
       className="dashboard"
       style={{
+        margin: "100px 0",
         display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",
         alignItems: "right",
         justifyContent: "right",
         minHeight: "100vh",
-        backgroundColor: "rgba(2, 3, 28, 0.16)",
-        color: "#fff",
+        color: "#f0f0f0",
         padding: "40px 20px",
+        backgroundColor: "#1a1a1a",
         boxSizing: "border-box",
       }}
     >

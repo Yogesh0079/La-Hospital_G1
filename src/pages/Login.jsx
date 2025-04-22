@@ -19,15 +19,15 @@ function Login(){
                 <a name="outlook" id="button-outlook-oauth"></a>
                 </div>
             </form>
-            
+
             </div>
-            {/* <div className="carousel"> */}
-            {/* <form style={{display : 'flex', justifyContent: 'space-between', flexDirection: "column", marginLeft: "60px"}} action="localhost:5000">
+            {/* <div className="carousel">
+            <form style={{display : 'flex', justifyContent: 'space-between', flexDirection: "column", marginLeft: "60px"}} action="localhost:5000">
                 <input style={{padding: "5px", margin: "10px", backgroundColor: "white", borderRadius: "8px", marginBottom: "17px", width: "15vw",}} type="text" name="uname" id="login-uname-input" />
                 <input style={{padding: "5px", margin: "10px", backgroundColor: "white", borderRadius: "8px", marginBottom: "17px", width: "15vw"}} type="email" name="email" id="login-email-input" />
                 <input style={{padding: "5px", margin: "10px", backgroundColor: "white", borderRadius: "8px", marginBottom: "17px", width: "15vw"}} type="password" name="password" id="login-password-input" />
-            </form> */}
-            {/* </div> */}
+            </form>
+            </div> */}
         </div>
         </>
     )

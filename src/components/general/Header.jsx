@@ -1,13 +1,21 @@
 import logo from "../../assets/logo-removebg-preview.png";
+import { useNavigate } from 'react-router-dom';
+
+
 function Header(){
+    const navigate = useNavigate();
+
+    function goToHome() {
+        navigate('/');
+    }
     return (
         <>
         <div className="header">
-            <p><b><img src={logo} alt="logo" /></b></p>
+            <p><b onClick={goToHome}><img className="header-hover" src={logo} alt="logo" /></b></p>
             <div>
-            <a href="#">link 1</a>
-            <a href="#">link 2</a>
-            <a href="#">link 3</a>
+            <a className="header-link header-hover" href="#">History</a>
+            <a className="header-link header-hover" href="#">Team</a>
+            <a className="header-link header-hover" href="#">About Us</a>
             </div>
         </div>
         </>

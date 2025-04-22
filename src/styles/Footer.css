@@ -1,8 +1,9 @@
 /* Footer.css */
 .footer {
+    height: 15vh;
     background-color: #646cff;
     color: #fff;
-    padding: 20px 0;
+    padding: 2rem;
     text-align: center;
 }
 
@@ -54,7 +55,7 @@
 .social-links {
     display: flex;
     justify-content: left;
-    gap: 10px;
+    gap: 5px;
 }
 
 .social-links li {
@@ -62,7 +63,7 @@
 }
 
 .social-links li a {
-    font-size: 16px;
+    font-size: 2rem;
     text-decoration: none;
     color: #fff;
     transition: color 0.3s ease;
