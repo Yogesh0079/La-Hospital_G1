@@ -1,17 +1,20 @@
 import React, { useState } from "react";
-const UserDetails = () => {
+import { useNavigate } from "react-router-dom";
+const UserDetails = (uid) => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        firstName: "",
-        lastName: "",
+        first_name: "",
+        department: "",
+        last_name: "",
         relation: "",
         address: "",
-        phoneNumber: "",
-        bloodGroup: "",
-        dateOfBirth: "",
+        contact: "",
+        blood_group: "",
+        dob: "",
         weight: "",
         height: "",
+        new: false
     });
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -19,19 +22,27 @@ const UserDetails = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        fetch(`http://localhost:5000/updateUser/${window.location.pathname.split("/").pop()}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+        })
         console.log("Form Data Submitted: ", formData);
+        navigate("/");
     };
 
     return (
-        <div style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
+        <div style={{ marginTop: "400px", backgroundColor: "#1a1a1a",padding: "20px", maxWidth: "600px", margin: "auto" }}>
             <h2>User Details Form</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>First Name:</label>
                     <input
                         type="text"
-                        name="firstName"
-                        value={formData.firstName}
+                        name="first_name"
+                        value={formData.first_name}
                         onChange={handleChange}
                         required
                     />
@@ -40,8 +51,18 @@ const UserDetails = () => {
                     <label>Last Name:</label>
                     <input
                         type="text"
-                        name="lastName"
-                        value={formData.lastName}
+                        name="last_name"
+                        value={formData.last_name}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div>
+                    <label>Department:</label>
+                    <input
+                        type="text"
+                        name="department"
+                        value={formData.department}
                         onChange={handleChange}
                         required
                     />
@@ -69,8 +90,8 @@ const UserDetails = () => {
                     <label>Phone Number:</label>
                     <input
                         type="tel"
-                        name="phoneNumber"
-                        value={formData.phoneNumber}
+                        name="contact"
+                        value={formData.contact}
                         onChange={handleChange}
                         required
                     />
@@ -79,8 +100,8 @@ const UserDetails = () => {
                     <label>Blood Group:</label>
                     <input
                         type="text"
-                        name="bloodGroup"
-                        value={formData.bloodGroup}
+                        name="blood_group"
+                        value={formData.blood_group}
                         onChange={handleChange}
                         required
                     />
@@ -89,8 +110,8 @@ const UserDetails = () => {
                     <label>Date of Birth:</label>
                     <input
                         type="date"
-                        name="dateOfBirth"
-                        value={formData.dateOfBirth}
+                        name="dob"
+                        value={formData.dob}
                         onChange={handleChange}
                         required
                     />

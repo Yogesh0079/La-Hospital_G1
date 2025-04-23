@@ -1,9 +1,11 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 import { userTypeMap, deptMap} from "../static/mappings.js";
-import {get_enumeration, rev_enumeration, createDb, readDb, updateDb} from "../connections/database.js";
+import {get_enumeration, rev_enumeration, createDb, readDb, updateDb, readDbField} from "../connections/database.js";
 
 const userSchema = new Schema({
+    new: Boolean,
+    oauth_id: String,
     first_name: String,
     last_name: String,
     email: String,
@@ -61,6 +63,17 @@ async function getUser(userId) {
         return res;
     });
 }
+async function getUserByField(email, field) {
+    return await readDbField(field, email, User, "getUser").then((res) => {
+        if (!res) return null;
+        if (!res.user_type) res.user_type = 0;
+        res.user_type = rev_enumeration(res.user_type, userTypeMap);
+        if (res.doc_info) {
+            res.doc_info.dept_id = rev_enumeration(res.doc_info.dept_id, deptMap);
+        }
+        return res;
+    });
+}
 
 async function updateUser(userId, updateFields) {
     return await updateDb(userId, updateFields, User, "getUser").then((res) => {
@@ -73,4 +86,4 @@ async function updateUser(userId, updateFields) {
 }
 
 export default User;
-export {createUser, getUser, updateUser};
+export {createUser, getUser, updateUser, getUserByField};

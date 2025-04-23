@@ -1,13 +1,32 @@
 import React, { useState } from "react";
+import {useNavigate} from "react-router-dom"
+import { getSessionUser } from "../../scripts/users";
+
 
 export default function Intro() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     department: "",
     date: "",
     number: 1,
   });
-
+  getSessionUser()
+        .then(data => {
+          console.log(data)
+          if (data.user) {
+            if (data.user.new) {
+              navigate(`/user/${data.user._id}`, { state: { user: data.user } });
+            }
+            console.log('Authenticated:', data.user);
+            setFormData({
+              ...formData,
+              name: data.user.first_name + " " + data.user.last_name,
+            });
+          } else {
+            console.log('Not authenticated');
+          }
+        });
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });

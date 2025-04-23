@@ -1,4 +1,6 @@
 // import new_doctor from "./assets/new_doctor.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faGoogle, faGithub, faMicrosoft } from "@fortawesome/free-brands-svg-icons";
 
 function Login(){
     return(
@@ -14,9 +16,9 @@ function Login(){
                 <button name="confirm" id="button-confirm" >Submit</button>
                 <hr />
                 <div className="OAuth">
-                <a name="google" id="button-google-oauth"></a>
-                <a name="github" id="button-github-oauth"></a>
-                <a name="outlook" id="button-outlook-oauth"></a>
+                <a href="http://localhost:5000/login/federated/google" name="google" id="button-google-oauth"><FontAwesomeIcon icon={faGoogle} /></a>
+                <a name="github" id="button-github-oauth"><FontAwesomeIcon icon={faGithub} /></a>
+                <a name="outlook" id="button-outlook-oauth"><FontAwesomeIcon icon={faMicrosoft} /></a>
                 </div>
             </form>
 

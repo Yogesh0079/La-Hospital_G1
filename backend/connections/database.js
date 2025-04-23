@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-mongoose.connect("mongodb://localhost:32768/lhospital")
+mongoose.connect("mongodb://localhost:32770/lhospital")
     .then(() => console.log('Connected to database!'))
     .catch((err) => console.log('Error connecting to database:', err));
 
@@ -33,6 +33,12 @@ async function readDb(id, dataSchema, deb_name) {
         return err;
     });
 }
+async function readDbField(field, value, dataSchema, deb_name) {
+    return dataSchema.findOne({[field]: value}).catch((err) => {
+        err.error = `${deb_name}`;
+        return err;
+    });
+}
 
 async function updateDb(id, updateFields, dataObject, deb_name) {
     return await dataObject.findOneAndUpdate({_id: id}, updateFields, {returnOriginal: false}).then((obj) => {
@@ -44,5 +50,5 @@ async function updateDb(id, updateFields, dataObject, deb_name) {
     });
 }
 
-export {get_enumeration, rev_enumeration, createDb, readDb, updateDb};
+export {get_enumeration, rev_enumeration, createDb, readDb, updateDb, readDbField};
 export default mongoose.connection;
