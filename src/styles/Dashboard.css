@@ -1,0 +1,379 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    -ms-overflow-style: none;  /* IE/Edge */
+    scrollbar-width: none;  /* Firefox */
+    -webkit-overflow-scrolling: touch;
+      overflow: auto;
+}
+
+*::-webkit-scrollbar{
+    display: none;
+}
+
+@keyframes slideFadeIn {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+/* Hide scrollbar on tablets/mobile for patient-user-data */
+@media (max-width: 1024px) {
+    .patient-user-data {
+      -ms-overflow-style: none;  /* IE/Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+    
+    .patient-user-data::-webkit-scrollbar {
+      display: none; /* Chrome/Safari/Opera */
+    }
+    
+    /* Ensure content remains scrollable */
+    .patient-user-data {
+      -webkit-overflow-scrolling: touch;
+      overflow: auto;
+    }
+  }
+  
+  /* Keep visible scrollbar on desktop */
+  @media (min-width: 1025px) {
+    .patient-user-data {
+      scrollbar-width: thin;
+      scrollbar-color: #c1c1c1 transparent;
+    }
+    
+    .patient-user-data::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .patient-user-data::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 3px;
+    }
+  }
+
+
+
+.dashboard {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    position: relative; /* Added for user-data positioning */
+}
+
+.sidebar {
+    width: 72px;
+    height: 100vh;
+    background-color: rgb(86, 86, 209);
+    border-right: 1px solid rgb(20, 20, 46);
+    flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+    .sidebar {
+        width: 48px;
+        height: 100vh;
+        background-color: rgb(86, 86, 209);
+        border-right: 1px solid rgb(20, 20, 46);
+        flex-shrink: 0;
+    }
+}
+
+.dashboard-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* User Data Panel - positioned to the right */
+.user-data {
+    position: absolute;
+    right: 1.1rem;
+    top: 44px; /* Below the search bar */
+    bottom: 0;
+    width: 400px;
+    z-index: 10;
+    padding: 20px;
+    overflow-y: auto;
+    color: black;
+    overflow: hidden;
+}
+
+/* Adjust main content when user-data is present */
+.main {
+    height: calc(100vh - 44px);
+    padding: 20px;
+    background-color: #f5f5f5;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-right: 400px; /* Make space for user-data */
+}
+
+/* Rest of your existing CSS remains the same */
+.search {
+    display: flex;
+    height: 60px;
+    border-bottom: 1px solid rgb(20, 20, 46);
+}
+
+.search-button {
+    border: none;
+    cursor: pointer;
+    height: 60px;
+    width: 44px;
+    background-color: white;
+    border-radius: 0;
+    margin-left: -7px;
+}
+
+.search-button img {
+    width: 20px;
+    height: 20px;
+}
+
+.search-area {
+    height: 60px;
+    padding: 12px;
+    flex: 1;
+    background-color: white;
+    border: none;
+    color: gray;
+}
+
+.notification {
+    border: none;
+    cursor: pointer;
+    width: 44px;
+    height: 60px;
+    background-color: rgb(86, 86, 209);
+    border-right: 1px solid rgb(20, 20, 46);
+    border-bottom: 1px solid rgb(20, 20, 46);
+    border-left: 1px solid rgb(20, 20, 46);
+    border-radius: 0;
+}
+
+.notification img {
+    width: 20px;
+    height: 20px;
+    margin-left: -7px;
+}
+
+.user {
+    border: none;
+    cursor: pointer;
+    width: 352px;
+    height: 60px;
+    background-color: rgb(86, 86, 209);
+    border-bottom: 1px solid rgb(20, 20, 46);
+    border-radius: 0;
+}
+
+@media (max-width: 600px) {
+    .user {
+        border: none;
+        cursor: pointer;
+        width: 44px;
+        height: 60px;
+        background-color: rgb(86, 86, 209);
+        border-bottom: 1px solid rgb(20, 20, 46);
+        border-radius: 0;
+    }
+}
+
+.vitals-main {
+    transform: translateX(20px); /* Moves element without affecting layout */
+    max-width: 270px;
+    padding: 1rem;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 6px 24px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Desktop row layout */
+@media (min-width: 600px) {
+    .main {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: center;
+        max-width: 968px;
+    }
+    
+    .vitals-main {
+        transform: translateX(20px); /* Moves element without affecting layout */
+        max-width: 892px;
+        padding: 1rem;
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 6px 24px rgba(0, 0, 0, 0.1);
+    }
+    
+    .reports-and-tests {
+        flex: 0 0 calc(1000px - 440px);
+    }
+    
+    .data {
+        flex: 0 0 1000px;
+    }
+}
+
+.vitals {
+    color: grey;
+    font-size: 1rem;
+}
+
+.vitals p {
+    margin: 1rem;
+}
+
+.vitals-direction {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.direction1, .direction2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.direction1 div, .direction2 div {
+    background-color: aliceblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 1rem;
+    flex: 1 1 100%;
+    min-height: 80px;
+    opacity: 0;
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: slideFadeIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+/* Responsive direction boxes */
+@media (min-width: 600px) {
+    .direction1 div, .direction2 div {
+        flex: 1 1 calc(50% - 0.5rem);
+    }
+}
+
+@media (min-width: 1024px) {
+    .direction1, .direction2 {
+        flex-wrap: nowrap;
+    }
+    .direction1 div, .direction2 div {
+        flex: 0.2;
+        min-height: 120px;
+    }
+}
+
+.reports-and-tests {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.repotest {
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.full-body, .x-ray, .blood {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 6px 24px rgba(0, 0, 0, 0.1);
+    flex: 0.4;
+    height: 20vh;
+}
+
+.data {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.patient-visits, .prescriptions {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.patient-visits div, .prescriptions div {
+    background-color: white;
+    height: 60vh;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 6px 24px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    overflow: auto;
+}
+
+/* Tablet responsive */
+@media (max-width: 992px) {
+    .data {
+        flex-direction: column;
+    }
+    .patient-visits div, .prescriptions div {
+        height: 40vh;
+    }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .user-data {
+        width: 300px; /* Smaller on mobile */
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+    }
+    
+    .user-data.active {
+        transform: translateX(0);
+    }
+    
+    .main {
+        margin-right: 0;
+    }
+    
+    .main {
+        padding: 10px;
+    }
+    .direction1 div, .direction2 div {
+        min-height: 60px;
+    }
+    .full-body, .x-ray, .blood {
+        height: 15vh;
+    }
+
+    .patient-visits div, .prescriptions div {
+        background-color: white;
+        height: 60vh;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 6px 24px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        overflow: auto;
+        max-width: 275px;
+    }
+}
+
+.user-data p{
+    margin: 1rem;
+    color: gray;
+}
+
+.patient-user-data {
+    width: 360px;
+    height: 80vh;
+    background-color: white;
+}

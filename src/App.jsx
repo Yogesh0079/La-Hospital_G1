@@ -6,6 +6,8 @@ import Home from "./pages/HomeX"
 import Login from "./pages/Login";
 import NoPage from "./pages/Nopage";
 import UserDetails from "./pages/userdetails";
+import Dashboard from "./pages/Dashboard";
+import Appointment from "./pages/Appointment";
 
 export default function App() {
   return (
@@ -19,6 +21,8 @@ export default function App() {
             element={<UserDetails />}
           />
           <Route path="*" element={<NoPage />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="appointment" element={<Appointment />} />
         </Route>
       </Routes>
     </BrowserRouter>
