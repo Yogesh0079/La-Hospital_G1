@@ -1,4 +1,4 @@
-import logo from "../../assets/logo-removebg-preview.png";
+import logo from "../../assets/logo.png";
 import { useNavigate } from 'react-router-dom';
 import "../../styles/global.css";
 
@@ -10,7 +10,7 @@ function Header(){
             <nav className="bg-white shadow-md py-4 sticky top-0 z-50">
             <div className="container mx-auto px-6 flex justify-between items-center">
                 <div className="flex items-center">
-                    <img className="header-image" src={logo} alt="" />
+                    <img className="header-image box-border mr-8" src={logo} alt="" />
                     <span className="text-2xl font-bold text-blue-800">La Hospital</span>
                 </div>
                 <div className="hidden md:flex space-x-8">

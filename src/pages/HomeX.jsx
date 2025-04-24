@@ -45,7 +45,7 @@ function Home() {
                 <div className="hero-pattern"></div>
                 <div className="container mx-auto px-6">
                     <div className="hero-content md:w-2/3">
-                        <h1 className="text-4xl md:text-5xl font-bold mb-6 split-text">
+                        <h1 className="text-4xl md:text-5xl font-bold mb-6 split-text pb-8">
                         <SplitText
                             text="An Advanced Hospital Managment System"
                             className="text-6xl font-semibold text-center"
@@ -66,7 +66,7 @@ function Home() {
                             <a href="#contact" className="bg-white text-blue-800 px-8 py-3 rounded-full font-bold text-center hover:bg-gray-100 transition shadow-lg">
                                 Book Appointment
                             </a>
-                            <a href="#services" className="border-2 border-white px-8 py-3 rounded-full font-bold text-center hover:bg-white hover:bg-opacity-10 transition">
+                            <a href="#services" className="bg-white text-blue-800 px-8 py-3 rounded-full font-bold text-center hover:bg-gray-100 transition shadow-lg">
                                 Our Services
                             </a>
                         </div>
