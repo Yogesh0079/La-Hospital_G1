@@ -8,9 +8,17 @@
     -webkit-overflow-scrolling: touch;
       overflow: auto;
 }
+
 *::-webkit-scrollbar{
     display: none;
 }
+
+@keyframes slideFadeIn {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
 
 /* Hide scrollbar on tablets/mobile for patient-user-data */
 @media (max-width: 1024px) {
@@ -64,6 +72,16 @@
     flex-shrink: 0;
 }
 
+@media (max-width: 600px) {
+    .sidebar {
+        width: 48px;
+        height: 100vh;
+        background-color: rgb(86, 86, 209);
+        border-right: 1px solid rgb(20, 20, 46);
+        flex-shrink: 0;
+    }
+}
+
 .dashboard-content {
     display: flex;
     flex-direction: column;
@@ -75,7 +93,7 @@
 /* User Data Panel - positioned to the right */
 .user-data {
     position: absolute;
-    right: 0;
+    right: 1.1rem;
     top: 44px; /* Below the search bar */
     bottom: 0;
     width: 400px;
@@ -102,14 +120,14 @@
 /* Rest of your existing CSS remains the same */
 .search {
     display: flex;
-    height: 44px;
+    height: 60px;
     border-bottom: 1px solid rgb(20, 20, 46);
 }
 
 .search-button {
     border: none;
     cursor: pointer;
-    height: 44px;
+    height: 60px;
     width: 44px;
     background-color: white;
     border-radius: 0;
@@ -122,7 +140,7 @@
 }
 
 .search-area {
-    height: 44px;
+    height: 60px;
     padding: 12px;
     flex: 1;
     background-color: white;
@@ -134,7 +152,7 @@
     border: none;
     cursor: pointer;
     width: 44px;
-    height: 44px;
+    height: 60px;
     background-color: rgb(86, 86, 209);
     border-right: 1px solid rgb(20, 20, 46);
     border-bottom: 1px solid rgb(20, 20, 46);
@@ -151,25 +169,51 @@
 .user {
     border: none;
     cursor: pointer;
-    width: 150px;
-    height: 44px;
+    width: 352px;
+    height: 60px;
     background-color: rgb(86, 86, 209);
     border-bottom: 1px solid rgb(20, 20, 46);
     border-radius: 0;
 }
 
+@media (max-width: 600px) {
+    .user {
+        border: none;
+        cursor: pointer;
+        width: 44px;
+        height: 60px;
+        background-color: rgb(86, 86, 209);
+        border-bottom: 1px solid rgb(20, 20, 46);
+        border-radius: 0;
+    }
+}
+
+.vitals-main {
+    transform: translateX(20px); /* Moves element without affecting layout */
+    max-width: 270px;
+    padding: 1rem;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 6px 24px rgba(0, 0, 0, 0.1);
+}
+
+
+
 /* Desktop row layout */
-@media (min-width: 1200px) {
+@media (min-width: 600px) {
     .main {
         flex-direction: row;
         flex-wrap: wrap;
         align-items: flex-start;
         justify-content: center;
+        max-width: 968px;
     }
     
     .vitals-main {
-        flex: 0 0 400px;
-        height: 100%;
+        transform: translateX(20px); /* Moves element without affecting layout */
+        max-width: 892px;
+        padding: 1rem;
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 6px 24px rgba(0, 0, 0, 0.1);
     }
     
     .reports-and-tests {
@@ -184,14 +228,6 @@
 .vitals {
     color: grey;
     font-size: 1rem;
-}
-
-.vitals-main {
-    width: 100%;
-    max-width: 1000px;
-    padding: 1rem;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 6px 24px rgba(0, 0, 0, 0.1);
 }
 
 .vitals p {
@@ -221,6 +257,10 @@
     padding: 1rem;
     flex: 1 1 100%;
     min-height: 80px;
+    opacity: 0;
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: slideFadeIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
 /* Responsive direction boxes */
@@ -315,6 +355,15 @@
     }
     .full-body, .x-ray, .blood {
         height: 15vh;
+    }
+
+    .patient-visits div, .prescriptions div {
+        background-color: white;
+        height: 60vh;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 6px 24px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        overflow: auto;
+        max-width: 275px;
     }
 }
 

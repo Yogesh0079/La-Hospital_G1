@@ -27,7 +27,7 @@ const NormalLayout = ({ children }) => {
     }
 
 const Layout = ({ children }) => {
-    if(window.location.href.split("/").pop() == "dashboard") {
+    if(window.location.href.split("/").pop() == "dashboard" || window.location.href.split("/").pop() == "appointment") {
         return SimpleLayout({children});
     }
     else {

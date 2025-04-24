@@ -3,6 +3,7 @@ import "../styles/Dashboard.css"
 import bellIcon from '../assets/bell.854x1024.png';
 import searchIcon from '../assets/instagram-search-icon.png';
 
+
 function Dashboard() {
     return (
         <>
@@ -14,8 +15,8 @@ function Dashboard() {
                 <div className='search'>
                     <button className='search-button'><img src={searchIcon}></img></button>
                     <input className='search-area' type='text' placeholder='Search..'></input>
-                    <button className='notification' type='#'><img src={bellIcon} alt="bell icon" /></button>
                     <button className='user'></button>
+                    <button className='notification' type='#'><img src={bellIcon} alt="bell icon" /></button>
                 </div>
                 <div className='main'>
                     <div className='vitals'>
@@ -54,7 +55,7 @@ function Dashboard() {
                         </div>
                     </div>
                     <div className='user-data'>
-                        <p>PATIENT DETAILS</p>
+                        <p>USER DETAILS</p>
                         <div className='patient-user-data'></div>
                     </div>
                 </div>
