@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faGoogle, faGithub, faMicrosoft } from "@fortawesome/free-brands-svg-icons";
 import {useState} from "react";
 import {createUser} from "../scripts/users";
+import "../styles/Login.css";
 
 function GetFormFields(params) {
     let [formState, setFormState] = useState({
@@ -50,19 +51,20 @@ function Login(){
         <div className="Login">
             <div className="form-border">
                 <form>
-                    <button onClick={handleButtonClick} name="Sign-In" id="button-sign-in">Sign In</button>
-                    <button onClick={handleButtonClick} name="Sign-Up" id="button-sign-up">Sign Up</button>
+                    <div className="button-group" style={{ display: "flex", gap: "20px" }}>
+                        <button onClick={handleButtonClick} name="Sign-In" id="button-sign-in">Sign In</button>
+                        <button onClick={handleButtonClick} name="Sign-Up" id="button-sign-up">Sign Up</button>
+                    </div>
                     <GetFormFields buttonState={buttonState} />
                     <button name="confirm" id="button-confirm" onClick={handleSubmit}>{buttonState}</button>
                     <hr />
-                    <div className="OAuth">
+                    <div className="OAuth" style={{ display: "flex", gap: "10px" }}>
                         <a href="http://localhost:5000/login/federated/google" name="google" id="button-google-oauth"><FontAwesomeIcon icon={faGoogle} /></a>
                         <a href="#" name="github" id="button-github-oauth"><FontAwesomeIcon icon={faGithub} /></a>
                         <a href="#" name="outlook" id="button-outlook-oauth"><FontAwesomeIcon icon={faMicrosoft} /></a>
                     </div>
                 </form>
             </div>
-            {/* <img className="login-image" src="https://thumbs.dreamstime.com/b/funny-crazy-doctor-laughing-holds-saw-hand-whit-isolated-white-background-62462517.jpg?w=992" alt="" srcset="" /> */}
         </div>
 
         </>
