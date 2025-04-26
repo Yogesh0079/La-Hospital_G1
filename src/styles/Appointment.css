@@ -5,7 +5,6 @@
   padding: 0;
   overflow: visible !important;
   z-index: auto !important;
-  transform: none !important;
 }
 
 body {
@@ -113,7 +112,6 @@ input[type="tel"]:focus {
   background-color: white;
   transition: all 0.3s ease;
   box-shadow: none !important;
-  transform: none !important; /* Prevents React Select from breaking scaling */
 }
 
 .react-select__control--is-focused {

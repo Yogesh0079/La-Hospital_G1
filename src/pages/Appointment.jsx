@@ -222,7 +222,7 @@ export default function Appointment() {
         <label>Name</label>
         <motion.div
           className="motion-input-container"
-          whileHover={{ scale: 0.98 }}
+          whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           style={{ display: 'inline-flex', width: '100%' }} // Inline override
         >
@@ -236,7 +236,7 @@ export default function Appointment() {
         </motion.div>
         <motion.div
           className="motion-input-container"
-          whileHover={{ scale: 0.98 }}
+          whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           style={{ display: 'inline-flex', width: '100%' }} // Inline override
         >
@@ -254,7 +254,7 @@ export default function Appointment() {
         <label>Email</label>
         <motion.div
           className="motion-input-container"
-          whileHover={{ scale: 0.98 }}
+          whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           style={{ display: 'inline-flex', width: '100%' }} // Inline override
         >
@@ -271,7 +271,7 @@ export default function Appointment() {
         <label>Phone Number</label>
         <motion.div
           className="motion-input-container"
-          whileHover={{ scale: 0.98 }}
+          whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           style={{ display: 'inline-flex', width: '100%' }} // Inline override
         >
