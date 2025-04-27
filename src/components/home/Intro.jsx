@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom"
 import { getSessionUser } from "../../scripts/users";
 
 
+
 export default function Intro() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
