@@ -6,6 +6,7 @@ import searchIcon from '../assets/instagram-search-icon.png';
 import { motion } from "framer-motion";
 import teamPhoto from '../assets/team.jpg';
 
+
 function Dashboard() {
     const [isUserDataVisible, setIsUserDataVisible] = useState(true);
     const [isMobile, setIsMobile] = useState(false);

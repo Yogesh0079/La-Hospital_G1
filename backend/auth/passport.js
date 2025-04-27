@@ -1,12 +1,19 @@
 import passport from "passport";
 import GoogleStrategy from 'passport-google-oidc';
+import LocalStrategy from 'passport-local';
 import dotenv from 'dotenv';
 import {getUser, createUser, getUserByField} from "../models/user.js";
-dotenv.config("../.env");
+import {User} from "../models/user.js";
+dotenv.config({ path: "../.env" });
+
+const config = {
+    clientID: config.GOOGLE_CLIENT_ID,
+    clientSecret: config.GOOGLE_CLIENT_SECRET,
+};
 
 passport.use(new GoogleStrategy({
-    clientID: process.env['GOOGLE_CLIENT_ID'],
-    clientSecret: process.env['GOOGLE_CLIENT_SECRET'],
+    clientID: config.clientID,
+    clientSecret: config.clientSecret,
     callbackURL: '/oauth2/redirect/google',
     scope: [ 'profile' , 'email']
   }, async function verify(issuer, profile, cb) {
@@ -33,6 +40,16 @@ passport.use(new GoogleStrategy({
         return cb(err);
   })
  }));
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+      User.findOne({ username: username }, function (err, user) {
+        if (err) { return done(err); }
+        if (!user) { return done(null, false); }
+        if (!user.verifyPassword(password)) { return done(null, false); }
+        return done(null, user);
+      });
+    }
+));
 passport.serializeUser(function(user, done) {
     done(null, user._id, user.email);
 });
@@ -45,4 +62,4 @@ passport.deserializeUser(function(id, done) {
     return done(null, res);
   });
 });
-export {GoogleStrategy, passport};
+export {GoogleStrategy, LocalStrategy, passport};

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-const UserDetails = (uid) => {
+const UserDetails = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         first_name: "",

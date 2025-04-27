@@ -57,7 +57,7 @@ app.post('/logout', function(req, res, next) {
         });
     });
 
-app.get('/auth', passport.authenticate('session'), (req, res) => {
+app.get('/authSession', passport.authenticate('session'), (req, res) => {
     res.cookie('session', req.sessionID, { httpOnly: true });
     if (req.isAuthenticated()) {
         res.json({user: req.user});
@@ -65,7 +65,9 @@ app.get('/auth', passport.authenticate('session'), (req, res) => {
         res.status(401).json({message: 'Unauthorized'});
     }
 });
+app.get('/authLocal', passport.authenticate('local'), (req, res) => {
 
+})
 app.listen(5000, () => {
     console.log("App started on port 5000");
 })
