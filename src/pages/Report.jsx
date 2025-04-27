@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import '../styles/Report.css';
+import { useNavigate } from "react-router-dom";
+import { getSessionUser } from "../scripts/users";
 
 export default function Report() {
     
@@ -55,7 +58,31 @@ export default function Report() {
 
   return (
     <>
-      
+      <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className="emr"
+      >
+        <div className='sidebar'></div>
+        <div
+        className="scroller"
+        >
+          <button type="submit" class="search-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          Search
+          </button>
+        </div>
+        <div class="text-editor">
+          <div class="editor-content" contenteditable="true" spellcheck="true"></div>
+        </div>
+        <div class="report-viewer">
+          {/*  */}
+        </div>
+      </motion.div>
     </>
   )
 }
