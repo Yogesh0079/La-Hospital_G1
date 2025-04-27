@@ -58,7 +58,7 @@ export default function Intro() {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            style={{ width: "100%", padding: "8px" }}
+            style={{ width: "97%", padding: "8px" }}
             required
           />
         </div>
@@ -66,14 +66,33 @@ export default function Intro() {
           <label style={{ display: "block", marginBottom: "5px" }}>
             Department:
           </label>
-          <input
-            type="text"
+          <select
             name="department"
             value={formData.department}
             onChange={handleChange}
             style={{ width: "100%", padding: "8px" }}
             required
-          />
+          >
+          <option value="">Select Department</option>
+          <option value="Cardiology">Cardiology</option>
+          <option value="Dermatology">Dermatology</option>
+          <option value="Endocrinology">Endocrinology</option>
+          <option value="Gastroenterology">Gastroenterology</option>
+          <option value="Hematology">Hematology</option>
+          <option value="Infectious Diseases">Infectious Diseases</option>
+          <option value="Nephrology">Nephrology</option>
+          <option value="Neurology">Neurology</option>
+          <option value="Oncology">Oncology</option>
+          <option value="Ophthalmology">Ophthalmology</option>
+          <option value="Orthopedics">Orthopedics</option>
+          <option value="Pediatrics">Pediatrics</option>
+          <option value="Psychiatry">Psychiatry</option>
+          <option value="Pulmonology">Pulmonology</option>
+          <option value="Radiology">Radiology</option>
+          <option value="Rheumatology">Rheumatology</option>
+          <option value="Urology">Urology</option>
+
+          </select>
         </div>
         <div style={{ marginBottom: "15px" }}>
           <label style={{ display: "block", marginBottom: "5px" }}>Date:</label>
@@ -82,25 +101,31 @@ export default function Intro() {
             name="date"
             value={formData.date}
             onChange={handleChange}
-            style={{ width: "100%", padding: "8px" }}
+            style={{ width: "97%", padding: "8px" }}
             required
           />
         </div>
         <div style={{ marginBottom: "15px" }}>
-          <label style={{ display: "block", marginBottom: "5px" }}>
-            Number (1-20):
-          </label>
-          <input
-            type="number"
-            name="number"
-            value={formData.number}
-            onChange={handleChange}
-            min="1"
-            max="20"
-            style={{ width: "100%", padding: "8px" }}
-            required
-          />
-        </div>
+  <label style={{ display: "block", marginBottom: "5px" }}>
+    Time Slot:
+  </label>
+  <select
+    name="timeSlot"
+    value={formData.timeSlot}
+    onChange={handleChange}
+    style={{ width: "100%", padding: "8px" }}
+    required
+  >
+    <option value="">Select Time Slot</option>
+    <option value="09:00 AM - 10:00 AM">09:00 AM - 10:00 AM</option>
+    <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+    <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
+    <option value="01:00 PM - 02:00 PM">01:00 PM - 02:00 PM</option>
+    <option value="02:00 PM - 03:00 PM">02:00 PM - 03:00 PM</option>
+    <option value="03:00 PM - 04:00 PM">03:00 PM - 04:00 PM</option>
+  </select>
+</div>
+
         <button
           type="submit"
           style={{
