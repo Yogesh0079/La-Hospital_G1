@@ -3,17 +3,16 @@ import GoogleStrategy from 'passport-google-oidc';
 import LocalStrategy from 'passport-local';
 import dotenv from 'dotenv';
 import {getUser, createUser, getUserByField} from "../models/user.js";
-import {User} from "../models/user.js";
+import User from "../models/user.js";
 dotenv.config({ path: "../.env" });
 
-const config = {
-    clientID: config.GOOGLE_CLIENT_ID,
-    clientSecret: config.GOOGLE_CLIENT_SECRET,
-};
+dotenv.config("../.env");
 
 passport.use(new GoogleStrategy({
-    clientID: config.clientID,
-    clientSecret: config.clientSecret,
+    // eslint-disable-next-line no-undef
+    clientID: process.env['GOOGLE_CLIENT_ID'],
+    // eslint-disable-next-line no-undef
+    clientSecret: process.env['GOOGLE_CLIENT_SECRET'],
     callbackURL: '/oauth2/redirect/google',
     scope: [ 'profile' , 'email']
   }, async function verify(issuer, profile, cb) {
@@ -40,16 +39,21 @@ passport.use(new GoogleStrategy({
         return cb(err);
   })
  }));
-passport.use(new LocalStrategy(
-    function(username, password, done) {
-      User.findOne({ username: username }, function (err, user) {
-        if (err) { return done(err); }
-        if (!user) { return done(null, false); }
-        if (!user.verifyPassword(password)) { return done(null, false); }
-        return done(null, user);
-      });
-    }
+
+ passport.use(new LocalStrategy(
+  { usernameField: 'email', session: true }, // 👈 this tells it to use "email" instead of "username"
+  function(email, password, done) {
+    User.findOne({ email: email }).then(user => {
+      if (!user) return done(null, false, { message: 'Incorrect email.' });
+
+      if (!(user.password == password)) { // make sure validPassword is implemented
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    }).catch(err => {if (err) return done(err);})
+  }
 ));
+
 passport.serializeUser(function(user, done) {
     done(null, user._id, user.email);
 });

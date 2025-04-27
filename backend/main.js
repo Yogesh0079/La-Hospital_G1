@@ -8,6 +8,8 @@ import cors from "cors";
 import morgan from "morgan";
 const app = express();
 
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 const corsOptions ={
    origin:'http://localhost:5173', //restricts the domain that can access the server
@@ -38,6 +40,11 @@ app.get("/", (req,res) => {
 })
 
 app.post("/createUser", newUser);
+app.post('/login',
+    passport.authenticate('local', { session: true }), (req, res) => {
+        res.json(req.user)
+    }
+);
 app.get("/getUser/:userId", getUserData);
 app.put("/updateUser/:userId", updateUserData);
 
@@ -47,9 +54,11 @@ app.put("/updateRecord/:recordId", updateRecordData);
 
 app.get("/login/federated/google", passport.authenticate("google"));
 app.get('/oauth2/redirect/google', passport.authenticate('google', {
-    successRedirect: 'http://localhost:5173/',
+    successRedirect: 'http://localhost:5173/dashboard',
     failureRedirect: 'http://localhost:5173/login'
 }));
+
+
 app.post('/logout', function(req, res, next) {
     req.logout(function(err) {
         if (err) { return next(err); }
@@ -65,9 +74,7 @@ app.get('/authSession', passport.authenticate('session'), (req, res) => {
         res.status(401).json({message: 'Unauthorized'});
     }
 });
-app.get('/authLocal', passport.authenticate('local'), (req, res) => {
 
-})
 app.listen(5000, () => {
     console.log("App started on port 5000");
 })

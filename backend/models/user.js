@@ -4,14 +4,15 @@ import { userTypeMap, deptMap} from "../static/mappings.js";
 import {get_enumeration, rev_enumeration, createDb, readDb, updateDb, readDbField} from "../connections/database.js";
 
 const userSchema = new Schema({
-    new: Boolean,
+    new: {type: Boolean, default: true},
     oauth_id: String,
-    first_name: String,
-    last_name: String,
-    email: String,
+    password: String,
+    first_name: {type: String, required: true},
+    last_name: {type: String, required: true},
+    email: {type: String, required: true},
     contact: String,
     address: String,
-    user_type: Number,
+    user_type: {type: Number, default: 0},
     photo: String,
     records: [Number],
     appontments: [Number],
@@ -20,7 +21,7 @@ const userSchema = new Schema({
         designation: String,
         date_joined: Date,
         salary: Number,
-        dept_id: Number,
+        dept_id: Number
     },
     patient_data: {
         blood_group: Number,
@@ -44,6 +45,7 @@ const userSchema = new Schema({
 const User = new mongoose.model("users", userSchema);
 
 async function createUser(reqData) {
+    if(!reqData) {return {error: "createUser"};}
     reqData.user_type = get_enumeration(reqData.user_type, userTypeMap) || 0;
     if (reqData.user_type === 1) {
         reqData.doc_info.dept_id = Object.keys(deptMap).find(key => deptMap[key] === reqData.doc_info.dept_id);

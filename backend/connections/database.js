@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-mongoose.connect("mongodb://localhost:32770/lhospital")
+mongoose.connect("mongodb://localhost:32768/lhospital")
     .then(() => console.log('Connected to database!'))
     .catch((err) => console.log('Error connecting to database:', err));
 

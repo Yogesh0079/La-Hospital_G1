@@ -5,7 +5,7 @@ import Layout from "./pages/Layout";
 import Home from "./pages/HomeX"
 import Login from "./pages/Login";
 import NoPage from "./pages/Nopage";
-import UserDetails from "./pages/userdetails";
+import UserDetails from "./pages/userDetailsX";
 import Dashboard from "./pages/Dashboard";
 import Appointment from "./pages/Appointment";
 

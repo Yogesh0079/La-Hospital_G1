@@ -3,8 +3,9 @@ import { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import "../styles/home.css";
 import { animateElements } from '../scripts/home.commons';
-import SplitText from "../components/general/SplitText";
-import CountUp from '../components/general/CountUp';
+import CountUp from '../components/animations/CountUp';
+import JumpText from '../components/animations/JumpText';
+
 import {
     faHeartbeat,
     faBrain,
@@ -46,18 +47,7 @@ function Home() {
                 <div className="container mx-auto px-6">
                     <div className="hero-content md:w-2/3">
                         <h1 className="text-4xl md:text-5xl font-bold mb-6 split-text pb-8">
-                        <SplitText
-                            text="An Advanced Hospital Managment System"
-                            className="text-6xl font-semibold text-center"
-                            delay={50}
-                            animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
-                            animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
-                            easing="easeOutCubic"
-                            threshold={0.3}
-                            rootMargin="-50px"
-                            onLetterAnimationComplete={console.log("Complete animation.")}
-                            />
-                            <span className="inline-block overflow-hidden"><span className="inline-block"></span></span>
+                            <JumpText loop={true} loopDelay={3000} className="main-heading-text" inputText="An Advanced Hospital Managment System" />
                         </h1>
                         <p className="text-xl mb-8 opacity-90 animate-text">
                             Streamlining healthcare operations for better patient care and efficient hospital administration.

@@ -2,37 +2,44 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faGoogle, faGithub, faMicrosoft } from "@fortawesome/free-brands-svg-icons";
 import {useState} from "react";
-import {createUser} from "../scripts/users";
+import {createUser, loginUser} from "../scripts/users";
 import "../styles/Login.css";
 
 function GetFormFields(params) {
-    let [formState, setFormState] = useState({
-        email: String,
-        password: String
-    })
-    let handleFormChange = (e) => {
-        const { name, value } = e.target;
-        setFormState({ ...formState, [name]: value });
-    }
+
     if (params.buttonState === "Sign-In") {
         return (
             <div className="login-form-fields" >
-                <input onChange={handleFormChange} type="text" name="uname" id="login-uname-input" placeholder="Username"/><br />
-                <input onChange={handleFormChange} type="password" name="password" id="login-password-input" placeholder="Password"/>
+                <input onChange={params.handler} type="text" name="email" id="login-uname-input" placeholder="Username"/><br />
+                <input onChange={params.handler} type="password" name="password" id="login-password-input" placeholder="Password"/>
             </div>
         )
     }
     else {
         return (
             <div className="login-form-fields">
-                <input type="text" name="email" id="login-fname-input" placeholder="  Email"/><br />
-                <input type="password" name="password" id="login-password-input" placeholder="Password"/>
+                <input onChange={params.handler} type="text" name="firstname" id="login-fname-input" placeholder="FirstName"/><br />
+                <input onChange={params.handler} type="text" name="lastname" id="login-fname-input" placeholder="LastName"/><br />
+                <input onChange={params.handler} type="text" name="contact" id="login-fname-input" placeholder="Contact"/><br />
+                <input onChange={params.handler} type="text" name="email" id="login-fname-input" placeholder="Email"/><br />
+                <input onChange={params.handler} type="password" name="password" id="login-password-input" placeholder="Password"/>
             </div>
         )
     }
 }
 
 function Login(){
+    let [formState, setFormState] = useState({
+        firstname: String,
+        lastname: String,
+        email: String,
+        contact: String,
+        password: String
+    })
+    let handleFormChange = (e) => {
+        const { name, value } = e.target;
+        setFormState({ ...formState, [name]: value });
+    }
 
     let [buttonState, setButtonState] = useState("Sign-In");
     const handleButtonClick = (e) => {
@@ -42,7 +49,17 @@ function Login(){
     const handleSubmit = (e) => {
         e.preventDefault();
         if (buttonState == "Sign-Up") {
-            createUser()
+            createUser({
+                        first_name: formState.firstname,
+                        last_name: formState.lastname,
+                        contact: formState.contact,
+                        email: formState.email,
+                        password: formState.password,
+                        user_type: 0
+                    });
+        }
+        else {
+            loginUser({email: formState.email, password: formState.password})
         }
     }
 
@@ -55,7 +72,7 @@ function Login(){
                         <button onClick={handleButtonClick} name="Sign-In" id="button-sign-in">Sign In</button>
                         <button onClick={handleButtonClick} name="Sign-Up" id="button-sign-up">Sign Up</button>
                     </div>
-                    <GetFormFields buttonState={buttonState} />
+                    <GetFormFields buttonState={buttonState} handler={handleFormChange}/>
                     <button name="confirm" id="button-confirm" onClick={handleSubmit}>{buttonState}</button>
                     <hr />
                     <div className="OAuth" style={{ display: "flex", gap: "10px" }}>
