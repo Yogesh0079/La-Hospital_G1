@@ -118,7 +118,7 @@ function Dashboard() {
                                     <div className='prescriptions'>
                                         <p>LIST OF PRESCRIPTIONS</p>
                                         <div class="add-prescription">
-                                            <button>Add A Prescription</button>
+                                            <motion.button class="add-prescription-button" whileHover={{ border: 0 , scale: 1.02 }} whileTap={{ scale: 0.98 }}>Add A Prescription</motion.button>
                                         </div>
                                         
                                         <div class="medication-section">

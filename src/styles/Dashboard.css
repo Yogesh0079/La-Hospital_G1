@@ -639,7 +639,7 @@ body {
     max-height: 56px;
 }
 
-.add-prescription button {
+.add-prescription-button {
     color: hsl(194, 100%, 45%);
     font-size: 18px;
     margin: 15px 0;
