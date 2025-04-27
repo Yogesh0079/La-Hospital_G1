@@ -2,6 +2,7 @@ import * as React from 'react';
 import "../styles/Dashboard.css"
 import bellIcon from '../assets/bell.854x1024.png';
 import searchIcon from '../assets/instagram-search-icon.png';
+import About from './about';
 
 
 function Dashboard() {
