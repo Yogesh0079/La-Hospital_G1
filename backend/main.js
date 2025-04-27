@@ -50,6 +50,13 @@ app.get('/oauth2/redirect/google', passport.authenticate('google', {
     successRedirect: 'http://localhost:5173/',
     failureRedirect: 'http://localhost:5173/login'
 }));
+<<<<<<< Updated upstream
+=======
+app.post("/ijp", (req) => {
+    console.log(req.body);
+})
+
+>>>>>>> Stashed changes
 app.post('/logout', function(req, res, next) {
     req.logout(function(err) {
         if (err) { return next(err); }

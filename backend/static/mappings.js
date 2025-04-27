@@ -69,4 +69,4 @@ const testTypeMap = {
     30: "HbA1c test"
 };
 
-export {userTypeMap, itemTypeMap, testTypeMap, deptMap};
+export {userTypeMap, itemTypeMap, testTypeMap, deptMap, prescriptionsMap};

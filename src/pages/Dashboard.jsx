@@ -3,8 +3,11 @@ import { useState, useEffect } from 'react';
 import "../styles/Dashboard.css"
 import bellIcon from '../assets/bell.854x1024.png';
 import searchIcon from '../assets/instagram-search-icon.png';
+<<<<<<< Updated upstream
 import { motion } from "framer-motion";
 import teamPhoto from '../assets/team.jpg';
+=======
+>>>>>>> Stashed changes
 
 
 function Dashboard() {

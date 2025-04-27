@@ -1,4 +1,4 @@
-import { useSprings, animated } from '@react-spring/web';
+// import { useSprings, animated } from '@react-spring/web';
 import { useEffect, useRef, useState } from 'react';
 
 const SplitText = ({

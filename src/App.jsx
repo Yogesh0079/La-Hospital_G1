@@ -8,7 +8,12 @@ import NoPage from "./pages/Nopage";
 import UserDetails from "./pages/userdetails";
 import Dashboard from "./pages/Dashboard";
 import Appointment from "./pages/Appointment";
+<<<<<<< Updated upstream
 import Report from "./pages/Report";
+=======
+import About from "./pages/about"
+import Contact from "./pages/contact";
+>>>>>>> Stashed changes
 
 export default function App() {
   return (
@@ -17,6 +22,9 @@ export default function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
+
           <Route
             path="user/:user_id"
             element={<UserDetails />}
