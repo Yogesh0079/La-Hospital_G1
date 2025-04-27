@@ -155,6 +155,7 @@ body {
     background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 6px 24px rgba(0, 0, 0, 0.1);
     width: 100%;
+    max-width: 82.5vw;
 }
 
 .vitals-direction {
@@ -196,6 +197,10 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    padding: 25px;
+    border-radius: 12px;
+    max-width: 82.5vw;
 }
 
 .full-body, .x-ray, .blood {
@@ -203,6 +208,15 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 6px 24px rgba(0, 0, 0, 0.1);
     flex: 1;
     min-height: 20vh;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: white;
+    padding: 16px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease;
 }
 
 /* Data Section */
@@ -576,6 +590,7 @@ body {
     max-height: 120px;
     width: 300px;
     padding: 0.5rem;
+    padding-left: 1.5rem;
   }
   
   .doctor-name {
@@ -596,6 +611,8 @@ body {
     gap: 15px;
     max-height: 120px;
     padding: 1rem;
+    max-width: 220px;
+    padding-left: 1.5rem;
   }
   
   .specialty {
@@ -613,7 +630,7 @@ body {
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.2s;
-    max-width: 120px;
+    max-width: 60px;
     margin-right: 1rem;
   }
   
@@ -623,9 +640,10 @@ body {
   
   @media (max-width: 600px) {
     .visit-card {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
+        width: 77.5vw;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
     }
     
     .visit-meta {
@@ -636,13 +654,13 @@ body {
 
 /* Prescriptions */
 .add-prescription {
-    max-height: 56px;
+    max-height: 78px;
+    padding: 1rem;
 }
 
 .add-prescription-button {
     color: hsl(194, 100%, 45%);
     font-size: 18px;
-    margin: 15px 0;
     background: 
     linear-gradient(90deg, #00b0e6 50%, transparent 50%) 0 0 repeat-x,
     linear-gradient(90deg, #00b0e6 50%, transparent 50%) 0 100% repeat-x,
@@ -661,6 +679,7 @@ body {
 
   .medication-section {
     max-height: 220px;
+    overflow: scroll !important;
   }
   
   .medication-list {
@@ -706,6 +725,7 @@ body {
 
   .past-months-section {
     max-height: 330px;
+    overflow: scroll !important;
   }
 
   .past-months-section span {
@@ -721,4 +741,27 @@ body {
       flex-direction: column;
       gap: 8px;
     }
+  }
+
+  .report-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ebf4ff;
+    border-radius: 50%;
+  }
+  
+  .report-name {
+    font-weight: 600;
+    color: #2b6cb0;
+    margin-bottom: 4px;
+    font-size: 15px;
+  }
+  
+  .report-date {
+    color: #718096;
+    font-size: 13px;
   }

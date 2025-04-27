@@ -74,11 +74,54 @@ function Dashboard() {
                                 <div className='reports-and-tests'>
                                     <p>MY REQUESTED REPORTS AND TESTS</p>
                                     <div className='repotest'>
-                                        <div className='full-body'></div>
-                                        <div className='x-ray'></div>
-                                        <div className='blood'></div>
+                                        <div className='full-body'>
+                                            <div class="report-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                                <path d="M8 14c0 1.5 1 3 3 3 2 0 3-1.5 3-3 0-2-1-3-3-3s-3 1.5-3 3z" fill="none" stroke="#00008B" stroke-width="1.5"/>
+                                                <path d="M14 8c0-1.5-1-3-3-3-2 0-3 1.5-3 3 0 2 1 3 3 3s3-1.5 3-3z" fill="none" stroke="#00008B" stroke-width="1.5"/>
+                                                <path d="M8 14l-3 3c-1 1-1 3 0 4s3 1 4 0l3-3M14 8l3-3c1-1 1-3 0-4s-3-1-4 0l-3 3" stroke="#00008B" stroke-width="1.5"/>
+                                                </svg>
+
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                                <path d="M7 14c0 1.5.5 3 2 3 1.5 0 2-1.5 2-3 0-2-.5-3-2-3s-2 1.5-2 3zM13 8c0-1.5-.5-3-2-3-1.5 0-2 1.5-2 3 0 2 .5 3 2 3s2-1.5 2-3z" fill="none" stroke="#00008B" stroke-width="1.5"/>
+                                                <path d="M7 14l-2 2c-1 1-1 3 0 4s3 1 4 0l2-2M13 8l2-2c1-1 1-3 0-4s-3-1-4 0l-2 2M15 16c0 1.5.5 3 2 3 1.5 0 2-1.5 2-3 0-2-.5-3-2-3s-2 1.5-2 3zM21 10c0-1.5-.5-3-2-3-1.5 0-2 1.5-2 3 0 2 .5 3 2 3s2-1.5 2-3z" fill="none" stroke="#00008B" stroke-width="1.5"/>
+                                                <path d="M15 16l-2 2c-1 1-1 3 0 4s3 1 4 0l2-2M21 10l2-2c1-1 1-3 0-4s-3-1-4 0l-2 2" stroke="#00008B" stroke-width="1.5"/>
+                                                </svg>
+                                            </div>
+                                            <div class="report-details">
+                                                <div class="report-name">Full Body</div>
+                                                <div class="report-date">July 20, 2019</div>
+                                            </div>
+                                        </div>
+                                        <div className='x-ray'>
+                                        <div class="report-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00008B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="8" r="6"/>
+                                            <path d="M8 16v2a4 4 0 0 0 8 0v-2"/>
+                                            <line x1="9" y1="10" x2="9.01" y2="10"/>
+                                            <line x1="15" y1="10" x2="15.01" y2="10"/>
+                                            <path d="M10 14a2 2 0 1 0 4 0"/>
+                                        </svg>
+                                        </div>
+                                        <div class="report-details">
+                                            <div class="report-name">X–Ray Scan</div>
+                                            <div class="report-date">April 30, 2019</div>
+                                        </div>
+                                        </div>
+                                        <div className='blood'>
+                                        <div class="report-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00008B" stroke-width="2">
+                                                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" stroke-linejoin="round"/>
+                                                <path d="M12 8v4" stroke-linecap="round"/>
+                                            </svg>
+                                            </div>
+                                        <div class="report-details">
+                                            <div class="report-name">Blood Test</div>
+                                            <div class="report-date">February 02, 2019</div>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
                                 <div className='data'>
                                     <div className='patient-visits'>
                                         <p>PATIENT VISITS</p>
@@ -89,7 +132,7 @@ function Dashboard() {
                                                     </div>
                                                 <div class="visit-meta">
                                                 <span class="specialty">Physician</span>
-                                                <button class="view-btn">View</button>
+                                                <motion.button whileHover={{ border: 0 , scale: 1.02 }} whileTap={{ scale: 0.98 }} class="view-btn">View</motion.button>
                                             </div>
                                         </div>
                                         
@@ -100,7 +143,7 @@ function Dashboard() {
                                                     </div>
                                                 <div class="visit-meta">
                                                 <span class="specialty">Orthopaedist</span>
-                                                <button class="view-btn">View</button>
+                                                <motion.button whileHover={{ border: 0 , scale: 1.02 }} whileTap={{ scale: 0.98 }} class="view-btn">View</motion.button>
                                             </div>
                                         </div>
                                         
@@ -111,7 +154,7 @@ function Dashboard() {
                                                     </div>
                                                     <div class="visit-meta">
                                                 <span class="specialty">Dentist</span>
-                                                <button class="view-btn">View</button>
+                                                <motion.button whileHover={{ border: 0 , scale: 1.02 }} whileTap={{ scale: 0.98 }} class="view-btn">View</motion.button>
                                             </div>
                                         </div>
                                     </div>
