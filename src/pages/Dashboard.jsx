@@ -1,13 +1,8 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import "../styles/Dashboard.css"
-import bellIcon from '../assets/bell.854x1024.png';
 import searchIcon from '../assets/instagram-search-icon.png';
-<<<<<<< Updated upstream
 import { motion } from "framer-motion";
-import teamPhoto from '../assets/team.jpg';
-=======
->>>>>>> Stashed changes
 
 
 function Dashboard() {
@@ -139,7 +134,7 @@ function Dashboard() {
                                                 <motion.button whileHover={{ border: 0 , scale: 1.02 }} whileTap={{ scale: 0.98 }} class="view-btn">View</motion.button>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="visit-card">
                                             <div class="visit-info">
                                                 <div class="doctor-name">Dr. Bruce Williams</div>
@@ -150,7 +145,7 @@ function Dashboard() {
                                                 <motion.button whileHover={{ border: 0 , scale: 1.02 }} whileTap={{ scale: 0.98 }} class="view-btn">View</motion.button>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="visit-card">
                                             <div class="visit-info">
                                                 <div class="doctor-name">Dr. Kate Summers</div>
@@ -167,7 +162,7 @@ function Dashboard() {
                                         <div class="add-prescription">
                                             <motion.button class="add-prescription-button" whileHover={{ border: 0 , scale: 1.02 }} whileTap={{ scale: 0.98 }}>Add A Prescription</motion.button>
                                         </div>
-                                        
+
                                         <div class="medication-section">
                                             <h3>MEDICATION</h3>
                                             <ul class="medication-list">
@@ -181,7 +176,7 @@ function Dashboard() {
                                             </li>
                                             </ul>
                                         </div>
-                                        
+
                                         <div class="past-months-section">
                                             <h3>PAST 9 MONTHS</h3>
                                             <div class="duration-items">
@@ -215,7 +210,7 @@ function Dashboard() {
                                 </div>
 
                                 <div class="section-title">DETAILS</div>
-                                
+
                                 <div class="patient-details">
                                     <div class="detail-row">
                                     <span class="detail-label">Age</span>
@@ -256,7 +251,7 @@ function Dashboard() {
                                 </div>
 
                                 <div class="section-title">ALLERGIES</div>
-                                
+
                                 <div class="allergies-list">
                                     <div class="allergy-item">• Eggs</div>
                                     <div class="allergy-item">• Peanuts</div>

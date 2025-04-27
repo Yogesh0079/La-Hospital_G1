@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../styles/userdetails.css";
+
 const UserDetails = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -15,6 +17,7 @@ const UserDetails = () => {
         height: "",
         new: false
     });
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -28,18 +31,19 @@ const UserDetails = () => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(formData),
-        })
+        });
         console.log("Form Data Submitted: ", formData);
         navigate("/");
     };
 
     return (
-        <div style={{ marginTop: "400px", backgroundColor: "#1a1a1a",padding: "20px", maxWidth: "600px", margin: "auto" }}>
-            <h2>User Details Form</h2>
-            <form onSubmit={handleSubmit}>
+        <div className="details-form">
+            <h2 className="form-heading">Let's Get to Know You. A bit more..</h2>
+            <form onSubmit={handleSubmit} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
                 <div>
                     <label>First Name:</label>
                     <input
+                        className="details-input"
                         type="text"
                         name="first_name"
                         value={formData.first_name}
@@ -50,6 +54,7 @@ const UserDetails = () => {
                 <div>
                     <label>Last Name:</label>
                     <input
+                        className="details-input"
                         type="text"
                         name="last_name"
                         value={formData.last_name}
@@ -60,6 +65,7 @@ const UserDetails = () => {
                 <div>
                     <label>Department:</label>
                     <input
+                        className="details-input"
                         type="text"
                         name="department"
                         value={formData.department}
@@ -70,6 +76,7 @@ const UserDetails = () => {
                 <div>
                     <label>Son of/Wife of:</label>
                     <input
+                        className="details-input"
                         type="text"
                         name="relation"
                         value={formData.relation}
@@ -77,9 +84,10 @@ const UserDetails = () => {
                         required
                     />
                 </div>
-                <div>
+                <div style={{ gridColumn: "span 2", backgroundColor: "white",}}>
                     <label>Address:</label>
                     <textarea
+                        className="details-input"
                         name="address"
                         value={formData.address}
                         onChange={handleChange}
@@ -89,6 +97,7 @@ const UserDetails = () => {
                 <div>
                     <label>Phone Number:</label>
                     <input
+                        className="details-input"
                         type="tel"
                         name="contact"
                         value={formData.contact}
@@ -99,6 +108,7 @@ const UserDetails = () => {
                 <div>
                     <label>Blood Group:</label>
                     <input
+                        className="details-input"
                         type="text"
                         name="blood_group"
                         value={formData.blood_group}
@@ -109,6 +119,7 @@ const UserDetails = () => {
                 <div>
                     <label>Date of Birth:</label>
                     <input
+                        className="details-date"
                         type="date"
                         name="dob"
                         value={formData.dob}
@@ -119,6 +130,7 @@ const UserDetails = () => {
                 <div>
                     <label>Weight (kg):</label>
                     <input
+                        className="details-number"
                         type="number"
                         name="weight"
                         value={formData.weight}
@@ -129,6 +141,7 @@ const UserDetails = () => {
                 <div>
                     <label>Height (cm):</label>
                     <input
+                        className="details-number"
                         type="number"
                         name="height"
                         value={formData.height}
@@ -136,7 +149,11 @@ const UserDetails = () => {
                         required
                     />
                 </div>
-                <button type="submit">Submit</button>
+                <div style={{ gridColumn: "span 2", textAlign: "center" }}>
+                    <button type="submit" className="detailsSubmit">
+                        Submit
+                    </button>
+                </div>
             </form>
         </div>
     );

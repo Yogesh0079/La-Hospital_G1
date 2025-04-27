@@ -7,30 +7,8 @@ import HorizontalLinearStepper from "../components/general/Stepper";
 import { prescriptionsMap } from "../scripts/mappings";
 
 const steps = ["Basic Details", "Medical Details", "Medical History","Emergency Contacts"];
-let finData;
-function StepComponentFunction (activeStep) {
-    const [formData, setFormData] = useState({
-        first_name: "",
-        last_name: "",
-        relation: "",
-        address: "",
-        emergency_contact: "",
-        contact: "",
-        gender: "",
-        blood_group: "",
-        dob: Date.now(),
-        weight: "",
-        height: "",
-        prescriptions: [],
-        new: false
-    });
-    // const handleSubmit () => {updateUser(formData)};
-    const handleChange = (e) => {
-        console.log(formData)
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-        finData = formData
-    };
+
+function StepComponentFunction (activeStep, formData, handleChange) {
     const [value, setValue] = useState('');
     const [prescriptions, setPrescriptionValue] = useState([]);
     const handlePrescriptionAdd = () => {
@@ -105,11 +83,8 @@ function StepComponentFunction (activeStep) {
                     <FormLabel id="radio-buttons-group-label">Gender</FormLabel>
                     <RadioGroup
                         aria-labelledby="radio-buttons-group-label"
-                        defaultValue="female"
-                        id="gender"
-                        onChange={handleChange}
-                        value={formData.gender}
-                        name="gender"
+                        defaultValue="other"
+                        name="radio-buttons-group"
                     >
                         <FormControlLabel value="female" control={<Radio />} label="Female" />
                         <FormControlLabel value="male" control={<Radio />} label="Male" />
@@ -119,7 +94,7 @@ function StepComponentFunction (activeStep) {
             </Grid>
             <Grid size={{md: 6, xs: 3, sm: 3}}>
                 <FormLabel id="dob-label">Date of Birth</FormLabel>
-                <input onChange={handleChange} id="dob" className="bg-inherit relative t-2" type="date" value={formData.dob} name="dob"/>
+                <input id="dob" className="bg-inherit relative t-2" type="date" name=""/>
             </Grid>
         </Grid>
         </React.Fragment>
@@ -132,7 +107,7 @@ function StepComponentFunction (activeStep) {
                 <Grid size={{md: 6, xs: 3, sm: 3}}>
                     <TextField
                         id="weight"
-                        label="Weight (kg)"
+                        label="Weight (cm)"
                         name="weight"
                         variant="outlined"
                         type="number"
@@ -182,8 +157,7 @@ function StepComponentFunction (activeStep) {
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             value={formData.diet}
-                            name="diet"
-                            label="Diet Type"
+                            label="diet"
                             onChange={handleChange}
                         >
                             <MenuItem value={0}>Vegetarian</MenuItem>
@@ -196,9 +170,7 @@ function StepComponentFunction (activeStep) {
                         <FormLabel id="smoke-radio-label">Do you Smoke?</FormLabel>
                         <RadioGroup
                             aria-labelledby="smoke-radio-label"
-                            defaultValue="nsmoke"
-                            onChange={handleChange}
-                            value={formData.smoke}
+                            defaultValue="female"
                             name="smoke-radio"
                         >
                             <FormControlLabel value="nsmoke" control={<Radio />} label="Never" />
@@ -212,9 +184,7 @@ function StepComponentFunction (activeStep) {
                         <FormLabel id="drink-radio-label">Do you Drink?</FormLabel>
                         <RadioGroup
                             aria-labelledby="drink-radio-label"
-                            defaultValue="ndrink"
-                            onChange={handleChange}
-                            value={formData.drink}
+                            defaultValue="female"
                             name="drink-radio"
                         >
                             <FormControlLabel value="ndrink" control={<Radio />} label="Never" />
@@ -224,6 +194,8 @@ function StepComponentFunction (activeStep) {
                     </FormControl>
                 </Grid>
                 </Grid>
+
+
             </React.Fragment>
         )
     }
@@ -304,17 +276,38 @@ function StepComponentFunction (activeStep) {
 
 const UserDetails = () => {
     const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        first_name: "",
+        last_name: "",
+        relation: "",
+        address: "",
+        emergency_contact: "",
+        contact: "",
+        gender: "",
+        blood_group: "",
+        dob: "",
+        weight: "",
+        height: "",
+        prescriptions: [],
+        new: false
+    });
+    // const handleSubmit () => {updateUser(formData)};
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
     const handleSubmit = (e) => {
-        console.log("SUbmite Called!!!")
         e.preventDefault();
         fetch(`http://localhost:5000/updateUser/${window.location.pathname.split("/").pop()}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(finData),
+            body: JSON.stringify(formData),
         });
-        console.log("Form Data Submitted: ", finData);
+        console.log("Form Data Submitted: ", formData);
+        navigate("/");
     };
 
     return (
@@ -322,11 +315,7 @@ const UserDetails = () => {
             <h2 className="form-heading">Let's Get to Know You. A bit more..</h2>
             <Box sx={{ flexGrow: 1 }}>
                     {/* <Box sx={{ width: '100%' }}> */}
-                    <HorizontalLinearStepper
-                        steps={steps}
-                        StepComponentFunction={(stepNumber) => StepComponentFunction(stepNumber)}
-                        handleSubmit={handleSubmit}
-                    />
+                    <HorizontalLinearStepper steps={steps} StepComponentFunction={(stepNumber) => StepComponentFunction(stepNumber, formData, handleChange, handleSubmit) }/>
                     {/* </ Box> */}
             </Box>
             </div>
