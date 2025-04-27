@@ -44,7 +44,15 @@ function Dashboard() {
                         <button className='search-button'><img src={searchIcon} alt="search" /></button>
                         <input className='search-area' type='text' placeholder='Search..'></input>
                         <button className='user' onClick={toggleUserData}></button>
-                        <button className='notification' type='#'><img src={bellIcon} alt="bell icon" /></button>
+                        <button className='notification' type='#'>
+                        <svg class="notification-bell" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00008B" stroke-width="2">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                            <circle cx="18" cy="6" r="3" fill="#ff4d4f">
+                                <animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite"/>
+                            </circle>
+                        </svg>
+                        </button>
                     </div>
                     <div className='content'>
                         <div className='main'>
