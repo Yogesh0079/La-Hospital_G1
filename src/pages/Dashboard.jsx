@@ -74,11 +74,66 @@ function Dashboard() {
                                 <div className='data'>
                                     <div className='patient-visits'>
                                         <p>PATIENT VISITS</p>
-                                        <div className='patient-visits-data'></div>
+                                        <div class="visit-card">
+                                            <div class="visit-info">
+                                                <div class="doctor-name">Dr. Kiera Knight</div>
+                                                    <div class="visit-date">July 20, 2019</div>
+                                                    </div>
+                                                <div class="visit-meta">
+                                                <span class="specialty">Physician</span>
+                                                <button class="view-btn">View</button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="visit-card">
+                                            <div class="visit-info">
+                                                <div class="doctor-name">Dr. Bruce Williams</div>
+                                                    <div class="visit-date">May 01, 2019</div>
+                                                    </div>
+                                                <div class="visit-meta">
+                                                <span class="specialty">Orthopaedist</span>
+                                                <button class="view-btn">View</button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="visit-card">
+                                            <div class="visit-info">
+                                                <div class="doctor-name">Dr. Kate Summers</div>
+                                                    <div class="visit-date">March 18, 2019</div>
+                                                    </div>
+                                                    <div class="visit-meta">
+                                                <span class="specialty">Dentist</span>
+                                                <button class="view-btn">View</button>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div className='prescriptions'>
                                         <p>LIST OF PRESCRIPTIONS</p>
-                                        <div className='prescriptions-data'></div>
+                                        <div class="add-prescription">
+                                            <button>Add A Prescription</button>
+                                        </div>
+                                        
+                                        <div class="medication-section">
+                                            <h3>MEDICATION</h3>
+                                            <ul class="medication-list">
+                                            <li>
+                                                <strong>Naecelear Spray</strong>
+                                                <span>July 20, 2019</span>
+                                            </li>
+                                            <li>
+                                                <strong>Vicadin</strong>
+                                                <span>May 01, 2018</span>
+                                            </li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="past-months-section">
+                                            <h3>PAST 9 MONTHS</h3>
+                                            <div class="duration-items">
+                                            <span>7 days</span>
+                                            <span>10 days</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
