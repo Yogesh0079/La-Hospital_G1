@@ -72,7 +72,7 @@ export default function Appointment() {
   const handleDepartmentChange = (selectedOption) => {
     setFormData(prev => ({
       ...prev,
-      department: selectedOption.value
+      [department]: selectedOption.value
     }));
   };
 
@@ -324,7 +324,7 @@ export default function Appointment() {
       <div className="department">
         <label>Which medical department do you want to make an appointment for?</label>
         <motion.div
-          className="motion-input-container"
+          className="motion-select-container"
           whileHover={{ scale: 0.98 }}
           whileTap={{ scale: 0.98 }}
           style={{ display: 'inline-flex', width: '100%' }} // Inline override
@@ -338,6 +338,7 @@ export default function Appointment() {
             classNamePrefix="react-select"
             menuPortalTarget={document.body}
             menuPosition="fixed"
+            
             styles={{
               control: (base) => ({
                 ...base,
