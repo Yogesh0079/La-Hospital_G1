@@ -348,22 +348,22 @@ function Home() {
                             <div className="space-y-4" onSubmit={handleSubmit}>
                                 <div className="animate-text delay-2">
                                     <label htmlFor="name" className="block text-gray-700 mb-2">Full Name</label>
-                                    <input type="text" id="name" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                    <input type="text" id="name" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white" />
                                 </div>
 
                                 <div className="animate-text delay-3">
                                     <label htmlFor="email" className="block text-gray-700 mb-2">Email Address</label>
-                                    <input type="email" id="email" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                    <input type="email" id="email" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white" />
                                 </div>
 
                                 <div className="animate-text delay-4">
                                     <label htmlFor="phone" className="block text-gray-700 mb-2">Phone Number</label>
-                                    <input type="tel" id="phone" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                    <input type="tel" id="phone" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white" />
                                 </div>
 
                                 <div className="animate-text delay-5">
                                     <label htmlFor="subject" className="block text-gray-700 mb-2">Subject</label>
-                                    <select id="subject" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <select id="subject" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
                                         <option value="">Select a subject</option>
                                         <option value="appointment">Appointment Request</option>
                                         <option value="billing">Billing Inquiry</option>
@@ -374,7 +374,7 @@ function Home() {
 
                                 <div className="animate-text delay-6">
                                     <label htmlFor="message" className="block text-gray-700 mb-2">Message</label>
-                                    <textarea id="message" rows="4" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                                    <textarea id="message" rows="4" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"></textarea>
                                 </div>
 
                                 <button type="submit" onClick={handleSubmit} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium w-full transition shadow-md animate-text delay-7">
