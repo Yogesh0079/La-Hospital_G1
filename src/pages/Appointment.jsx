@@ -19,7 +19,7 @@ export default function Appointment() {
     { value: "cardiology", label: "Cardiology" },
     { value: "neurology", label: "Neurology" },
     { value: "orthopedics", label: "Orthopedics" },
-    { value: "pediatrics", label: "Pediatrics" }
+    { value: "pediatrics", label: "Pediatrics" },
   ];
 
   useEffect(() => {
@@ -72,7 +72,7 @@ export default function Appointment() {
   const handleDepartmentChange = (selectedOption) => {
     setFormData(prev => ({
       ...prev,
-      [department]: selectedOption.value
+      department: selectedOption.value
     }));
   };
 
