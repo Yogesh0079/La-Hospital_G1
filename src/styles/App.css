@@ -2,7 +2,8 @@
     margin:0;
     padding:0;
     width:100%;
-    z-index:0;
+    position: relative;
+    z-index: 1 !important;
 }
 
 /* Login */
@@ -19,7 +20,7 @@
     height: 5vw;
     background: linear-gradient(to right, rgb(28, 42, 76), rgb(110, 135, 189));
     margin-left: 6.5vw;
-    z-index:1;
+    z-index: 9999 !important;
 }
 .header div{
     display: inline-flex;

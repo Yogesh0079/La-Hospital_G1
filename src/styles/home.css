@@ -2,7 +2,7 @@
     background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
     position: relative;
     overflow: hidden;
-    z-index: 10;
+    z-index: 10 !important;
 }
 
 .testimonial-card {

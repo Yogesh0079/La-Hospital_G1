@@ -3,8 +3,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  overflow: visible !important;
-  z-index: auto !important;
+  overflow: visible;
 }
 
 body {
@@ -13,7 +12,7 @@ body {
   color: #333;
   line-height: 1.6;
   padding: 20px;
-  overflow-x: visible !important; /* Ensure body doesn't clip content */
+  overflow-x: visible; /* Ensure body doesn't clip content */
 }
 
 /* Appointment Form */
@@ -25,8 +24,9 @@ body {
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: relative; /* Creates stacking context */
-  overflow: visible !important; /* Prevents clipping */
+  overflow: visible; /* Prevents clipping */
   transform-style: preserve-3d;
+  z-index: 99; 
 }
 
 .appointment-form h1 {
@@ -34,6 +34,7 @@ body {
   margin-bottom: 1.5rem;
   color: #2c3e50;
   font-size: 2rem;
+  z-index: 100; 
 }
 
 .appointment-form hr {
@@ -41,6 +42,7 @@ body {
   height: 1px;
   background-color: #eee;
   margin: 1rem 0;
+  z-index: 100; 
 }
 
 /* Form Sections */
@@ -51,17 +53,20 @@ body {
 .department {
   margin-bottom: 1.5rem;
   position: relative; /* For proper select dropdown positioning */
+  z-index: 100; 
 }
 
 .name {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  z-index: 100; 
 }
 
 .name input {
   flex: 1;
   min-width: 200px;
+  z-index: 100; 
 }
 
 /* Input Fields */
@@ -70,11 +75,10 @@ label {
   margin-bottom: 0.5rem;
   font-weight: 500;
   color: #2c3e50;
+  z-index: 100; 
 }
 
-input[type="text"],
-input[type="email"],
-input[type="tel"] {
+.motion-input-container input {
   color: black;
   background-color: white;
   width: 100%;
@@ -83,14 +87,14 @@ input[type="tel"] {
   border-radius: 6px;
   font-size: 1rem;
   transition: all 0.3s ease;
+  z-index: 100; 
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="tel"]:focus {
+.motion-input-container input:focus {
   border-color: #4285f4;
   outline: 2px solid rgba(66, 133, 244, 0.2);
   outline-offset: 2px;
+  z-index: 100; 
 }
 
 /* React Select Styles - Fixed Dropdown */
@@ -100,59 +104,65 @@ input[type="tel"]:focus {
   width: 100%;
   margin-top: 0.5rem;
   position: relative;
-  z-index: 1;
+  z-index: 101; 
 }
 
 .react-select__control {
   min-height: 48px;
-  border: 1px solid #ddd !important;
-  border-radius: 6px !important;
+  border: 1px solid #ddd;
+  border-radius: 6px;
   font-size: 1rem;
   color: #333;
   background-color: white;
   transition: all 0.3s ease;
-  box-shadow: none !important;
+  box-shadow: none;
+  z-index: 101;
 }
 
 .react-select__control--is-focused {
-  border-color: #4285f4 !important;
-  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2) !important;
+  border-color: #4285f4;
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+  z-index: 101;
 }
 
 .react-select__menu {
-  position: absolute !important;
-  z-index: 9999 !important; /* Extreme high z-index */
-  inset: auto !important; /* Reset positioning */
-  margin-top: 4px !important;
-  border-radius: 6px !important;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
-  border: 1px solid #eee !important;
-  width: 100% !important;
+  position: absolute;
+  z-index: 101; /* Extreme high z-index */
+  inset: auto; /* Reset positioning */
+  margin-top: 4px;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #eee;
+  width: 100%;
 }
 
 .react-select__menu-portal {
-  z-index: 9999 !important; /* Highest possible */
+  z-index: 101; /* Highest possible */
 }
 
 .react-select__option {
-  padding: 0.8rem 1rem !important;
+  padding: 0.8rem 1rem;
   font-size: 1rem;
   color: #333;
   transition: all 0.2s;
+  z-index: 101;
 }
 
 .react-select__option--is-focused {
-  background-color: #f5f5f5 !important;
+  background-color: #f5f5f5;
+  z-index: 101;
 }
 
 .react-select__option--is-selected {
-  background-color: #4285f4 !important;
-  color: white !important;
+  background-color: #4285f4;
+  color: white;
+  z-index: 101;
 }
 
 .react-select__indicator {
-  padding: 0 8px !important;
-  color: #666 !important;
+  padding: 0 8px;
+  color: #666;
+  z-index: 101;
 }
 
 /* Radio Buttons */
@@ -160,6 +170,7 @@ input[type="tel"]:focus {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  z-index: 100;
 }
 
 .via-email,
@@ -167,21 +178,24 @@ input[type="tel"]:focus {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  z-index: 100;
 }
 
-input[type="radio"] {
+.radio-motion-input {
   margin-right: 0.5rem;
   cursor: pointer;
+  z-index: 100;
 }
 
 /* Calendar Styles */
 .calendar-container {
   margin: 2rem 0;
+  z-index: 100;
 }
 
 .calendar-header {
   position: relative;
-  z-index: 1; /* Lower than dropdown */
+  z-index: 100; /* Lower than dropdown */
   background: white; /* Optional: prevent transparency issues */
   display: flex;
   justify-content: space-between;
@@ -193,6 +207,7 @@ input[type="radio"] {
   text-align: center;
   font-size: 1.3rem;
   color: #2c3e50;
+  z-index: 100;
 }
 
 .calendar-header button {
@@ -203,10 +218,12 @@ input[type="radio"] {
   padding: 0.5rem 1rem;
   color: #4285f4;
   border-radius: 4px;
+  z-index: 100;
 }
 
 .calendar-header button:hover {
   background-color: #f0f7ff;
+  z-index: 100;
 }
 
 .calendar {
@@ -214,6 +231,7 @@ input[type="radio"] {
   border-collapse: collapse;
   margin: 1rem 0;
   table-layout: fixed;
+  z-index: 100;
 }
 
 .calendar th {
@@ -224,6 +242,7 @@ input[type="radio"] {
   background-color: #4285f4;
   color: white;
   border: 1px solid black;
+  z-index: 100;
 }
 
 .calendar td {
@@ -232,49 +251,58 @@ input[type="radio"] {
   border: 1px solid #eee;
   cursor: pointer;
   transition: all 0.2s;
+  z-index: 100;
 }
 
 /* Calendar cell animations */
 .calendar td.day {
-  transform-origin: center !important;
-  transform-box: fill-box !important;
+  transform-origin: center;
+  transform-box: fill-box;
+  z-index: 100;
 }
 
 .calendar td.empty {
   background-color: #f9f9f9;
   cursor: default;
+  z-index: 100;
 }
 
 .calendar td.day:hover {
   background-color: #f5f5f5;
+  z-index: 100;
 }
 
 .calendar td.selected {
   background-color: #4285f4;
   color: white;
   font-weight: bold;
+  z-index: 100;
 }
 
 /* Selected Day */
 .selected-day {
   margin-top: 1.5rem;
+  z-index: 100;
 }
 
 .selected-day h3 {
   margin-bottom: 1rem;
   color: #2c3e50;
+  z-index: 100;
 }
 
 .time-slots {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 0.75rem;
+  z-index: 100;
 }
 
 .time-column {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  z-index: 100;
 }
 
 .time-slot {
@@ -284,16 +312,19 @@ input[type="radio"] {
   text-align: center;
   cursor: pointer;
   transition: all 0.2s;
+  z-index: 100;
 }
 
 .time-slot:hover {
   background-color: #f5f5f5;
+  z-index: 100;
 }
 
 .time-slot.selected {
   background-color: #4285f4;
   color: white;
   border-color: #4285f4;
+  z-index: 100;
 }
 
 /* Timezone */
@@ -302,6 +333,7 @@ input[type="radio"] {
   text-align: center;
   color: #666;
   font-size: 0.9rem;
+  z-index: 100;
 }
 
 /* Submit Button */
@@ -319,10 +351,12 @@ input[type="radio"] {
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s;
+  z-index: 100;
 }
 
 .submit-btn:hover {
   background-color: #3367d6;
+  z-index: 100;
 }
 
 /* Responsive Design */
@@ -362,29 +396,30 @@ input[type="radio"] {
 .appointment-form,
 .department,
 .react-select-container {
-  overflow: visible !important;
-  contain: none !important;
+  overflow: visible;
+  contain: none;
 }
 
 .debug * {
-  outline: 1px solid rgba(255,0,0,0.3) !important;
-  background: rgba(0,255,0,0.1) !important;
+  outline: 1px solid rgba(255,0,0,0.3);
+  background: rgba(0,255,0,0.1);
+  z-index: 100;
 }
 
 /* Fixes for Framer Motion scaling */
 [motion] > *,
 .motion-container > * {
-  transform-box: fill-box !important;
-  transform-origin: center !important;
-  backface-visibility: hidden !important;
+  transform-box: fill-box;
+  transform-origin: center;
+  backface-visibility: hidden;
   will-change: transform; /* Optimize performance */
 }
 
 
 /* For parent containers */
 .motion-input-container {
-  display: inline-flex !important; /* Better than inline-block */
+  display: inline-flex; /* Better than inline-block */
   position: relative;
-  transform-style: preserve-3d !important;
+  transform-style: preserve-3d;
   isolation: isolate; /* Prevents z-index conflicts */
 }

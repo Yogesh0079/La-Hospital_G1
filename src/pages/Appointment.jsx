@@ -288,12 +288,13 @@ export default function Appointment() {
         <label>Contact Preferences</label>
         <div className="via-email">
           <motion.div
-            className='.moion-container' 
+            className='.motion-container' 
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             style={{ display: 'inline-block', width: '100%' }} // Inline override
           >
             <input 
+              className="radio-motion-input"
               type='radio' 
               name='contact-preferences' 
               value='email'
@@ -304,7 +305,7 @@ export default function Appointment() {
         </div>
         <div className="via-phone">
           <motion.div
-            className='.moion-container' 
+            className='.motion-container' 
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             style={{ display: 'inline-block', width: '100%' }} // Inline override
