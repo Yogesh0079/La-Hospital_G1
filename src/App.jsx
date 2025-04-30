@@ -22,7 +22,7 @@ export default function App() {
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route
-            path="user/:user_id"
+            path="userDetails"
             element={<UserDetails />}
           />
           <Route path="*" element={<NoPage />} />

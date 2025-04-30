@@ -4,8 +4,10 @@ import { useState } from "react";
 import { createUser, loginUser } from "../scripts/users";
 import "../scripts/login.commons"
 import "../styles/Login.css";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+    let navigate = useNavigate()
     let [formState, setFormState] = useState({
         firstname: "",
         lastname: "",
@@ -36,9 +38,18 @@ function Login() {
                 email: formState.email,
                 password: formState.password,
                 user_type: 0
-            });
+            }).then((user) => {
+                localStorage.setItem("uid", user._id);
+                localStorage.setItem("authType", "local")
+                navigate(`/userDetails`)});
         } else {
-            loginUser({ email: formState.email, password: formState.password });
+            loginUser({ email: formState.email, password: formState.password }).then(
+                (res) => {
+                    localStorage.setItem("uid", res._id);
+                    localStorage.setItem("authType", "local")
+                    navigate(`/userDetails`)
+                }
+            );
         }
     };
 
@@ -175,7 +186,7 @@ function Login() {
 
                     <div className="flex justify-center gap-4">
                         <a
-                            href="#"
+                            onClick={() => {localStorage.setItem("authType", "local");window.location.href("http://localhost:5000/oauth2/redirect/google")}}
                             className="w-12 h-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-xl text-gray-700 shadow-sm hover:shadow-md transition auth-btn"
                         >
                             <FontAwesomeIcon icon={faGoogle} className="text-red-500" />
