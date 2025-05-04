@@ -186,10 +186,13 @@ function Login() {
 
                     <div className="flex justify-center gap-4">
                         <a
-                            onClick={() => {localStorage.setItem("authType", "local");window.location.href("http://localhost:5000/oauth2/redirect/google")}}
+                            href="http://localhost:5000/login/federated/google"
                             className="w-12 h-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-xl text-gray-700 shadow-sm hover:shadow-md transition auth-btn"
                         >
-                            <FontAwesomeIcon icon={faGoogle} className="text-red-500" />
+                            <FontAwesomeIcon
+                                icon={faGoogle}
+                                className="text-red-500"
+                                />
                         </a>
                         <a
                             href="#"

@@ -2,11 +2,59 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import "../styles/Dashboard.css"
 import { motion } from "framer-motion";
-
+import { useNavigate } from 'react-router-dom';
+import { getUserByLocalId } from "../scripts/users.js";
+import { getSessionUser } from '../scripts/users.js';
+import { BloodTest, FullBodyTest, XRayTest } from '../components/Dashboard/MedicalTests.jsx';
 
 function Dashboard() {
+    const navigate = useNavigate();
     const [isUserDataVisible, setIsUserDataVisible] = useState(true);
     const [isMobile, setIsMobile] = useState(false);
+    const [userData, setUserData] = useState({
+        "_id": "ObjectId('6816ec779e249c391b17e24d')",
+        "new": true,
+        "oauth_id": null,
+        "password": "hashed_password_sample",
+        "first_name": "Angela",
+        "last_name": "Martin",
+        "email": "angela.martin@example.com",
+        "contact": "+1 234 567 8901",
+        "emergency_contact": {
+          "name": "Dwight Schrute",
+          "number": "+1 345 678 9012",
+          "relation": "Colleague"
+        },
+        "address": "1725 Slough Avenue, Scranton, PA",
+        "user_type": 1,
+        "photo": "angela_profile.jpg",
+        "records": [102, 106, 113],
+        "appontments": [206, 211],
+        "staff_info": null,
+        "medical_data": {
+          "blood_group": "O+",
+          "height": 158,
+          "weight": 54,
+          "dob": "ISODate('1981-06-25T08:30:00.000Z')",
+          "allergies": ["Cats", "Penicillin"],
+          "current_medications": [302],
+          "reports": [
+            {
+              "test_id": 402,
+              "date": "ISODate('2024-04-15T08:30:00.000Z')",
+              "results": {
+                "hemoglobin": 13.0,
+                "blood_sugar": 90
+              },
+              "remarks": "All vitals within normal range.",
+              "_id": "ObjectId('6816ec779e249c391b17e24e')"
+            }
+          ]
+        },
+        "cartData": [],
+        "__v": 0
+      }
+      );
 
     useEffect(() => {
         const handleResize = () => {
@@ -16,7 +64,25 @@ function Dashboard() {
                 setIsUserDataVisible(true);
             }
         };
-
+         getSessionUser()
+           .then(data => {
+             if (data && data.user) {
+               if (data.user.new) {
+                 navigate(`/userData/`);
+               }
+                setUserData(data);
+             }
+           });
+           getUserByLocalId()
+            .then(data => {
+                if (data && data.user) {
+                    if (data.user.new) {
+                        navigate(`/userData/`);
+                    }
+                    setUserData(data);
+                }
+                console.log(data);
+            })
         // Initial check
         handleResize();
         window.addEventListener('resize', handleResize);
@@ -36,7 +102,11 @@ function Dashboard() {
                 transition={{ duration: 0.8 }}
                 className='dashboard'
             >
-                <div className='sidebar'></div>
+                <div className='sidebar'>
+                    <div className='logo'>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00008B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </div>
+                </div>
                 <div className='dashboard-content'>
                     <div className='search'>
                         <button className='search-button'>
@@ -60,16 +130,16 @@ function Dashboard() {
                     <div className='content'>
                         <div className='main'>
                             <div className='vitals'>
-                                <p>VITALS</p>
+                                <p>ACTIONS</p>
                                 <div className='vitals-main'>
                                     <div className='vitals-direction'>
                                         <div className='direction1'>
-                                            <motion.div whileHover={{ scale: 1.02, color: 'white', backgroundColor: '#00b082' }} style={{ backgroundColor: '#F8F8FF' }} className='vital1'>Body Temp</motion.div>
-                                            <motion.div whileHover={{ scale: 1.02, color: 'white', backgroundColor: '#00b082' }} style={{ backgroundColor: '#F8F8FF' }} className='vital1'>Pulse</motion.div>
+                                            <motion.div whileHover={{ scale: 1.02, color: 'white', backgroundColor: '#00b082' }} style={{ backgroundColor: '#F8F8FF' }} className='vital1'>Book an appointment</motion.div>
+                                            <motion.div whileHover={{ scale: 1.02, color: 'white', backgroundColor: '#00b082' }} style={{ backgroundColor: '#F8F8FF' }} className='vital1'>Book a test</motion.div>
                                         </div>
                                         <div className='direction2'>
-                                            <motion.div whileHover={{ scale: 1.02, color: 'white', backgroundColor: '#00b082' }} style={{ backgroundColor: '#F8F8FF' }} className='vital1'>Blood Pressure</motion.div>
-                                            <motion.div whileHover={{ scale: 1.02, color: 'white', backgroundColor: '#00b082' }} style={{ backgroundColor: '#F8F8FF' }} className='vital1'>Breathing Rate</motion.div>
+                                            <motion.div whileHover={{ scale: 1.02, color: 'white', backgroundColor: '#00b082' }} style={{ backgroundColor: '#F8F8FF' }} className='vital1'>Emergency OPD</motion.div>
+                                            <motion.div whileHover={{ scale: 1.02, color: 'white', backgroundColor: '#00b082' }} style={{ backgroundColor: '#F8F8FF' }} className='vital1'>Previous Appointments</motion.div>
                                         </div>
                                     </div>
                                     <div className='graph'></div>
@@ -78,51 +148,14 @@ function Dashboard() {
                                     <p>MY REQUESTED REPORTS AND TESTS</p>
                                     <div className='repotest'>
                                         <div className='full-body'>
-                                            <div className="report-icon">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                                <path d="M8 14c0 1.5 1 3 3 3 2 0 3-1.5 3-3 0-2-1-3-3-3s-3 1.5-3 3z" fill="none" stroke="#00008B" strokeWidth="1.5"/>
-                                                <path d="M14 8c0-1.5-1-3-3-3-2 0-3 1.5-3 3 0 2 1 3 3 3s3-1.5 3-3z" fill="none" stroke="#00008B" strokeWidth="1.5"/>
-                                                <path d="M8 14l-3 3c-1 1-1 3 0 4s3 1 4 0l3-3M14 8l3-3c1-1 1-3 0-4s-3-1-4 0l-3 3" stroke="#00008B" strokeWidth="1.5"/>
-                                                </svg>
-
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                                <path d="M7 14c0 1.5.5 3 2 3 1.5 0 2-1.5 2-3 0-2-.5-3-2-3s-2 1.5-2 3zM13 8c0-1.5-.5-3-2-3-1.5 0-2 1.5-2 3 0 2 .5 3 2 3s2-1.5 2-3z" fill="none" stroke="#00008B" strokeWidth="1.5"/>
-                                                <path d="M7 14l-2 2c-1 1-1 3 0 4s3 1 4 0l2-2M13 8l2-2c1-1 1-3 0-4s-3-1-4 0l-2 2M15 16c0 1.5.5 3 2 3 1.5 0 2-1.5 2-3 0-2-.5-3-2-3s-2 1.5-2 3zM21 10c0-1.5-.5-3-2-3-1.5 0-2 1.5-2 3 0 2 .5 3 2 3s2-1.5 2-3z" fill="none" stroke="#00008B" strokeWidth="1.5"/>
-                                                <path d="M15 16l-2 2c-1 1-1 3 0 4s3 1 4 0l2-2M21 10l2-2c1-1 1-3 0-4s-3-1-4 0l-2 2" stroke="#00008B" strokeWidth="1.5"/>
-                                                </svg>
-                                            </div>
-                                            <div className="report-details">
-                                                <div className="report-name">Full Body</div>
-                                                <div className="report-date">July 20, 2019</div>
-                                            </div>
+                                            <FullBodyTest testDate="April 30, 2019" />
                                         </div>
                                         <div className='x-ray'>
-                                        <div className="report-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00008B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                            <circle cx="12" cy="8" r="6"/>
-                                            <path d="M8 16v2a4 4 0 0 0 8 0v-2"/>
-                                            <line x1="9" y1="10" x2="9.01" y2="10"/>
-                                            <line x1="15" y1="10" x2="15.01" y2="10"/>
-                                            <path d="M10 14a2 2 0 1 0 4 0"/>
-                                        </svg>
-                                        </div>
-                                        <div className="report-details">
-                                            <div className="report-name">X–Ray Scan</div>
-                                            <div className="report-date">April 30, 2019</div>
-                                        </div>
+                                            <XRayTest testDate="April 30, 2019" />
                                         </div>
                                         <div className='blood'>
-                                        <div className="report-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00008B" strokeWidth="2">
-                                                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" strokeLinejoin="round"/>
-                                                <path d="M12 8v4" strokeLinecap="round"/>
-                                            </svg>
-                                            </div>
-                                        <div className="report-details">
-                                            <div className="report-name">Blood Test</div>
-                                            <div className="report-date">February 02, 2019</div>
+                                            <BloodTest testDate="April 30, 2019" />
                                         </div>
-                                    </div>
                                 </div>
                             </div>
                                 <div className='data'>
@@ -204,12 +237,12 @@ function Dashboard() {
                             <div className='patient-user-data'>
                                 <div className="patient-header">
                                     <div className="patient-name-id">
-                                    <h2>Angela Martin</h2>
+                                    <h2>{userData.first_name + " " +  userData.last_name}</h2>
                                     <p>7006-101-6884</p>
                                     </div>
                                     <div className="patient-actions">
-                                    <motion.button whileHover={{ scale: 1.08 }} className="action-btn">Update</motion.button>
-                                    <motion.button whileHover={{ scale: 1.08 }} className="action-btn">Share</motion.button>
+                                    <motion.button onClick={() => {navigate('/userDetails')}} whileHover={{ scale: 1.08 }} className="action-btn">Update</motion.button>
+                                    <motion.button onClick={() => {navigate('/shareUser')}}whileHover={{ scale: 1.08 }} className="action-btn">Share</motion.button>
                                     </div>
                                 </div>
 
@@ -222,7 +255,7 @@ function Dashboard() {
                                     </div>
                                     <div className="detail-row">
                                     <span className="detail-label">Gender</span>
-                                    <span className="detail-value">Female</span>
+                                    <span className="detail-value">{userData.gender}</span>
                                     </div>
                                     <div className="detail-row">
                                     <span className="detail-label">Marital Status</span>
@@ -234,15 +267,15 @@ function Dashboard() {
                                     </div>
                                     <div className="detail-row">
                                     <span className="detail-label">Blood Group</span>
-                                    <span className="detail-value">O+</span>
+                                    <span className="detail-value">{userData.medical_data.blood_group}</span>
                                     </div>
                                     <div className="detail-row">
                                     <span className="detail-label">Height (m)</span>
-                                    <span className="detail-value">1.78</span>
+                                    <span className="detail-value">{userData.medical_data.height}</span>
                                     </div>
                                     <div className="detail-row">
                                     <span className="detail-label">Weight (kg)</span>
-                                    <span className="detail-value">65</span>
+                                    <span className="detail-value">{userData.medical_data.weight}</span>
                                     </div>
                                     <div className="detail-row">
                                     <span className="detail-label">BMI (kg/m2)</span>

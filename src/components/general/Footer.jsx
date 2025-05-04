@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import '../../styles/Footer.css'; // Optional: Add custom styles for the footer
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {animateElements} from '../../scripts/home.commons'
 // import { faFacebook, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 const Footer = () => {
+    useEffect(() => {
+        animateElements('.animate-text', 'animate__fadeInUp', 0.5, 0.1);
+    })
     return (
         <footer className="bg-gray-900 text-white py-12">
         <div className="container mx-auto px-6">
@@ -11,7 +15,7 @@ const Footer = () => {
                 <div>
                     <div className="flex items-center mb-4 animate-text">
                         <i className="fas fa-hospital text-blue-400 text-3xl mr-3"></i>
-                        <span className="text-2xl font-bold">MediCare</span>
+                        <span className="text-2xl font-bold">La Hospital</span>
                     </div>
                     <p className="text-gray-400 mb-4 animate-text delay-1">Providing exceptional healthcare services with compassion and innovation since 1995.</p>
                     <div className="flex space-x-4 animate-text delay-2">
@@ -65,7 +69,7 @@ const Footer = () => {
             </div>
 
             <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p className="text-gray-400 mb-4 md:mb-0 animate-text delay-8">© 2023 MediCare Hospital. All rights reserved.</p>
+                <p className="text-gray-400 mb-4 md:mb-0 animate-text delay-8">© 2023 La Hospital. All rights reserved.</p>
                 <div className="flex space-x-6 animate-text delay-9">
                     <a href="#" className="text-gray-400 hover:text-white transition">Privacy Policy</a>
                     <a href="#" className="text-gray-400 hover:text-white transition">Terms of Service</a>

@@ -99,7 +99,7 @@ function StepComponentFunction (activeStep, formData, handleChange, prescription
             </Grid>
             <Grid size={{md: 6, xs: 3, sm: 3}}>
                 <FormLabel id="dob-label">Date of Birth</FormLabel>
-                <input id="dob" parent="medical_data" onchange={(e) => {handleChange(e, "medical_record")}} value={formData.medical_data.dob.substr(0,10)} className="bg-inherit relative t-2" type="date" name="dob"/>
+                <input id="dob" parent="medical_data" onchange={(e) => {handleChange(e, "medical_record")}} value={(formData.medical_data.dob) ? formData.medical_data.dob.substr(0,10) : null} className="bg-inherit relative t-2" type="date" name="dob"/>
             </Grid>
         </Grid>
         </React.Fragment>
@@ -355,7 +355,7 @@ const UserDetails = () => {
         else if (type == "emergency_contact") {
             setFormData({ ...formData, emergency_contact: { ...formData.emergency_contact, [name]: value } });
         }
-        else {
+        else if (type == "norm"){
             setFormData({ ...formData, [name]: value });
         }
         console.log("Form Data: ", formData);

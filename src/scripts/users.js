@@ -24,7 +24,14 @@ async function createUser (userData) {
         },
         body: JSON.stringify(userData)
         });
-    return (await response).json();
+    return (await response).json().then((res) => {
+        if (res.error) {
+            return res;
+        }
+        localStorage.setItem("uid", res._id);
+        localStorage.setItem("authType", "session");
+        return res;
+    });
 }
 
 async function loginUser(userData) {
@@ -52,6 +59,8 @@ async function getUserByLocalId() {
     let response = await  fetch(`http://localhost:5000/getUser/${id}`, {
         credentials: 'include',
       });
-      return (await response).json()
+      return (await response).json().then((res) => {
+        return res;
+      })
 }
 export {getSessionUser, createUser, loginUser, getUserByLocalId};
