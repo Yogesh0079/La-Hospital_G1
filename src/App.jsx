@@ -5,9 +5,12 @@ import Layout from "./pages/Layout";
 import Home from "./pages/HomeX"
 import Login from "./pages/Login";
 import NoPage from "./pages/Nopage";
-import UserDetails from "./pages/userdetails";
+import UserDetails from "./pages/userDetailsX";
 import Dashboard from "./pages/Dashboard";
 import Appointment from "./pages/Appointment";
+import About from "./pages/about"
+import Contact from "./pages/contact";
+
 
 export default function App() {
   return (
@@ -16,6 +19,8 @@ export default function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
           <Route
             path="user/:user_id"
             element={<UserDetails />}

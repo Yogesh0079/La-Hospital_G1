@@ -1,9 +1,0 @@
----Frontend---
-Implement main page. [ND]
-Implement login page.
-Implement records generator.
-
----Backend----
-Add Cors, BodyParser, CookieParser, dotenv
-Add Inventory, Appointment Schema to database
-Implement login functions.
