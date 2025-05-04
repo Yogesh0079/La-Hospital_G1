@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import Appointment from "./pages/Appointment";
 import About from "./pages/about"
 import Contact from "./pages/contact";
+import Squidward from "./pages/Squidward";
 
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="*" element={<NoPage />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="appointment" element={<Appointment />} />
+          <Route path="Squidward" element={<Squidward />} />
         </Route>
       </Routes>
     </BrowserRouter>

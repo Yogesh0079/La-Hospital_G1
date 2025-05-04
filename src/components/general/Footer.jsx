@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect } from "react";
 import '../../styles/Footer.css'; // Optional: Add custom styles for the footer
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {animateElements} from '../../scripts/home.commons.js';
+
 // import { faFacebook, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 const Footer = () => {
+    useEffect(() => {
+            animateElements();
+    
+          return () => {
+          }
+        }, []);
     return (
         <footer className="bg-gray-900 text-white py-12">
         <div className="container mx-auto px-6">
@@ -56,7 +64,7 @@ const Footer = () => {
                     <h4 className="text-lg font-bold mb-4 animate-text delay-5">Newsletter</h4>
                     <p className="text-gray-400 mb-4 animate-text delay-6">Subscribe to our newsletter for health tips and hospital updates.</p>
                     <form className="flex animate-text delay-7">
-                        <input type="email" placeholder="Your email" className="px-4 py-2 rounded-l-lg focus:outline-none text-gray-800 w-full"/>
+                        <input type="email" placeholder="Your email" className="px-4 py-2 rounded-l-lg focus:outline-none text-gray-800 w-full bg-white"/>
                         <button type="submit" className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-r-lg">
                             <i className="fas fa-paper-plane"></i>
                         </button>
