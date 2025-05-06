@@ -148,13 +148,13 @@ function Dashboard() {
                                     <p>MY REQUESTED REPORTS AND TESTS</p>
                                     <div className='repotest'>
                                         <div className='full-body'>
-                                            <FullBodyTest testDate="April 30, 2019" />
+                                            <FullBodyTest />
                                         </div>
                                         <div className='x-ray'>
-                                            <XRayTest testDate="April 30, 2019" />
+                                            <XRayTest />
                                         </div>
                                         <div className='blood'>
-                                            <BloodTest testDate="April 30, 2019" />
+                                            <BloodTest />
                                         </div>
                                 </div>
                             </div>

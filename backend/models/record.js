@@ -7,6 +7,7 @@ const recordSchema = new Schema({
     pat_id: Number,
     doc_id: Number,
     dept_id: Number,
+    type: Number, // 1: Appointment, 2: Test, 3: Discharged, 4: Completed Test
     date: Date,
     rev_date: Date,
     body: {

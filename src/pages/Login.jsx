@@ -55,7 +55,7 @@ function Login() {
 
     return (
         <>
-            <div className="max-w-md w-full bg-white block rounded-xl overflow-hidden form-container">
+            <div className="max-w-md w-full bg-white block rounded-xl overflow-hidden form-container shadow-lg mx-auto mt-10 mb-10">
                 <div className="p-1 bg-gradient-to-r from-blue-500 to-teal-400"></div>
 
                 <div className="p-8">

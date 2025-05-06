@@ -4,16 +4,54 @@ import { getSessionUser } from "../scripts/users";
 import '../styles/Appointment.css';
 import { motion } from "framer-motion";
 import Select from 'react-select';
+import { selectClasses } from "@mui/material";
+import { getUserByLocalId } from "../scripts/users";
+import { createAppointment } from "../scripts/appointment";
 
 export default function Appointment() {
+  const [selectedDate, setSelectedDate] = useState(new Date(2025, 3, 28));
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    name: "",
-    department: "",
-    date: "",
-    number: 1,
-  });
-
+  let authType = localStorage.getItem("authType")
+  useEffect(()=>{
+    const datafetch= async()=>{
+        let user;
+        if (authType == "session") {
+            user = await getSessionUser()
+        }
+        else if (authType == "local") {
+            user = await getUserByLocalId()
+        }
+        setFormData({ ...formData,
+                     ...user
+                    });
+    }
+    datafetch();
+  },[])
+   const [formData, setFormData] = useState({
+          first_name: "",
+          last_name: "",
+          relation: "",
+          address: "",
+          email: "",
+          contact: "",
+          emergency_contact: {
+              name: "",
+              number: "",
+              relation: ""
+          },
+          medical_data: {
+              dob: "",
+              gender: "",
+              blood_group: "",
+              height: "",
+              weight: "",
+              allergies: [],
+              current_medications: [],
+              smoke: "",
+              drink: ""
+          },
+          new: false
+      });
   // Department options for react-select
   const departmentOptions = [
     { value: "cardiology", label: "Cardiology" },
@@ -21,21 +59,7 @@ export default function Appointment() {
     { value: "orthopedics", label: "Orthopedics" },
     { value: "pediatrics", label: "Pediatrics" }
   ];
-
-  useEffect(() => {
-    // 1. Original session user logic
-    getSessionUser()
-      .then(data => {
-        if (data && data.user) {
-          if (data.user.new) {
-            navigate(`/userData/`, { state: { user: data.user } });
-          }
-          setFormData(prev => ({
-            ...prev,
-            name: data.user.first_name + " " + data.user.last_name,
-          }));
-        }
-      });
+  const [reportData, setReportData] = useState();
 
     // 2. Animation fix logic (runs in same effect)
     const cleanupAnimationStyles = () => {
@@ -59,14 +83,13 @@ export default function Appointment() {
     const handleAnimationFix = () => cleanupAnimationStyles();
     window.addEventListener('load', handleAnimationFix);
 
-    return () => {
-      window.removeEventListener('load', handleAnimationFix);
-    };
-  }, [navigate]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+  };
+  const handleReportData = (e) => {
+    const { name, value } = e.target;
+    setReportData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleDepartmentChange = (selectedOption) => {
@@ -75,15 +98,24 @@ export default function Appointment() {
       department: selectedOption.value
     }));
   };
-
+  const handleBooking = (e) => {
+    e.preventDefault();
+    if (formData.first_name && formData.last_name && formData.email && formData.contact && selectedDate) {
+      alert("Appointment booked successfully!");
+      createAppointment(formData).then(() => {
+        navigate("/dashboard");
+      });
+    } else {
+      alert("Please fill in all required fields.");
+    }
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Data Submitted:", formData);
   };
 
-  const AppointmentCalendar = () => {
+  const AppointmentCalendar = ({selectedDate, setSelectedDate}) => {
     const [currentDate, setCurrentDate] = useState(new Date(2025, 3, 28));
-    const [selectedDate, setSelectedDate] = useState(new Date(2025, 3, 28));
     const [selectedTime, setSelectedTime] = useState(null);
 
     const timeSlots = [
@@ -158,51 +190,55 @@ export default function Appointment() {
       });
     };
 
+    useEffect(() => {
+      renderCalendar();
+    }, [currentDate, selectedDate]);
+
     return (
       <div className="calendar-container">
-        <h1>Appointment</h1>
-        <div className="calendar-header">
-          <button type="button" onClick={() => navigateMonth(-1)}>&lt;</button>
-          <h2>{currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</h2>
-          <button type="button" onClick={() => navigateMonth(1)}>&gt;</button>
-        </div>
-        <table className="calendar">
-          <thead>
-            <tr>
-              {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                <th key={day}>{day}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {renderCalendar()}
-          </tbody>
-        </table>
-        <div className="selected-day">
-          <h3>{formatSelectedDate()}</h3>
-          <div className="time-slots">
-            {[0, 2, 4].map(startIndex => (
-              <div key={startIndex} className="time-column">
-                {timeSlots.slice(startIndex, startIndex + 2).map(time => (
-                  <div
-                    key={time}
-                    className={`time-slot ${selectedTime === time ? 'selected' : ''}`}
-                    onClick={() => handleTimeClick(time)}
-                  >
-                    {time}
-                  </div>
-                ))}
-              </div>
-            ))}
+      <h1>Appointment</h1>
+      <div className="calendar-header">
+        <button type="button" onClick={() => navigateMonth(-1)}>&lt;</button>
+        <h2>{currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</h2>
+        <button type="button" onClick={() => navigateMonth(1)}>&gt;</button>
+      </div>
+      <table className="calendar">
+        <thead>
+        <tr>
+          {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+          <th key={day}>{day}</th>
+          ))}
+        </tr>
+        </thead>
+        <tbody>
+        {renderCalendar()}
+        </tbody>
+      </table>
+      <div className="selected-day">
+        <h3>{formatSelectedDate()}</h3>
+        <div className="time-slots">
+        {[0, 2, 4].map(startIndex => (
+          <div key={startIndex} className="time-column">
+          {timeSlots.slice(startIndex, startIndex + 2).map(time => (
+            <div
+            key={time}
+            className={`time-slot ${selectedTime === time ? 'bg-grey' : ''}`}
+            onClick={() => handleTimeClick(time)}
+            >
+            {time}
+            </div>
+          ))}
           </div>
+        ))}
         </div>
-        <div className="timezone">
-          <strong>Asia/Kolkata ({new Date().toLocaleTimeString('en-US', {
-            hour: '2-digit',
-            minute: '2-digit',
-            timeZone: 'Asia/Kolkata'
-          })})</strong>
-        </div>
+      </div>
+      <div className="timezone">
+        <strong>Asia/Kolkata ({new Date().toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: 'Asia/Kolkata'
+        })})</strong>
+      </div>
       </div>
     );
   };
@@ -230,7 +266,7 @@ export default function Appointment() {
             type='text'
             name="first-name"
             placeholder="First name"
-            value={formData.name.split(' ')[0] || ''}
+            value={formData.first_name}
             onChange={handleChange}
           />
         </motion.div>
@@ -244,7 +280,7 @@ export default function Appointment() {
             type='text'
             name="last-name"
             placeholder="Last name"
-            value={formData.name.split(' ')[1] || ''}
+            value={formData.last_name}
             onChange={handleChange}
           />
         </motion.div>
@@ -261,6 +297,7 @@ export default function Appointment() {
           <input
             type='email'
             name='email'
+            value={formData.email}
             placeholder='abcdef@example.com'
             onChange={handleChange}
           />
@@ -278,6 +315,7 @@ export default function Appointment() {
           <input
             type="tel"
             name="phone-number"
+            value={formData.contact}
             placeholder="XXXXX-XXXXXX"
             onChange={handleChange}
           />
@@ -349,7 +387,7 @@ export default function Appointment() {
         </motion.div>
       </div>
 
-      <AppointmentCalendar />
+      <AppointmentCalendar selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
 
       <motion.div
         className='.motion-input-container'
@@ -357,7 +395,13 @@ export default function Appointment() {
         whileTap={{ scale: 0.98 }}
         style={{ display: 'inline-block', width: '100%' }} // Inline override
       >
-        <button type="submit" className="submit-btn">Book Appointment</button>
+        <input
+          type='text'
+          name='address'
+          value={selectedDate}
+          readOnly
+        />
+        <button onClick={handleBooking} type="submit" className="submit-btn">Book Appointment</button>
       </motion.div>
     </motion.form>
   );

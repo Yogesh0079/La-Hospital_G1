@@ -33,7 +33,7 @@ const UserDetails = () => {
             body: JSON.stringify(formData),
         });
         console.log("Form Data Submitted: ", formData);
-        navigate("/");
+        navigate("/dashboard");
     };
 
     return (

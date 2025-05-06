@@ -30,7 +30,7 @@ export default function App() {
           />
           <Route path="*" element={<NoPage />} />
           <Route path="report" element={<Report />} />
-          <Route path="TestResults" element={<TestResults />} />
+          <Route path="TestResults/:userId" element={<TestResults />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="appointment" element={<Appointment />} />
           <Route path="modify" element={<ModifyReports />} />

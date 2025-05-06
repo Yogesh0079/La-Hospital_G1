@@ -57,6 +57,9 @@ const User = new mongoose.model("users", userSchema);
 async function createUser(reqData) {
     if(!reqData) {return {error: "createUser"};}
     reqData.user_type = get_enumeration(reqData.user_type, userTypeMap) || 0;
+    if (reqData.user_type === 1) {
+        reqData.staff_info.dept_id = get_enumeration(reqData.staff_info.dept_id, deptMap) || 0;
+    }
     if (reqData.user_type === 1 && typeof reqData.staff_info.dept_id === "string") {
         reqData.staff_info.dept_id = Object.keys(deptMap).find(key => deptMap[key] === reqData.staff_info.dept_id);
     }
@@ -68,6 +71,7 @@ async function createUser(reqData) {
 
 async function getUser(userId) {
     return await readDb(userId, User, "getUser").then((res) => {
+        if (!res) return null;
         res.user_type = rev_enumeration(res.user_type, userTypeMap);
         if (res.staff_info) {
             res.staff_info.dept_id = rev_enumeration(res.staff_info.dept_id, deptMap);
