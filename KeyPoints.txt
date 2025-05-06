@@ -1,0 +1,11 @@
+Key Features
+
+	- Database for Storing Patient Data
+	- Appointment system
+	- Storing of patient records
+	- Providing access to patient records
+	- Showing and creating patient records for docs
+	- Consultation
+	- Uploading of medical reports
+	- User System for Docs and Patients
+

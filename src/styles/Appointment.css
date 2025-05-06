@@ -1,0 +1,431 @@
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  line-height: 1.6;
+  padding: 20px;
+  overflow-x: visible; /* Ensure body doesn't clip content */
+}
+
+#root {
+  z-index: 0;
+  position: relative;
+}
+
+/* Appointment Form */
+.appointment-form {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative; /* Creates stacking context */
+  overflow: visible; /* Prevents clipping */
+  transform-style: preserve-3d;
+  z-index: 99; 
+}
+
+.appointment-form h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  font-size: 2rem;
+  z-index: 0; 
+}
+
+.appointment-form hr {
+  border: 0;
+  height: 1px;
+  background-color: #eee;
+  margin: 1rem 0;
+  z-index: 0; 
+}
+
+/* Form Sections */
+.name,
+.email,
+.phone-number,
+.contact-preference,
+.department {
+  margin-bottom: 1.5rem;
+  position: relative; /* For proper select dropdown positioning */
+  z-index: 0; 
+}
+
+.name {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  z-index: 0; 
+}
+
+.name input {
+  flex: 1;
+  min-width: 200px;
+  z-index: 0; 
+}
+
+/* Input Fields */
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #2c3e50;
+  z-index: 0; 
+}
+
+.motion-input-container input {
+  color: black;
+  background-color: white;
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  z-index: 0; 
+}
+
+.motion-input-container input:focus {
+  border-color: #4285f4;
+  outline: 2px solid rgba(66, 133, 244, 0.2);
+  outline-offset: 2px;
+  z-index: 0; 
+}
+
+/* React Select Styles - Fixed Dropdown */
+.react-select-container {
+  transform-style: flat !important;
+  perspective: none !important;
+  width: 100%;
+  margin-top: 0.5rem;
+  position: relative;
+  z-index: 0; 
+}
+
+.react-select__control {
+  min-height: 48px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: #333;
+  background-color: white;
+  transition: all 0.3s ease;
+  box-shadow: none;
+  z-index: 0;
+}
+
+.react-select__control--is-focused {
+  border-color: #4285f4;
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+  z-index: 0;
+}
+
+.react-select__menu {
+  position: absolute;
+  z-index: 101; /* Extreme high z-index */
+  inset: auto; /* Reset positioning */
+  margin-top: 4px;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #eee;
+  width: 100%;
+}
+
+.react-select__menu-portal {
+  z-index: 102; /* Highest possible */
+}
+
+
+.react-select__option {
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  color: #333;
+  transition: all 0.2s;
+  z-index: 101;
+}
+
+.react-select__option--is-focused {
+  background-color: #f5f5f5;
+  z-index: 101;
+}
+
+.react-select__option--is-selected {
+  background-color: #4285f4;
+  color: white;
+  z-index: 101;
+}
+
+.react-select__indicator {
+  padding: 0 8px;
+  color: #666;
+  z-index: 101;
+}
+
+/* Radio Buttons */
+.contact-preference {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  z-index: 0;
+}
+
+.via-email,
+.via-phone {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 0;
+}
+
+.radio-motion-input {
+  margin-right: 0.5rem;
+  cursor: pointer;
+  z-index: 0;
+}
+
+/* Calendar Styles */
+.calendar-container {
+  margin: 2rem 0;
+  z-index: 0;
+}
+
+.calendar-header {
+  position: relative;
+  z-index: 0; /* Lower than dropdown */
+  background: white; /* Optional: prevent transparency issues */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.calendar-header h2 {
+  text-align: center;
+  font-size: 1.3rem;
+  color: #2c3e50;
+  z-index: 0;
+}
+
+.calendar-header button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  color: #4285f4;
+  border-radius: 4px;
+  z-index: 0;
+}
+
+.calendar-header button:hover {
+  background-color: #f0f7ff;
+  z-index: 0;
+}
+
+.calendar {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  table-layout: fixed;
+  z-index: 0;
+}
+
+.calendar th {
+  padding: 0.25rem;
+  text-align: center;
+  font-weight: normal;
+  color: #666;
+  background-color: #4285f4;
+  color: white;
+  border: 1px solid black;
+  z-index: 0;
+}
+
+.calendar td {
+  padding: 0.75rem;
+  text-align: center;
+  border: 1px solid #eee;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 0;
+}
+
+/* Calendar cell animations */
+.calendar td.day {
+  transform-origin: center;
+  transform-box: fill-box;
+  z-index: 0;
+}
+
+.calendar td.empty {
+  background-color: #f9f9f9;
+  cursor: default;
+  z-index: 0;
+}
+
+.calendar td.day:hover {
+  background-color: #f5f5f5;
+  z-index: 0;
+}
+
+.calendar td.selected {
+  background-color: #4285f4;
+  color: white;
+  font-weight: bold;
+  z-index: 0;
+}
+
+/* Selected Day */
+.selected-day {
+  margin-top: 1.5rem;
+  z-index: 0;
+}
+
+.selected-day h3 {
+  margin-bottom: 1rem;
+  color: #2c3e50;
+  z-index: 0;
+}
+
+.time-slots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.75rem;
+  z-index: 0;
+}
+
+.time-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 0;
+}
+
+.time-slot {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 0;
+}
+
+.time-slot:hover {
+  background-color: #f5f5f5;
+  z-index: 0;
+}
+
+.time-slot.selected {
+  background-color: #4285f4;
+  color: white;
+  border-color: #4285f4;
+  z-index: 0;
+}
+
+/* Timezone */
+.timezone {
+  margin-top: 1rem;
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+  z-index: 0;
+}
+
+/* Submit Button */
+.submit-btn {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 2rem auto 0;
+  padding: 1rem;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  z-index: 0;
+}
+
+.submit-btn:hover {
+  background-color: #3367d6;
+  z-index: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .appointment-form {
+    padding: 1.5rem;
+  }
+
+  .name {
+    flex-direction: column;
+  }
+
+  .time-slots {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .react-select__control {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  .appointment-form h1 {
+    font-size: 1.5rem;
+  }
+
+  .time-slots {
+    grid-template-columns: 1fr;
+  }
+
+  .react-select__control {
+    min-height: 42px;
+    font-size: 0.95rem;
+  }
+}
+
+.appointment-form,
+.department,
+.react-select-container {
+  overflow: visible;
+  contain: none;
+}
+
+.debug * {
+  outline: 1px solid rgba(255,0,0,0.3);
+  background: rgba(0,255,0,0.1);
+  z-index: 0;
+}
+
+/* Fixes for Framer Motion scaling */
+[motion] > *,
+.motion-container > * {
+  transform-box: fill-box;
+  transform-origin: center;
+  backface-visibility: hidden;
+  will-change: transform; /* Optimize performance */
+}
+
+
+/* For parent containers */
+.motion-input-container {
+  display: inline-flex; /* Better than inline-block */
+  position: relative;
+  transform-style: preserve-3d;
+  isolation: isolate; /* Prevents z-index conflicts */
+}

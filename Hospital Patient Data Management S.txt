@@ -1,0 +1,10 @@
+> Hospital Patient Data Management System
+
+- FrontEnd
+	
+	React/HTML/CSS
+
+- BackEnd
+
+	Python with Flask (SQL lite DB)
+
