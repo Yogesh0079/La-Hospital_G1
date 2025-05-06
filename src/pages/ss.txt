@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management - Bed Ward</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#10b981',
+                        danger: '#ef4444',
+                        warning: '#f59e0b',
+                        info: '#06b6d4',
+                        dark: '#1e293b',
+                        light: '#f8fafc'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .bed-card {
+            transition: all 0.3s ease;
+        }
+        .bed-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .occupied {
+            border-left: 4px solid #ef4444;
+        }
+        .available {
+            border-left: 4px solid #10b981;
+        }
+        .reserved {
+            border-left: 4px solid #f59e0b;
+        }
+        .maintenance {
+            border-left: 4px solid #06b6d4;
+        }
+        .sidebar {
+            transition: all 0.3s ease;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                position: absolute;
+                z-index: 10;
+                height: 100vh;
+            }
+            .sidebar.active {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="sidebar bg-white w-64 border-r border-gray-200 flex-shrink-0">
+            <div class="p-4 border-b border-gray-200">
+                <h1 class="text-xl font-bold text-primary flex items-center">
+                    <i class="fas fa-hospital mr-2"></i> MedCare HMS
+                </h1>
+            </div>
+            <nav class="p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-gray-700 hover:bg-primary hover:text-white rounded-lg">
+                            <i class="fas fa-tachometer-alt mr-3"></i> Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-gray-700 hover:bg-primary hover:text-white rounded-lg">
+                            <i class="fas fa-procedures mr-3"></i> Bed Ward
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-gray-700 hover:bg-primary hover:text-white rounded-lg">
+                            <i class="fas fa-user-injured mr-3"></i> Patients
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-gray-700 hover:bg-primary hover:text-white rounded-lg">
+                            <i class="fas fa-user-md mr-3"></i> Doctors
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-gray-700 hover:bg-primary hover:text-white rounded-lg">
+                            <i class="fas fa-pills mr-3"></i> Pharmacy
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-gray-700 hover:bg-primary hover:text-white rounded-lg">
+                            <i class="fas fa-file-invoice-dollar mr-3"></i> Billing
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center p-2 text-gray-700 hover:bg-primary hover:text-white rounded-lg">
+                            <i class="fas fa-cog mr-3"></i> Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top Navigation -->
+            <header class="bg-white border-b border-gray-200 py-4 px-6 flex items-center justify-between">
+                <div class="flex items-center">
+                    <button id="sidebarToggle" class="md:hidden mr-4 text-gray-600">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                    <h2 class="text-xl font-semibold text-gray-800">
+                        <i class="fas fa-procedures mr-2 text-primary"></i> Bed Ward Management
+                    </h2>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <button class="text-gray-600 hover:text-gray-900">
+                            <i class="fas fa-bell text-xl"></i>
+                            <span class="absolute top-0 right-0 h-2 w-2 rounded-full bg-danger"></span>
+                        </button>
+                    </div>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="w-8 h-8 rounded-full mr-2">
+                        <span class="text-gray-700">Dr. Sarah Smith</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-y-auto p-6">
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500">Total Beds</p>
+                                <h3 class="text-2xl font-bold text-dark">120</h3>
+                            </div>
+                            <div class="bg-blue-100 p-3 rounded-full">
+                                <i class="fas fa-bed text-primary text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500">Available</p>
+                                <h3 class="text-2xl font-bold text-secondary">45</h3>
+                            </div>
+                            <div class="bg-green-100 p-3 rounded-full">
+                                <i class="fas fa-check-circle text-secondary text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500">Occupied</p>
+                                <h3 class="text-2xl font-bold text-danger">68</h3>
+                            </div>
+                            <div class="bg-red-100 p-3 rounded-full">
+                                <i class="fas fa-user-injured text-danger text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500">Maintenance</p>
+                                <h3 class="text-2xl font-bold text-info">7</h3>
+                            </div>
+                            <div class="bg-cyan-100 p-3 rounded-full">
+                                <i class="fas fa-tools text-info text-xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Bar -->
+                <div class="bg-white rounded-lg shadow p-4 mb-6 flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <select class="block appearance-none bg-gray-100 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-primary">
+                                <option>All Wards</option>
+                                <option>General Ward</option>
+                                <option>ICU</option>
+                                <option>Pediatrics</option>
+                                <option>Maternity</option>
+                                <option>Orthopedic</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <select class="block appearance-none bg-gray-100 border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-primary">
+                                <option>All Status</option>
+                                <option>Available</option>
+                                <option>Occupied</option>
+                                <option>Reserved</option>
+                                <option>Maintenance</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="bg-primary hover:bg-blue-600 text-white py-2 px-4 rounded flex items-center">
+                            <i class="fas fa-plus mr-2"></i> Add New Bed
+                        </button>
+                        <button class="bg-secondary hover:bg-green-600 text-white py-2 px-4 rounded flex items-center">
+                            <i class="fas fa-file-export mr-2"></i> Export
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Beds Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Bed Card 1 (Occupied) -->
+                    <div class="bed-card occupied bg-white rounded-lg shadow overflow-hidden">
+                        <div class="p-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-bold text-lg text-dark">Bed #101</h3>
+                                    <p class="text-gray-500">General Ward</p>
+                                </div>
+                                <span class="bg-red-100 text-danger px-2 py-1 rounded-full text-xs font-medium">Occupied</span>
+                            </div>
+                            <div class="mt-4">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-user-injured mr-2 text-gray-500"></i>
+                                    <span class="text-gray-700">John Doe</span>
+                                </div>
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-id-card mr-2 text-gray-500"></i>
+                                    <span class="text-gray-700">MRN: 123456</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-calendar-alt mr-2 text-gray-500"></i>
+                                    <span class="text-gray-700">Admitted: 12/05/2023</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 px-4 py-3 flex justify-end">
+                            <button class="text-primary hover:text-blue-600 mr-3">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="text-warning hover:text-yellow-600 mr-3">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="text-danger hover:text-red-600">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Bed Card 2 (Available) -->
+                    <div class="bed-card available bg-white rounded-lg shadow overflow-hidden">
+                        <div class="p-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-bold text-lg text-dark">Bed #102</h3>
+                                    <p class="text-gray-500">General Ward</p>
+                                </div>
+                                <span class="bg-green-100 text-secondary px-2 py-1 rounded-full text-xs font-medium">Available</span>
+                            </div>
+                            <div class="mt-4">
+                                <div class="flex items-center justify-center h-20">
+                                    <span class="text-gray-400">No patient assigned</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 px-4 py-3 flex justify-end">
+                            <button class="bg-primary hover:bg-blue-600 text-white py-1 px-3 rounded text-sm">
+                                <i class="fas fa-user-plus mr-1"></i> Assign Patient
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Bed Card 3 (Reserved) -->
+                    <div class="bed-card reserved bg-white rounded-lg shadow overflow-hidden">
+                        <div class="p-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-bold text-lg text-dark">Bed #201</h3>
+                                    <p class="text-gray-500">ICU</p>
+                                </div>
+                                <span class="bg-yellow-100 text-warning px-2 py-1 rounded-full text-xs font-medium">Reserved</span>
+                            </div>
+                            <div class="mt-4">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-user-clock mr-2 text-gray-500"></i>
+                                    <span class="text-gray-700">Reserved for Surgery</span>
+                                </div>
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-calendar-day mr-2 text-gray-500"></i>
+                                    <span class="text-gray-700">Reserved until: 15/06/2023</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-user-md mr-2 text-gray-500"></i>
+                                    <span class="text-gray-700">Dr. Michael Brown</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 px-4 py-3 flex justify-end">
+                            <button class="text-primary hover:text-blue-600 mr-3">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="text-warning hover:text-yellow-600">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Bed Card 4 (Maintenance) -->
+                    <div class="bed-card maintenance bg-white rounded-lg shadow overflow-hidden">
+                        <div class="p-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-bold text-lg text-dark">Bed #305</h3>
+                                    <p class="text-gray-500">Pediatrics</p>
+                                </div>
+                                <span class="bg-cyan-100 text-info px-2 py-1 rounded-full text-xs font-medium">Maintenance</span>
+                            </div>
+                            <div class="mt-4">
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-tools mr-2 text-gray-500"></i>
+                                    <span class="text-gray-700">Equipment Repair</span>
+                                </div>
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-calendar-times mr-2 text-gray-500"></i>
+                                    <span class="text-gray-700">Out since: 05/06/2023</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-info-circle mr-2 text-gray-500"></i>
+                                    <span class="text-gray-700">Expected back: 10/06/2023</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 px-4 py-3 flex justify-end">
+                            <button class="text-primary hover:text-blue-600 mr-3">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="text-info hover:text-cyan-600">
+                                <i class="fas fa-check-circle"></i> Mark Ready
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- More bed cards can be added here following the same pattern -->
+                </div>
+
+                <!-- Pagination -->
+                <div class="mt-8 flex items-center justify-between">
+                    <div class="text-gray-500">
+                        Showing <span class="font-medium">1</span> to <span class="font-medium">8</span> of <span class="font-medium">120</span> beds
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="bg-white border border-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-50">
+                            Previous
+                        </button>
+                        <button class="bg-primary text-white px-3 py-1 rounded">
+                            1
+                        </button>
+                        <button class="bg-white border border-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-50">
+                            2
+                        </button>
+                        <button class="bg-white border border-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-50">
+                            3
+                        </button>
+                        <button class="bg-white border border-gray-300 text-gray-700 px-3 py-1 rounded hover:bg-gray-50">
+                            Next
+                        </button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Toggle sidebar on mobile
+        document.getElementById('sidebarToggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('active');
+        });
+
+        // Sample data for demonstration
+        const bedStatuses = ['occupied', 'available', 'reserved', 'maintenance'];
+        const bedWards = ['General Ward', 'ICU', 'Pediatrics', 'Maternity', 'Orthopedic'];
+        const patientNames = ['John Doe', 'Jane Smith', 'Robert Johnson', 'Emily Davis', 'Michael Wilson'];
+        
+        // Function to generate random bed cards (for demonstration)
+        function generateRandomBeds(count) {
+            const bedsContainer = document.querySelector('.grid');
+            
+            for (let i = 0; i < count; i++) {
+                const status = bedStatuses[Math.floor(Math.random() * bedStatuses.length)];
+                const ward = bedWards[Math.floor(Math.random() * bedWards.length)];
+                const bedNumber = Math.floor(Math.random() * 400) + 1;
+                
+                let bedHtml = '';
+                
+                if (status === 'occupied') {
+                    const patient = patientNames[Math.floor(Math.random() * patientNames.length)];
+                    const mrn = Math.floor(Math.random() * 900000) + 100000;
+                    const admitDate = new Date(Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000);
+                    
+                    bedHtml = `
+                        <div class="bed-card occupied bg-white rounded-lg shadow overflow-hidden">
+                            <div class="p-4">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="font-bold text-lg text-dark">Bed #${bedNumber}</h3>
+                                        <p class="text-gray-500">${ward}</p>
+                                    </div>
+                                    <span class="bg-red-100 text-danger px-2 py-1 rounded-full text-xs font-medium">Occupied</span>
+                                </div>
+                                <div class="mt-4">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-user-injured mr-2 text-gray-500"></i>
+                                        <span class="text-gray-700">${patient}</span>
+                                    </div>
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-id-card mr-2 text-gray-500"></i>
+                                        <span class="text-gray-700">MRN: ${mrn}</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-calendar-alt mr-2 text-gray-500"></i>
+                                        <span class="text-gray-700">Admitted: ${admitDate.toLocaleDateString()}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 px-4 py-3 flex justify-end">
+                                <button class="text-primary hover:text-blue-600 mr-3">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="text-warning hover:text-yellow-600 mr-3">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="text-danger hover:text-red-600">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                } else if (status === 'available') {
+                    bedHtml = `
+                        <div class="bed-card available bg-white rounded-lg shadow overflow-hidden">
+                            <div class="p-4">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="font-bold text-lg text-dark">Bed #${bedNumber}</h3>
+                                        <p class="text-gray-500">${ward}</p>
+                                    </div>
+                                    <span class="bg-green-100 text-secondary px-2 py-1 rounded-full text-xs font-medium">Available</span>
+                                </div>
+                                <div class="mt-4">
+                                    <div class="flex items-center justify-center h-20">
+                                        <span class="text-gray-400">No patient assigned</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 px-4 py-3 flex justify-end">
+                                <button class="bg-primary hover:bg-blue-600 text-white py-1 px-3 rounded text-sm">
+                                    <i class="fas fa-user-plus mr-1"></i> Assign Patient
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                } else if (status === 'reserved') {
+                    const doctor = patientNames[Math.floor(Math.random() * patientNames.length)];
+                    const reserveDate = new Date(Date.now() + Math.floor(Math.random() * 7) * 24 * 60 * 60 * 1000);
+                    
+                    bedHtml = `
+                        <div class="bed-card reserved bg-white rounded-lg shadow overflow-hidden">
+                            <div class="p-4">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="font-bold text-lg text-dark">Bed #${bedNumber}</h3>
+                                        <p class="text-gray-500">${ward}</p>
+                                    </div>
+                                    <span class="bg-yellow-100 text-warning px-2 py-1 rounded-full text-xs font-medium">Reserved</span>
+                                </div>
+                                <div class="mt-4">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-user-clock mr-2 text-gray-500"></i>
+                                        <span class="text-gray-700">Reserved for Surgery</span>
+                                    </div>
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-calendar-day mr-2 text-gray-500"></i>
+                                        <span class="text-gray-700">Reserved until: ${reserveDate.toLocaleDateString()}</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-user-md mr-2 text-gray-500"></i>
+                                        <span class="text-gray-700">Dr. ${doctor}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 px-4 py-3 flex justify-end">
+                                <button class="text-primary hover:text-blue-600 mr-3">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="text-warning hover:text-yellow-600">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                } else if (status === 'maintenance') {
+                    const returnDate = new Date(Date.now() + Math.floor(Math.random() * 5) * 24 * 60 * 60 * 1000);
+                    
+                    bedHtml = `
+                        <div class="bed-card maintenance bg-white rounded-lg shadow overflow-hidden">
+                            <div class="p-4">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="font-bold text-lg text-dark">Bed #${bedNumber}</h3>
+                                        <p class="text-gray-500">${ward}</p>
+                                    </div>
+                                    <span class="bg-cyan-100 text-info px-2 py-1 rounded-full text-xs font-medium">Maintenance</span>
+                                </div>
+                                <div class="mt-4">
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-tools mr-2 text-gray-500"></i>
+                                        <span class="text-gray-700">Equipment Repair</span>
+                                    </div>
+                                    <div class="flex items-center mb-2">
+                                        <i class="fas fa-calendar-times mr-2 text-gray-500"></i>
+                                        <span class="text-gray-700">Out since: ${new Date().toLocaleDateString()}</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-info-circle mr-2 text-gray-500"></i>
+                                        <span class="text-gray-700">Expected back: ${returnDate.toLocaleDateString()}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-gray-50 px-4 py-3 flex justify-end">
+                                <button class="text-primary hover:text-blue-600 mr-3">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="text-info hover:text-cyan-600">
+                                    <i class="fas fa-check-circle"></i> Mark Ready
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                bedsContainer.insertAdjacentHTML('beforeend', bedHtml);
+            }
+        }
+
+        // Uncomment to generate random beds (for demonstration)
+        // generateRandomBeds(8);
+    </script>
+</body>
+</html>

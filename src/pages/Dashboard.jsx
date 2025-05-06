@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import "../styles/Dashboard.css"
-import { motion } from "framer-motion";
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion';
 
 
 function Dashboard() {

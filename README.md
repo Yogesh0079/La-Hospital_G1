@@ -1,4 +1,4 @@
-# L-Hospital
+# La-Hospital
 
 ## Core Features
 
