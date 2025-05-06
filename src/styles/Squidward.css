@@ -1,0 +1,97 @@
+.bed-occupied {
+    border-color: #ef4444;
+}
+.bed-available {
+    border-color: #22c55e;
+}
+.bed-maintenance {
+    border-color: #3b82f6;
+}
+.bed-reserved {
+    border-color: #eab308;
+}
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+}
+.bed-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+.ward-view {
+    height: calc(100vh - 250px);
+    overflow-y: auto;
+}
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 10px;
+    background-color: #ef4444;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+[data-tooltip] {
+    position: relative;
+}
+[data-tooltip]:hover:after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 10;
+}
+.button{
+    display: flex;
+    background-color: white;
+    overflow: hidden;
+    height: 30px;
+    width: 64px;
+    padding: 0;
+    font-size: 12px;
+    margin: 0;
+}
+
+.button svg, .button p {
+    margin: auto 0;
+}
+
+.la-hospital-logo-bedward {
+    max-width: 64px;
+    max-height: 64px;
+}
+
+/* .bedward-top-content {
+    display: flex;
+} */
+
+.relative svg {
+    margin-top: -28px;
+    margin-left: 12px;
+}
+
+.notification-button-squidward {
+    width: 48px;
+    height: 48px;
+    margin: 0;
+}
+
+.squidward-notification-bell {
+    margin-top: -4px;
+    margin-left: -14px;
+}
