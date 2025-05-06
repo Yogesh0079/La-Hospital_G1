@@ -9,31 +9,7 @@ function modifyReportsCommons() {
     const findingsContainer = document.getElementById('findingsContainer');
     const addFindingButton = document.getElementById('addFinding');
 
-    const findingTemplates = {
-        blood_test: {
-            fields: [
-                { label: 'Test', type: 'text', placeholder: 'e.g., Hemoglobin' },
-                { label: 'Result', type: 'text', placeholder: 'e.g., 14.2' },
-                { label: 'Unit', type: 'text', placeholder: 'e.g., g/dL' },
-                { label: 'Normal Range', type: 'text', placeholder: 'e.g., 13.5-17.5' },
-                { label: 'Status', type: 'select', options: ['Normal', 'Low', 'High'] }
-            ]
-        },
-        xray: {
-            fields: [
-                { label: 'Region', type: 'text', placeholder: 'e.g., Lungs' },
-                { label: 'Observation', type: 'text', placeholder: 'e.g., Clear lung fields' },
-                { label: 'Status', type: 'select', options: ['Normal', 'Abnormal'] }
-            ]
-        },
-        full_body_scan: {
-            fields: [
-                { label: 'Region', type: 'text', placeholder: 'e.g., Brain' },
-                { label: 'Observation', type: 'text', placeholder: 'e.g., No evidence of masses' },
-                { label: 'Status', type: 'select', options: ['Normal', 'Abnormal'] }
-            ]
-        }
-    };
+
 
     function addFindingRow(fields) {
         const row = document.createElement('div');

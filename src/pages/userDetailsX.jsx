@@ -31,7 +31,7 @@ function StepComponentFunction (activeStep, formData, handleChange, prescription
                     name="first_name"
                     variant="outlined"
                     value={formData.first_name}
-                    onchange={(e) => {handleChange(e, "medical_record")}}
+                    onChange={(e) => {handleChange(e, "medical_record")}}
                     fullWidth
                     />
             </Grid>
@@ -42,7 +42,7 @@ function StepComponentFunction (activeStep, formData, handleChange, prescription
                     name="last_name"
                     variant="outlined"
                     value={formData.last_name}
-                    onchange={(e) => {handleChange(e, "medical_record")}}
+                    onChange={(e) => {handleChange(e, "medical_record")}}
                     fullWidth
                 />
             </Grid>
@@ -54,7 +54,7 @@ function StepComponentFunction (activeStep, formData, handleChange, prescription
                     variant="outlined"
                     type="text"
                     value={formData.contact}
-                    onchange={(e) => {handleChange(e, "norm")}}
+                    onChange={(e) => {handleChange(e, "norm")}}
                     fullWidth
                 />
             </Grid>
@@ -66,7 +66,7 @@ function StepComponentFunction (activeStep, formData, handleChange, prescription
                     variant="outlined"
                     type="email"
                     value={formData.email}
-                    onchange={(e) => {handleChange(e, "norm")}}
+                    onChange={(e) => {handleChange(e, "norm")}}
                     fullWidth
                 />
             </Grid>
@@ -77,7 +77,7 @@ function StepComponentFunction (activeStep, formData, handleChange, prescription
                             name="address"
                             variant="outlined"
                             value={formData.address}
-                            onchange={(e) => {handleChange(e, "norm")}}
+                            onChange={(e) => {handleChange(e, "norm")}}
                             fullWidth
                     />
             </Grid>
@@ -85,7 +85,7 @@ function StepComponentFunction (activeStep, formData, handleChange, prescription
                 <FormControl>
                     <FormLabel id="radio-buttons-group-label">Gender</FormLabel>
                     <RadioGroup
-                        onchange={(e) => {handleChange(e, "norm")}}
+                        onChange={(e) => {handleChange(e, "norm")}}
                         aria-labelledby="radio-buttons-group-label"
                         defaultValue={formData.gender}
                         value={formData.gender}
@@ -99,7 +99,7 @@ function StepComponentFunction (activeStep, formData, handleChange, prescription
             </Grid>
             <Grid size={{md: 6, xs: 3, sm: 3}}>
                 <FormLabel id="dob-label">Date of Birth</FormLabel>
-                <input id="dob" parent="medical_data" onchange={(e) => {handleChange(e, "medical_record")}} value={(formData.medical_data.dob) ? formData.medical_data.dob.substr(0,10) : null} className="bg-inherit relative t-2" type="date" name="dob"/>
+                <input id="dob" parent="medical_data" onChange={(e) => {handleChange(e, "medical_record")}} value={(formData.medical_data.dob) ? formData.medical_data.dob.substr(0,10) : null} className="bg-inherit relative t-2" type="date" name="dob"/>
             </Grid>
         </Grid>
         </React.Fragment>
@@ -118,7 +118,7 @@ function StepComponentFunction (activeStep, formData, handleChange, prescription
                         type="number"
                         parent="medical_data"
                         value={formData.medical_data.weight}
-                        onchange={(e) => {handleChange(e, "medical_record")}}
+                        onChange={(e) => {handleChange(e, "medical_record")}}
                         fullWidth
                     />
                 </Grid>
@@ -131,7 +131,7 @@ function StepComponentFunction (activeStep, formData, handleChange, prescription
                         type="number"
                         parent="medical_data"
                         value={formData.medical_data.height}
-                        onchange={(e) => {handleChange(e, "medical_record")}}
+                        onChange={(e) => {handleChange(e, "medical_record")}}
                         fullWidth
                     />
                 </Grid>
@@ -144,7 +144,7 @@ function StepComponentFunction (activeStep, formData, handleChange, prescription
                             name="blood_group"
                             parent="medical_data"
                             value={formData.medical_data.blood_group}
-                            onchange={(e) => {handleChange(e, "medical_record")}}
+                            onChange={(e) => {handleChange(e, "medical_record")}}
                             label="Blood Group"
                         >
                             <MenuItem value="A+">A+</MenuItem>
@@ -166,7 +166,7 @@ function StepComponentFunction (activeStep, formData, handleChange, prescription
                             id="demo-simple-select"
                             value={formData.medical_data.diet}
                             label="diet"
-                            onchange={(e) => {handleChange(e, "medical_record")}}
+                            onChange={(e) => {handleChange(e, "medical_record")}}
                         >
                             <MenuItem value={0}>Vegetarian</MenuItem>
                             <MenuItem value={1}>Non-Vegetarian</MenuItem>
@@ -181,7 +181,7 @@ function StepComponentFunction (activeStep, formData, handleChange, prescription
                             defaultValue={formData.medical_data.smoke}
                             value={formData.medical_data.smoke}
                             name="smoke-radio"
-                            onchange={(e) => {handleChange(e, "medical_record")}}
+                            onChange={(e) => {handleChange(e, "medical_record")}}
                         >
                             <FormControlLabel value="nsmoke" control={<Radio />} label="Never" />
                             <FormControlLabel value="msmoke" control={<Radio />} label="Less than thrice a week" />
@@ -196,7 +196,7 @@ function StepComponentFunction (activeStep, formData, handleChange, prescription
                             aria-labelledby="drink-radio-label"
                             defaultValue={formData.medical_data.drink}
                             value={formData.medical_data.drink}
-                            onchange={(e) => {handleChange(e, "medical_record")}}
+                            onChange={(e) => {handleChange(e, "medical_record")}}
                             name="drink-radio"
                         >
                             <FormControlLabel value="ndrink" control={<Radio />} label="Never" />
@@ -264,9 +264,8 @@ function StepComponentFunction (activeStep, formData, handleChange, prescription
                             label="Full Name"
                             name="relation"
                             variant="outlined"
-                            parent="emergency_contact"
-                            value={formData.emergency_contact.name}
-                            onchange={(e) => {handleChange(e, "emergency_contact")}}
+                            value={formData['emergency_contact'].name}
+                            onChange={(e) => {handleChange(e, "emergency_contact")}}
                             fullWidth
                         />
                     </Grid>
@@ -276,9 +275,8 @@ function StepComponentFunction (activeStep, formData, handleChange, prescription
                             label="Contact Number"
                             name="emergency_contact"
                             variant="outlined"
-                            parent="emergency_contact"
-                            value={formData.emergency_contact.number}
-                            onchange={(e) => {handleChange(e, "emergency_contact")}}
+                            value={formData['emergency_contact'].number}
+                            onChange={(e) => {handleChange(e, "emergency_contact")}}
                             fullWidth
                         />
                     </Grid>
@@ -288,9 +286,8 @@ function StepComponentFunction (activeStep, formData, handleChange, prescription
                             label="Relation"
                             name="emergency_contact"
                             variant="outlined"
-                            parent="emergency_contact"
                             value={formData.emergency_contact.relation}
-                            onchange={(e) => {handleChange(e, "emergency_contact")}}
+                            onChange={(e) => {handleChange(e, "emergency_contact")}}
                             fullWidth
                         />
                     </Grid>
