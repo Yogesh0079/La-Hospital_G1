@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { getUserByLocalId } from "../scripts/users.js";
 import { getSessionUser } from '../scripts/users.js';
 import { BloodTest, FullBodyTest, XRayTest } from '../components/Dashboard/MedicalTests.jsx';
+import Sidebar  from '../components/general/Sidebar.jsx';
 
 function Dashboard() {
     const navigate = useNavigate();
@@ -102,11 +103,7 @@ function Dashboard() {
                 transition={{ duration: 0.8 }}
                 className='dashboard'
             >
-                <div className='sidebar'>
-                    <div className='logo'>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00008B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </div>
-                </div>
+                <Sidebar />
                 <div className='dashboard-content'>
                     <div className='search'>
                         <button className='search-button'>
@@ -134,12 +131,12 @@ function Dashboard() {
                                 <div className='vitals-main'>
                                     <div className='vitals-direction'>
                                         <div className='direction1'>
-                                            <motion.div whileHover={{ scale: 1.02, color: 'white', backgroundColor: '#00b082' }} style={{ backgroundColor: '#F8F8FF' }} className='vital1'>Book an appointment</motion.div>
-                                            <motion.div whileHover={{ scale: 1.02, color: 'white', backgroundColor: '#00b082' }} style={{ backgroundColor: '#F8F8FF' }} className='vital1'>Book a test</motion.div>
+                                            <motion.div onClick={() => {navigate("/appointment")}} whileHover={{ scale: 1.02, color: 'white', backgroundColor: '#00b082' }} style={{ backgroundColor: '#F8F8FF' }} className='vital1'>Book an appointment</motion.div>
+                                            <motion.div onClick={() => {navigate("/testbook")}} whileHover={{ scale: 1.02, color: 'white', backgroundColor: '#00b082' }} style={{ backgroundColor: '#F8F8FF' }} className='vital1'>Book a test</motion.div>
                                         </div>
                                         <div className='direction2'>
-                                            <motion.div whileHover={{ scale: 1.02, color: 'white', backgroundColor: '#00b082' }} style={{ backgroundColor: '#F8F8FF' }} className='vital1'>Emergency OPD</motion.div>
-                                            <motion.div whileHover={{ scale: 1.02, color: 'white', backgroundColor: '#00b082' }} style={{ backgroundColor: '#F8F8FF' }} className='vital1'>Previous Appointments</motion.div>
+                                            <motion.div onClick={() => {navigate("/emergency")}} whileHover={{ scale: 1.02, color: 'white', backgroundColor: '#00b082' }} style={{ backgroundColor: '#F8F8FF' }} className='vital1'>Emergency OPD</motion.div>
+                                            <motion.div onClick={() => {navigate("/checkappoint")}} whileHover={{ scale: 1.02, color: 'white', backgroundColor: '#00b082' }} style={{ backgroundColor: '#F8F8FF' }} className='vital1'>Previous Appointments</motion.div>
                                         </div>
                                     </div>
                                     <div className='graph'></div>

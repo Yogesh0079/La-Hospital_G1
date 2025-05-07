@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import {newUser, updateUserData, getUserData} from "./controllers/user.js";
 import {newRecord, getRecordData, updateRecordData} from "./controllers/record.js";
+import {newAppointment, getAppointmentData, updateAppointmentData} from "./controllers/appointment.js";
 import {passport} from "./auth/passport.js";
 import session from "express-session";
 import cors from "cors";
@@ -51,6 +52,11 @@ app.put("/updateUser/:userId", updateUserData);
 app.post("/createRecord", newRecord)
 app.get("/getRecord/:recordId", getRecordData);
 app.put("/updateRecord/:recordId", updateRecordData);
+
+app.post("/createAppointment", newAppointment);
+app.put("/updateAppointment/:appointmentId", updateAppointmentData);
+app.get("/getAppointment/:appointmentId", getAppointmentData);
+
 
 app.get("/login/federated/google", passport.authenticate("google"));
 app.get('/oauth2/redirect/google', passport.authenticate('google', {

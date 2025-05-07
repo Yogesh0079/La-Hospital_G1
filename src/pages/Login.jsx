@@ -93,7 +93,7 @@ function Login() {
                                         name="email"
                                         onChange={handleFormChange}
                                         placeholder="Email"
-                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 input-field focus:outline-none focus:border-blue-500 transition"
+                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 input-field focus:outline-none focus:border-blue-500 transition h-15 w-80"
                                     />
                                 </div>
                                 <div className="mb-6">
@@ -102,7 +102,7 @@ function Login() {
                                         name="password"
                                         onChange={handleFormChange}
                                         placeholder="Password"
-                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 input-field focus:outline-none focus:border-blue-500 transition"
+                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 input-field focus:outline-none focus:border-blue-500 transition h-15 w-80"
                                     />
                                 </div>
                             </>
@@ -115,7 +115,7 @@ function Login() {
                                             name="firstname"
                                             onChange={handleFormChange}
                                             placeholder="First Name"
-                                            className="w-full px-4 py-3 rounded-lg border border-gray-300 input-field focus:outline-none focus:border-blue-500 transition"
+                                            className="w-full px-4 py-3 rounded-lg border border-gray-300 input-field focus:outline-none focus:border-blue-500 transition h-15 w-50"
                                         />
                                     </div>
                                     <div>
@@ -124,7 +124,7 @@ function Login() {
                                             name="lastname"
                                             onChange={handleFormChange}
                                             placeholder="Last Name"
-                                            className="w-full px-4 py-3 rounded-lg border border-gray-300 input-field focus:outline-none focus:border-blue-500 transition"
+                                            className="w-full px-4 py-3 rounded-lg border border-gray-300 input-field focus:outline-none focus:border-blue-500 transition h-15 w-50 h-15 w-50"
                                         />
                                     </div>
                                 </div>
@@ -134,7 +134,7 @@ function Login() {
                                         name="contact"
                                         onChange={handleFormChange}
                                         placeholder="Phone Number"
-                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 input-field focus:outline-none focus:border-blue-500 transition"
+                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 input-field focus:outline-none focus:border-blue-500 transition h-15 w-80"
                                     />
                                 </div>
                                 <div className="mb-4">
@@ -143,7 +143,7 @@ function Login() {
                                         name="email"
                                         onChange={handleFormChange}
                                         placeholder="Email"
-                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 input-field focus:outline-none focus:border-blue-500 transition"
+                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 input-field focus:outline-none focus:border-blue-500 transition h-15 w-80"
                                     />
                                 </div>
                                 <div className="mb-6">
@@ -152,7 +152,7 @@ function Login() {
                                         name="password"
                                         onChange={handleFormChange}
                                         placeholder="Password"
-                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 input-field focus:outline-none focus:border-blue-500 transition"
+                                        className="w-full px-4 py-3 rounded-lg border border-gray-300 input-field focus:outline-none focus:border-blue-500 transition h-15 w-80"
                                     />
                                 </div>
                             </>
@@ -176,7 +176,8 @@ function Login() {
                                     Remember me
                                 </label>
                             </div>
-                            <a href="#" className="text-sm text-blue-600 hover:text-blue-500">
+                            <br />
+                            <a href="#" className="text-sm text-blue-600 hover:text-blue-500 block">
                                 Forgot password?
                             </a>
                         </div>

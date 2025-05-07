@@ -32,14 +32,6 @@ body {
     position: relative;
 }
 
-.sidebar {
-    width: 72px;
-    height: 100vh;
-    background-color: #4169e1;
-    border-right: 1px solid rgb(20, 20, 46);
-    flex-shrink: 0;
-    z-index: 1 !important;
-}
 
 .dashboard-content {
     display: flex;
@@ -345,9 +337,7 @@ body {
 }
 
 @media (max-width: 600px) {
-    .sidebar {
-        width: 48px;
-    }
+
 
     .user {
         width: 44px;

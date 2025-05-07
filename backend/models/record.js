@@ -15,9 +15,48 @@ const recordSchema = new Schema({
         tests: [Number],
         diagnosis: String,
         prescriptions: [Number],
-        remakrs: String
+        remarks: String,
+        blood_test: { // Add a new object for blood test results
+            hemoglobin: {
+                value: { type: Number, required: true },
+                unit: { type: String, default: 'g/dL' },
+                reference_range: { type: String, default: '13.5-17.5' },
+                status: { type: String, enum: ['Normal', 'Low', 'High'], default: 'Normal' }
+            },
+            wbc_count: {
+                value: { type: Number, required: true },
+                unit: { type: String, default: 'x10³/µL' },
+                reference_range: { type: String, default: '4.0-11.0' },
+                status: { type: String, enum: ['Normal', 'Low', 'High'], default: 'Normal' }
+            },
+            platelets: {
+                value: { type: Number, required: true },
+                unit: { type: String, default: 'x10³/µL' },
+                reference_range: { type: String, default: '150-450' },
+                status: { type: String, enum: ['Normal', 'Low', 'High'], default: 'Normal' }
+            },
+            rbc_count: {
+                value: { type: Number, required: true },
+                unit: { type: String, default: 'x10⁶/µL' },
+                reference_range: { type: String, default: '4.5-5.9' },
+                status: { type: String, enum: ['Normal', 'Low', 'High'], default: 'Normal' }
+            },
+            hematocrit: {
+                value: { type: Number, required: true },
+                unit: { type: String, default: '%' },
+                reference_range: { type: String, default: '40.0-52.0' },
+                status: { type: String, enum: ['Normal', 'Low', 'High'], default: 'Normal' }
+            },
+            mcv: {
+                value: { type: Number, required: true },
+                unit: { type: String, default: 'fL' },
+                reference_range: { type: String, default: '80.0-100.0' },
+                status: { type: String, enum: ['Normal', 'Low', 'High'], default: 'Low' } // Assuming the value you mentioned was low
+            }
+        }
     }
 });
+
 const Record = new mongoose.model("records", recordSchema);
 
 function createRecord(reqData) {

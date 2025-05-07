@@ -102,9 +102,7 @@ export default function Appointment() {
     e.preventDefault();
     if (formData.first_name && formData.last_name && formData.email && formData.contact && selectedDate) {
       alert("Appointment booked successfully!");
-      createAppointment(formData).then(() => {
         navigate("/dashboard");
-      });
     } else {
       alert("Please fill in all required fields.");
     }

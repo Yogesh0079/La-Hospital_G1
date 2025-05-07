@@ -49,7 +49,7 @@ const userSchema = new Schema({
     cartData: [{
         item_id: Number,
         quantity: Number
-    }]
+    }],
 });
 
 const User = new mongoose.model("users", userSchema);
