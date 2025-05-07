@@ -133,11 +133,14 @@ function Dashboard() {
                                         <div className='direction1'>
                                             <motion.div onClick={() => {navigate("/appointment")}} whileHover={{ scale: 1.02, color: 'white', backgroundColor: '#00b082' }} style={{ backgroundColor: '#F8F8FF' }} className='vital1'>Book an appointment</motion.div>
                                             <motion.div onClick={() => {navigate("/testbook")}} whileHover={{ scale: 1.02, color: 'white', backgroundColor: '#00b082' }} style={{ backgroundColor: '#F8F8FF' }} className='vital1'>Book a test</motion.div>
+                                            <motion.div onClick={() => {navigate("/squidward")}} whileHover={{ scale: 1.02, color: 'white', backgroundColor: '#00b082' }} style={{ backgroundColor: '#F8F8FF' }} className='vital1'>Ward Management</motion.div>
                                         </div>
-                                        <div className='direction2'>
+                                        <div className='direction1'>
                                             <motion.div onClick={() => {navigate("/emergency")}} whileHover={{ scale: 1.02, color: 'white', backgroundColor: '#00b082' }} style={{ backgroundColor: '#F8F8FF' }} className='vital1'>Emergency OPD</motion.div>
                                             <motion.div onClick={() => {navigate("/checkappoint")}} whileHover={{ scale: 1.02, color: 'white', backgroundColor: '#00b082' }} style={{ backgroundColor: '#F8F8FF' }} className='vital1'>Previous Appointments</motion.div>
+                                            <motion.div onClick={() => {navigate("/modify")}} whileHover={{ scale: 1.02, color: 'white', backgroundColor: '#00b082' }} style={{ backgroundColor: '#F8F8FF' }} className='vital1'>Modify Report</motion.div>
                                         </div>
+
                                     </div>
                                     <div className='graph'></div>
                                 </div>
