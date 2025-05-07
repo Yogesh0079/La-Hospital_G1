@@ -166,18 +166,19 @@ function Login() {
                         </button>
 
                         <div className="flex items-center justify-between my-4">
-                            <div className="flex items-center">
+                            <div className="flex flex-row items-start">
                                 <input
                                     type="checkbox"
                                     id="rememberMe"
-                                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                                    className="h-4 w-4 checkbox text-white focus:ring-blue-500 border-gray-300 rounded bg-white"
                                 />
-                                <label htmlFor="rememberMe" className="ml-2 block text-sm text-gray-700">
+                                <label htmlFor="rememberMe" className="mt-2 block text-sm text-gray-700">
                                     Remember me
                                 </label>
                             </div>
-                            <br />
-                            <a href="#" className="text-sm text-blue-600 hover:text-blue-500 block">
+
+                          <br />
+                            <a href="#" className="text-sm text-blue-600 hover:text-blue-500">
                                 Forgot password?
                             </a>
                         </div>

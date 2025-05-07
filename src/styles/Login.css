@@ -87,3 +87,7 @@ hr {
     background-color: #007bff;
     color: #fff;
 }
+
+.checkbox {
+    accent-color: white;
+}
