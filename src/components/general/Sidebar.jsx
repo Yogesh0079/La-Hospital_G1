@@ -12,40 +12,40 @@ export default function Sidebar() {
             </div>
             <div className="flex-grow px-4 py-6 c-white">
                 <div className="space-y-1">
-                    <a href="#" className="flex items-center px-4 py-3 bg-primaryLight bg-opacity-10 text-primary rounded-lg">
+                    <a href="#" className="flex items-center px-4 py-3 bg-primaryLight bg-opacity-10 text-black rounded-lg">
                         <FontAwesomeIcon icon="boxes" className="mr-3" />
                         <span className="font-medium">Inventory</span>
                     </a>
-                    <a href="#" className="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                    <a href="#" className="flex items-center px-4 py-3 text-white hover:bg-gray-100 rounded-lg">
                         <FontAwesomeIcon icon="prescription-bottle-alt" className="mr-3" />
                         <span>Medications</span>
                     </a>
-                    <a href="#" className="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                    <a href="#" className="flex items-center px-4 py-3 text-white hover:bg-gray-100 rounded-lg">
                         <FontAwesomeIcon icon="syringe" className="mr-3" />
                         <span>Injections</span>
                     </a>
-                    <a href="#" className="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                    <a href="#" className="flex items-center px-4 py-3 text-white hover:bg-gray-100 rounded-lg">
                         <FontAwesomeIcon icon="flask" className="mr-3" />
                         <span>Lab Supplies</span>
                     </a>
-                    <a href="#" className="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                    <a href="#" className="flex items-center px-4 py-3 text-white hover:bg-gray-100 rounded-lg">
                         <FontAwesomeIcon icon="procedures" className="mr-3" />
                         <span>Equipment</span>
                     </a>
                 </div>
 
                 <div className="mt-8">
-                    <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 mb-2">Reports</h3>
+                    <h3 className="text-xs font-semibold text-black uppercase tracking-wider px-4 mb-2">Reports</h3>
                     <div className="space-y-1">
-                        <a href="#" className="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <a href="#" className="flex items-center px-4 py-3 text-white hover:bg-gray-100 rounded-lg">
                             <FontAwesomeIcon icon="chart-line" className="mr-3" />
                             <span>Inventory Analytics</span>
                         </a>
-                        <a href="#" className="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <a href="#" className="flex items-center px-4 py-3 text-white hover:bg-gray-100 rounded-lg">
                             <FontAwesomeIcon icon="exclamation-triangle" className="mr-3" />
                             <span>Low Stock</span>
                         </a>
-                        <a href="#" className="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+                        <a href="#" className="flex items-center px-4 py-3 text-white hover:bg-gray-100 rounded-lg">
                             <FontAwesomeIcon icon="history" className="mr-3" />
                             <span>Expiring Soon</span>
                         </a>
@@ -56,8 +56,8 @@ export default function Sidebar() {
                 <div className="flex items-center">
                     <img className="h-9 w-9 rounded-full" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile"/>
                     <div className="ml-3">
-                        <p className="text-sm font-medium text-gray-700">Dr. Sarah Johnson</p>
-                        <p className="text-xs text-gray-500">Administrator</p>
+                        <p className="text-sm font-medium text-white">Dr. Sarah Johnson</p>
+                        <p className="text-xs text-white">Administrator</p>
                     </div>
                 </div>
             </div>

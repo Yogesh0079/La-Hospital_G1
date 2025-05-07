@@ -28,11 +28,6 @@ const NormalLayout = ({ children }) => {
     }
 
 const Layout = ({ children }) => {
-    if(window.location.href.split("/").pop() == "dashboard" || window.location.href.split("/").pop() == "appointment" || window.location.href.split("/").pop() == "report") {
-        return SimpleLayout({children});
-    }
-    else {
         return NormalLayout({children});
-    }
 }   
 export default Layout;
