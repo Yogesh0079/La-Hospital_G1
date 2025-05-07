@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import Select from 'react-select';
 import { selectClasses } from "@mui/material";
 import { getUserByLocalId } from "../scripts/users";
-import { createAppointment } from "../scripts/appointment";
+// import { createAppointment } from "../scripts/appointment";
 
 export default function Appointment() {
   const [selectedDate, setSelectedDate] = useState(new Date(2025, 3, 28));
@@ -102,9 +102,9 @@ export default function Appointment() {
     e.preventDefault();
     if (formData.first_name && formData.last_name && formData.email && formData.contact && selectedDate) {
       alert("Appointment booked successfully!");
-      createAppointment(formData).then(() => {
+      // createAppointment(formData).then(() => {
         navigate("/dashboard");
-      });
+      // });
     } else {
       alert("Please fill in all required fields.");
     }

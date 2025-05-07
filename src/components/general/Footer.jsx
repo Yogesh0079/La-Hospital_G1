@@ -15,7 +15,6 @@ const Footer = () => {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
                     <div className="flex items-center mb-4 animate-text">
-                        <i className="fas fa-hospital text-blue-400 text-3xl mr-3"></i>
                        <span className="text-2xl font-bold">La Hospital</span>
                     </div>
                     <p className="text-gray-400 mb-4 animate-text delay-1">Providing exceptional healthcare services with compassion and innovation since 1995.</p>
@@ -60,13 +59,10 @@ const Footer = () => {
                 <div>
                     <h4 className="text-lg font-bold mb-4 animate-text delay-5">Newsletter</h4>
                     <p className="text-gray-400 mb-4 animate-text delay-6">Subscribe to our newsletter for health tips and hospital updates.</p>
-                    <form className="flex animate-text delay-7 flex flex-row">
+                    <form className="flex animate-text delay-7 flex flex-row ">
                         <input type="email" placeholder="Your email" className="px-4 py-2 rounded-l-lg focus:outline-none text-gray-800 w-full bg-white"/>
-                        <button type="submit" className="bg-blue-600 hover:bg-blue-700 rounded-r-lg h-11 ">
-                            <svg className="mt-2 ml-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="8 12 20 20" fill="none" stroke="#00008B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" >
-                            <circle cx="11" cy="11" r="8"/>
-                            <path d="M21 21l-4.35-4.35"/>
-                        </svg>
+                        <button type="submit" className="bg-blue-600 hover:bg-blue-700 rounded-r-lg h-11 overflow-hidden m-2 flex items-center justify-center px-4">
+                            Submit
                         </button>
                     </form>
                 </div>
