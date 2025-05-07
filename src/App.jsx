@@ -10,8 +10,10 @@ import Dashboard from "./pages/Dashboard";
 import Appointment from "./pages/Appointment";
 import About from "./pages/about"
 import Contact from "./pages/contact";
+import Report from "./pages/Report";
+import TestResults from "./pages/TestResults";
+import ModifyReports from "./pages/modifyReports";
 import Squidward from "./pages/Squidward";
-
 
 export default function App() {
   return (
@@ -23,12 +25,15 @@ export default function App() {
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route
-            path="user/:user_id"
+            path="userDetails"
             element={<UserDetails />}
           />
           <Route path="*" element={<NoPage />} />
+          <Route path="report" element={<Report />} />
+          <Route path="TestResults/:userId" element={<TestResults />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="appointment" element={<Appointment />} />
+          <Route path="modify" element={<ModifyReports />} />
           <Route path="Squidward" element={<Squidward />} />
         </Route>
       </Routes>

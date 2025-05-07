@@ -91,3 +91,4 @@ return (
     </>
 );
 }
+export default About;

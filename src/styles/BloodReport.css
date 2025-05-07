@@ -1,0 +1,12 @@
+.normal-value {
+    color: #10B981;
+}
+
+.abnormal-value {
+    color: #EF4444;
+    font-weight: 600;
+}
+
+.report-header {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+}

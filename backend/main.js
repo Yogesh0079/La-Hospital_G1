@@ -41,8 +41,8 @@ app.get("/", (req,res) => {
 
 app.post("/createUser", newUser);
 app.post('/login',
-    passport.authenticate('local', { session: true }), (req, res) => {
-        res.json(req.user)
+    passport.authenticate('local', { session: true, usernameField : 'email'}), (req, res) => {
+        res.json(req.user);
     }
 );
 app.get("/getUser/:userId", getUserData);
@@ -54,7 +54,7 @@ app.put("/updateRecord/:recordId", updateRecordData);
 
 app.get("/login/federated/google", passport.authenticate("google"));
 app.get('/oauth2/redirect/google', passport.authenticate('google', {
-    successRedirect: 'http://localhost:5173/dashboard',
+    successRedirect: `http://localhost:5173/userDetails/`,
     failureRedirect: 'http://localhost:5173/login'
 }));
 

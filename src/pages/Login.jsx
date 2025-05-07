@@ -4,8 +4,10 @@ import { useState } from "react";
 import { createUser, loginUser } from "../scripts/users";
 import "../scripts/login.commons"
 import "../styles/Login.css";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+    let navigate = useNavigate()
     let [formState, setFormState] = useState({
         firstname: "",
         lastname: "",
@@ -36,15 +38,24 @@ function Login() {
                 email: formState.email,
                 password: formState.password,
                 user_type: 0
-            });
+            }).then((user) => {
+                localStorage.setItem("uid", user._id);
+                localStorage.setItem("authType", "local")
+                navigate(`/userDetails`)});
         } else {
-            loginUser({ email: formState.email, password: formState.password });
+            loginUser({ email: formState.email, password: formState.password }).then(
+                (res) => {
+                    localStorage.setItem("uid", res._id);
+                    localStorage.setItem("authType", "local")
+                    navigate(`/userDetails`)
+                }
+            );
         }
     };
 
     return (
         <>
-            <div className="max-w-md w-full bg-white block rounded-xl overflow-hidden form-container mx-auto">
+            <div className="max-w-md w-full bg-white block rounded-xl overflow-hidden form-container shadow-lg mx-auto mt-10 mb-10">
                 <div className="p-1 bg-gradient-to-r from-blue-500 to-teal-400"></div>
 
                 <div className="p-8">
@@ -175,10 +186,13 @@ function Login() {
 
                     <div className="flex justify-center gap-4">
                         <a
-                            href="#"
+                            href="http://localhost:5000/login/federated/google"
                             className="w-12 h-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-xl text-gray-700 shadow-sm hover:shadow-md transition auth-btn"
                         >
-                            <FontAwesomeIcon icon={faGoogle} className="text-red-500" />
+                            <FontAwesomeIcon
+                                icon={faGoogle}
+                                className="text-red-500"
+                                />
                         </a>
                         <a
                             href="#"

@@ -5,6 +5,7 @@ import "../styles/home.css";
 import { animateElements } from '../scripts/home.commons';
 import CountUp from '../components/animations/CountUp';
 import JumpText from '../components/animations/JumpText';
+import { useNavigate } from 'react-router-dom';
 
 import {
     faHeartbeat,
@@ -25,6 +26,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 function Home() {
+    const navigate = useNavigate();
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = {
@@ -53,7 +55,7 @@ function Home() {
                             Streamlining healthcare operations for better patient care and efficient hospital administration.
                         </p>
                         <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 animate-text delay-1">
-                            <a href="#contact" className="bg-white text-blue-800 px-8 py-3 rounded-full font-bold text-center hover:bg-gray-100 transition shadow-lg">
+                            <a href="#" onClick={() => {navigate("TestResults")}} className="bg-white text-blue-800 px-8 py-3 rounded-full font-bold text-center hover:bg-gray-100 transition shadow-lg">
                                 Book Appointment
                             </a>
                             <a href="#services" className="bg-white text-blue-800 px-8 py-3 rounded-full font-bold text-center hover:bg-gray-100 transition shadow-lg">
@@ -183,8 +185,8 @@ function Home() {
                             <img src="https://img.freepik.com/free-vector/hospital-building-concept-illustration_114360-2031.jpg" alt="Hospital Building" className="w-full rounded-lg shadow-xl" />
                         </div>
                         <div className="md:w-1/2 md:pl-12">
-                            <h2 className="text-3xl font-bold text-gray-800 mb-6 animate-text">About MediCare Hospital</h2>
-                            <p className="text-gray-600 mb-6 animate-text delay-1">Founded in 1995, MediCare Hospital has grown to become one of the leading healthcare providers in the region. Our mission is to deliver exceptional patient care through innovation, compassion, and medical excellence.</p>
+                            <h2 className="text-3xl font-bold text-gray-800 mb-6 animate-text">About La Hospital</h2>
+                            <p className="text-gray-600 mb-6 animate-text delay-1">Founded in 1995, La Hospital has grown to become one of the leading healthcare providers in the region. Our mission is to deliver exceptional patient care through innovation, compassion, and medical excellence.</p>
                             <p className="text-gray-600 mb-6 animate-text delay-2">With over 25 years of experience, we've built a reputation for clinical excellence and patient-centered care. Our team of board-certified physicians and healthcare professionals are dedicated to improving the health and well-being of our community.</p>
                             <div className="flex space-x-4">
                                 <div className="bg-blue-100 p-4 rounded-lg animate-text delay-3">
@@ -215,7 +217,7 @@ function Home() {
                     <div className="container mx-auto px-6">
                         <div className="text-center mb-16">
                             <h2 className="text-3xl font-bold text-white mb-4 animate-text">Patient Testimonials</h2>
-                            <p className="text-blue-100 max-w-2xl mx-auto animate-text delay-1">Hear what our patients have to say about their experiences at MediCare Hospital.</p>
+                            <p className="text-blue-100 max-w-2xl mx-auto animate-text delay-1">Hear what our patients have to say about their experiences at La Hospital.</p>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -318,8 +320,8 @@ function Home() {
                                     </div>
                                     <div>
                                         <h4 className="font-bold mb-1">Email</h4>
-                                        <p className="text-gray-600">info@medicarehospital.com</p>
-                                        <p className="text-gray-600">appointments@medicarehospital.com</p>
+                                        <p className="text-gray-600">info@La Hospitalhospital.com</p>
+                                        <p className="text-gray-600">appointments@La Hospitalhospital.com</p>
                                     </div>
                                 </div>
                             </div>

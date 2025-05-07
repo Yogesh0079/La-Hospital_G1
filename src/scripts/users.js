@@ -6,15 +6,15 @@ async function getSessionUser () {
       });
       return (await response).json()
     }
-    else if (auth_type == "local") {
-    let response = fetch('http://localhost:5000/authLocal', {
-        credentials: 'include',
-        });
-        return (await response).json()
-    }
+    // else if (auth_type == "local") {
+    // let response = fetch('http://localhost:5000/authLocal', {
+    //     credentials: 'include',
+    //     });
+    //     return (await response).json()
+    // }
 }
 async function createUser (userData) {
-    console.log(userData);
+    // console.log(userData);
     localStorage.setItem("authType", "local");
     let response = fetch('http://localhost:5000/createUser', {
         method: "POST",
@@ -24,7 +24,14 @@ async function createUser (userData) {
         },
         body: JSON.stringify(userData)
         });
-    return (await response).json().then(window.location.href("/dashboard")).catch((err) => {window.location.href("")});
+    return (await response).json().then((res) => {
+        if (res.error) {
+            return res;
+        }
+        localStorage.setItem("uid", res._id);
+        localStorage.setItem("authType", "session");
+        return res;
+    });
 }
 
 async function loginUser(userData) {
@@ -38,7 +45,22 @@ async function loginUser(userData) {
       },
       body: JSON.stringify(userData)
       });
-      return (await response).json().then((res) => console.log(res));
+      return (await response).json().then((res) => {
+        if (res.error) {
+            return res;
+        }
+        localStorage.setItem("uid", res._id);
+        localStorage.setItem("authType", "session");
+        return res;
+      });
 }
-
-export {getSessionUser, createUser, loginUser};
+async function getUserByLocalId() {
+    let id = localStorage.getItem("uid");
+    let response = await  fetch(`http://localhost:5000/getUser/${id}`, {
+        credentials: 'include',
+      });
+      return (await response).json().then((res) => {
+        return res;
+      })
+}
+export {getSessionUser, createUser, loginUser, getUserByLocalId};

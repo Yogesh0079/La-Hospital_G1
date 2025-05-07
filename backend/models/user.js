@@ -11,6 +11,12 @@ const userSchema = new Schema({
     last_name: {type: String, required: true},
     email: {type: String, required: true},
     contact: String,
+    gender: String,
+    emergency_contact: {
+        name: String,
+        number: String,
+        relation: String
+    },
     address: String,
     user_type: {type: Number, default: 0},
     photo: String,
@@ -23,12 +29,16 @@ const userSchema = new Schema({
         salary: Number,
         dept_id: Number
     },
-    patient_data: {
-        blood_group: Number,
+    medical_data: {
+        blood_group: String,
         height: Number,
         weight: Number,
+        dob: Date,
+        diet: Number,
         allergies: [String],
         current_medications: [Number],
+        smoke: String,
+        drink: String,
         reports : [{
             test_id: Number,
             date: Date,
@@ -48,19 +58,23 @@ async function createUser(reqData) {
     if(!reqData) {return {error: "createUser"};}
     reqData.user_type = get_enumeration(reqData.user_type, userTypeMap) || 0;
     if (reqData.user_type === 1) {
-        reqData.doc_info.dept_id = Object.keys(deptMap).find(key => deptMap[key] === reqData.doc_info.dept_id);
+        reqData.staff_info.dept_id = get_enumeration(reqData.staff_info.dept_id, deptMap) || 0;
+    }
+    if (reqData.user_type === 1 && typeof reqData.staff_info.dept_id === "string") {
+        reqData.staff_info.dept_id = Object.keys(deptMap).find(key => deptMap[key] === reqData.staff_info.dept_id);
     }
     else {
-        reqData.doc_info = null;
+        reqData.staff_info = null;
     }
     return await createDb(reqData, User, "createUser");
 }
 
 async function getUser(userId) {
     return await readDb(userId, User, "getUser").then((res) => {
+        if (!res) return null;
         res.user_type = rev_enumeration(res.user_type, userTypeMap);
-        if (res.doc_info) {
-            res.doc_info.dept_id = rev_enumeration(res.doc_info.dept_id, deptMap);
+        if (res.staff_info) {
+            res.staff_info.dept_id = rev_enumeration(res.staff_info.dept_id, deptMap);
         }
         return res;
     });
@@ -70,8 +84,8 @@ async function getUserByField(email, field) {
         if (!res) return null;
         if (!res.user_type) res.user_type = 0;
         res.user_type = rev_enumeration(res.user_type, userTypeMap);
-        if (res.doc_info) {
-            res.doc_info.dept_id = rev_enumeration(res.doc_info.dept_id, deptMap);
+        if (res.staff_info) {
+            res.staff_info.dept_id = rev_enumeration(res.staff_info.dept_id, deptMap);
         }
         return res;
     });
@@ -80,7 +94,7 @@ async function getUserByField(email, field) {
 async function updateUser(userId, updateFields) {
     return await updateDb(userId, updateFields, User, "getUser").then((res) => {
         if (res.user_type === 1) {
-            res.doc_info.dept_id = get_enumeration(res.doc_info.dept_id, deptMap);
+            res.staff_info.dept_id = get_enumeration(res.staff_info.dept_id, deptMap);
         }
         res.user_type = rev_enumeration(res.user_type, userTypeMap);
         return res;

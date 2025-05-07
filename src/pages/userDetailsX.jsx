@@ -1,23 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/userdetails.css";
 import Grid from '@mui/material/Grid';
 import { Box, Chip ,FormControl, Button, Checkbox, Radio, Select, TextField, RadioGroup, FormGroup, InputLabel, MenuItem, Autocomplete, FormLabel, FormControlLabel} from "@mui/material";
 import HorizontalLinearStepper from "../components/general/Stepper";
 import { prescriptionsMap } from "../scripts/mappings";
+import { getSessionUser, getUserByLocalId } from "../scripts/users";
 
 const steps = ["Basic Details", "Medical Details", "Medical History","Emergency Contacts"];
 
-function StepComponentFunction (activeStep, formData, handleChange) {
+function StepComponentFunction (activeStep, formData, handleChange, prescriptionsChange) {
     const [value, setValue] = useState('');
     const [prescriptions, setPrescriptionValue] = useState([]);
     const handlePrescriptionAdd = () => {
         if (!prescriptions.includes(value)) {
-            setPrescriptionValue([...prescriptions, value])
-            console.log(prescriptions)
+            setPrescriptionValue([...formData.medical_data.current_medications])
+            setPrescriptionValue([...prescriptions, value]);
+            prescriptionsChange([...prescriptions, value]);
         }
     }
     if (activeStep == 0) {
+        console.log("Form Data: ", formData);
         return (
         <React.Fragment>
         <Grid container spacing={{xs: 1, sm: 1, md: 2}} columns={{ xs: 4, sm: 8, md: 12 }}>
@@ -28,7 +31,7 @@ function StepComponentFunction (activeStep, formData, handleChange) {
                     name="first_name"
                     variant="outlined"
                     value={formData.first_name}
-                    onChange={handleChange}
+                    onChange={(e) => {handleChange(e, "medical_record")}}
                     fullWidth
                     />
             </Grid>
@@ -39,7 +42,7 @@ function StepComponentFunction (activeStep, formData, handleChange) {
                     name="last_name"
                     variant="outlined"
                     value={formData.last_name}
-                    onChange={handleChange}
+                    onChange={(e) => {handleChange(e, "medical_record")}}
                     fullWidth
                 />
             </Grid>
@@ -51,7 +54,7 @@ function StepComponentFunction (activeStep, formData, handleChange) {
                     variant="outlined"
                     type="text"
                     value={formData.contact}
-                    onChange={handleChange}
+                    onChange={(e) => {handleChange(e, "norm")}}
                     fullWidth
                 />
             </Grid>
@@ -63,7 +66,7 @@ function StepComponentFunction (activeStep, formData, handleChange) {
                     variant="outlined"
                     type="email"
                     value={formData.email}
-                    onChange={handleChange}
+                    onChange={(e) => {handleChange(e, "norm")}}
                     fullWidth
                 />
             </Grid>
@@ -74,7 +77,7 @@ function StepComponentFunction (activeStep, formData, handleChange) {
                             name="address"
                             variant="outlined"
                             value={formData.address}
-                            onChange={handleChange}
+                            onChange={(e) => {handleChange(e, "norm")}}
                             fullWidth
                     />
             </Grid>
@@ -82,8 +85,10 @@ function StepComponentFunction (activeStep, formData, handleChange) {
                 <FormControl>
                     <FormLabel id="radio-buttons-group-label">Gender</FormLabel>
                     <RadioGroup
+                        onChange={(e) => {handleChange(e, "norm")}}
                         aria-labelledby="radio-buttons-group-label"
-                        defaultValue="other"
+                        defaultValue={formData.gender}
+                        value={formData.gender}
                         name="radio-buttons-group"
                     >
                         <FormControlLabel value="female" control={<Radio />} label="Female" />
@@ -94,7 +99,7 @@ function StepComponentFunction (activeStep, formData, handleChange) {
             </Grid>
             <Grid size={{md: 6, xs: 3, sm: 3}}>
                 <FormLabel id="dob-label">Date of Birth</FormLabel>
-                <input id="dob" className="bg-inherit relative t-2" type="date" name=""/>
+                <input id="dob" parent="medical_data" onChange={(e) => {handleChange(e, "medical_record")}} value={(formData.medical_data.dob) ? formData.medical_data.dob.substr(0,10) : null} className="bg-inherit relative t-2" type="date" name="dob"/>
             </Grid>
         </Grid>
         </React.Fragment>
@@ -111,8 +116,9 @@ function StepComponentFunction (activeStep, formData, handleChange) {
                         name="weight"
                         variant="outlined"
                         type="number"
-                        value={formData.weight}
-                        onChange={handleChange}
+                        parent="medical_data"
+                        value={formData.medical_data.weight}
+                        onChange={(e) => {handleChange(e, "medical_record")}}
                         fullWidth
                     />
                 </Grid>
@@ -123,8 +129,9 @@ function StepComponentFunction (activeStep, formData, handleChange) {
                         name="height"
                         variant="outlined"
                         type="number"
-                        value={formData.height}
-                        onChange={handleChange}
+                        parent="medical_data"
+                        value={formData.medical_data.height}
+                        onChange={(e) => {handleChange(e, "medical_record")}}
                         fullWidth
                     />
                 </Grid>
@@ -135,8 +142,9 @@ function StepComponentFunction (activeStep, formData, handleChange) {
                             labelId="select-label-bg"
                             id="select-bg"
                             name="blood_group"
-                            value={formData.blood_group}
-                            onChange={handleChange}
+                            parent="medical_data"
+                            value={formData.medical_data.blood_group}
+                            onChange={(e) => {handleChange(e, "medical_record")}}
                             label="Blood Group"
                         >
                             <MenuItem value="A+">A+</MenuItem>
@@ -156,9 +164,9 @@ function StepComponentFunction (activeStep, formData, handleChange) {
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={formData.diet}
+                            value={formData.medical_data.diet}
                             label="diet"
-                            onChange={handleChange}
+                            onChange={(e) => {handleChange(e, "medical_record")}}
                         >
                             <MenuItem value={0}>Vegetarian</MenuItem>
                             <MenuItem value={1}>Non-Vegetarian</MenuItem>
@@ -170,8 +178,10 @@ function StepComponentFunction (activeStep, formData, handleChange) {
                         <FormLabel id="smoke-radio-label">Do you Smoke?</FormLabel>
                         <RadioGroup
                             aria-labelledby="smoke-radio-label"
-                            defaultValue="female"
+                            defaultValue={formData.medical_data.smoke}
+                            value={formData.medical_data.smoke}
                             name="smoke-radio"
+                            onChange={(e) => {handleChange(e, "medical_record")}}
                         >
                             <FormControlLabel value="nsmoke" control={<Radio />} label="Never" />
                             <FormControlLabel value="msmoke" control={<Radio />} label="Less than thrice a week" />
@@ -184,7 +194,9 @@ function StepComponentFunction (activeStep, formData, handleChange) {
                         <FormLabel id="drink-radio-label">Do you Drink?</FormLabel>
                         <RadioGroup
                             aria-labelledby="drink-radio-label"
-                            defaultValue="female"
+                            defaultValue={formData.medical_data.drink}
+                            value={formData.medical_data.drink}
+                            onChange={(e) => {handleChange(e, "medical_record")}}
                             name="drink-radio"
                         >
                             <FormControlLabel value="ndrink" control={<Radio />} label="Never" />
@@ -227,7 +239,7 @@ function StepComponentFunction (activeStep, formData, handleChange) {
                     <Grid size={{md: 12, xs: 6, sm: 6}}>
                         <FormGroup>
                             <Box className="flex flex-column flex-wrap justify-around">
-                            <FormControlLabel control={<Checkbox name="nut_allergy" />} label="Peanuts" />
+                                <FormControlLabel control={<Checkbox name="nut_allergy" />} label="Peanuts" />
                                 <FormControlLabel control={<Checkbox name="gluten_allergy" />} label="Wheat" />
                                 <FormControlLabel control={<Checkbox name="meat_allergy" />} label="Meat" />
                                 <FormControlLabel control={<Checkbox name="lactose_intolerant" />} label="Lactose" />
@@ -252,8 +264,8 @@ function StepComponentFunction (activeStep, formData, handleChange) {
                             label="Full Name"
                             name="relation"
                             variant="outlined"
-                            value={formData.relation}
-                            onChange={handleChange}
+                            value={formData['emergency_contact'].name}
+                            onChange={(e) => {handleChange(e, "emergency_contact")}}
                             fullWidth
                         />
                     </Grid>
@@ -263,8 +275,19 @@ function StepComponentFunction (activeStep, formData, handleChange) {
                             label="Contact Number"
                             name="emergency_contact"
                             variant="outlined"
-                            value={formData.emergency_contact}
-                            onChange={handleChange}
+                            value={formData['emergency_contact'].number}
+                            onChange={(e) => {handleChange(e, "emergency_contact")}}
+                            fullWidth
+                        />
+                    </Grid>
+                    <Grid size={{md: 6, xs: 3, sm: 3}}>
+                        <TextField
+                            id="input-emergency"
+                            label="Relation"
+                            name="emergency_contact"
+                            variant="outlined"
+                            value={formData.emergency_contact.relation}
+                            onChange={(e) => {handleChange(e, "emergency_contact")}}
                             fullWidth
                         />
                     </Grid>
@@ -276,30 +299,73 @@ function StepComponentFunction (activeStep, formData, handleChange) {
 
 const UserDetails = () => {
     const navigate = useNavigate();
+    let authType = localStorage.getItem("authType")
+    useEffect(()=>{
+        const datafetch= async()=>{
+            let user;
+            if (authType == "session") {
+                user = await getSessionUser()
+            }
+            else if (authType == "local") {
+                user = await getUserByLocalId()
+            }
+            setFormData({ ...formData,
+                         ...user
+                        });
+        }
+        datafetch();
+    },[])
     const [formData, setFormData] = useState({
         first_name: "",
         last_name: "",
         relation: "",
         address: "",
-        emergency_contact: "",
+        email: "",
         contact: "",
-        gender: "",
-        blood_group: "",
-        dob: "",
-        weight: "",
-        height: "",
-        prescriptions: [],
+        emergency_contact: {
+            name: "",
+            number: "",
+            relation: ""
+        },
+        medical_data: {
+            dob: "",
+            gender: "",
+            blood_group: "",
+            height: "",
+            weight: "",
+            allergies: [],
+            current_medications: [],
+            smoke: "",
+            drink: ""
+        },
         new: false
     });
-    // const handleSubmit () => {updateUser(formData)};
-    const handleChange = (e) => {
+    // user.then((user) => {
+    //
+    // })
+    const handleChange = (e, type) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        if (type == "medical_data") {
+            setFormData({ ...formData, medical_data: { ...formData.medical_data, [name]: value } });
+
+        }
+        else if (type == "emergency_contact") {
+            setFormData({ ...formData, emergency_contact: { ...formData.emergency_contact, [name]: value } });
+        }
+        else if (type == "norm"){
+            setFormData({ ...formData, [name]: value });
+        }
+        console.log("Form Data: ", formData);
+    };
+    const prescriptionsChange = (prescriptions) => {
+        setFormData({ ...formData
+                        ,medical_data: { ...formData.medical_data, current_medications: prescriptions } });
     };
 
     const handleSubmit = (e) => {
+        console.log("handle submit")
         e.preventDefault();
-        fetch(`http://localhost:5000/updateUser/${window.location.pathname.split("/").pop()}`, {
+        fetch(`http://localhost:5000/updateUser/${localStorage.getItem('uid')}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -307,7 +373,7 @@ const UserDetails = () => {
             body: JSON.stringify(formData),
         });
         console.log("Form Data Submitted: ", formData);
-        navigate("/");
+        navigate("/dashboard");
     };
 
     return (
@@ -315,7 +381,7 @@ const UserDetails = () => {
             <h2 className="form-heading">Let's Get to Know You. A bit more..</h2>
             <Box sx={{ flexGrow: 1 }}>
                     {/* <Box sx={{ width: '100%' }}> */}
-                    <HorizontalLinearStepper steps={steps} StepComponentFunction={(stepNumber) => StepComponentFunction(stepNumber, formData, handleChange, handleSubmit) }/>
+                    <HorizontalLinearStepper handleSubmit={handleSubmit} steps={steps} StepComponentFunction={(stepNumber) => StepComponentFunction(stepNumber, formData, handleChange, prescriptionsChange) }/>
                     {/* </ Box> */}
             </Box>
             </div>
